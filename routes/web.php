@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\Shop\MainController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\Shop\MainController::class, 'index']) -> name('shop.main');
 
 
 
@@ -23,5 +23,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //ADMIN
 Route::middleware('admin')->prefix('admin') ->group(function(){
-    Route::get('/', [\App\Http\Controllers\Shop\Admin\MainController::class, 'index']);
+    Route::get('/', [\App\Http\Controllers\Shop\Admin\MainController::class, 'index'])
+        -> name('admin.home');
+    Route::resource('/category', \App\Http\Controllers\Shop\Admin\CategoryController::class)
+    ->names('admin.category');
 });

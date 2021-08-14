@@ -10,6 +10,6 @@ class MainController extends Controller
 {
     public function index()
     {
-        dd(Auth::user()->role->role);
+        return view('shop.admin.main.main');
     }
 }
