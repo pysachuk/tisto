@@ -5,14 +5,19 @@ namespace App\Http\Controllers\Shop\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\Interfaces\ProductRepositoryInterface;
+use App\Http\Requests\StoreProductRequest;
+use App\Models\Product;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
     private $categoryRepository;
+    private $productRepository;
 
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    public function __construct(CategoryRepositoryInterface $categoryRepository, ProductRepositoryInterface $productRepository)
     {
         $this->categoryRepository = $categoryRepository;
+        $this->productRepository = $productRepository;
     }
     /**
      * Display a listing of the resource.
@@ -21,8 +26,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this -> categoryRepository -> all();
-        return view('shop.admin.category.index', compact('categories'));
+        $products = $this -> productRepository -> all();
+        $product = $products -> first();
+        return view('shop.admin.product.index', compact('products'));
     }
 
     /**
@@ -32,7 +38,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('shop.admin.category.create');
+        $categories = $this -> categoryRepository -> all();
+
+        return view('shop.admin.product.create', compact('categories'));
     }
 
     /**
@@ -41,10 +49,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $this -> categoryRepository -> store($request);
-        return redirect() -> route('admin.category.index') -> with('message', 'Категория успешно добавлена');
+        if($this -> productRepository -> store($request))
+            return redirect() -> back() -> with('message', 'Продукт успешно добавлен');
     }
 
     /**
@@ -66,8 +74,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = $this -> categoryRepository -> getCategory($id);
-        return view('shop.admin.category.edit', compact('category'));
+        //
     }
 
     /**
@@ -79,10 +86,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = $this -> categoryRepository -> getCategory($id);
-        $category -> title = $request -> title;
-        $category -> save();
-        return redirect() -> back() -> with('message', 'Категория успешно Обновлена');
+        //
     }
 
     /**
@@ -93,8 +97,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = $this -> categoryRepository -> getCategory($id);
-        $category -> delete();
-        return redirect() -> route('admin.category.index') -> with('message', 'Категория успешно Удалена');
+        //
     }
 }

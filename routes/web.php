@@ -27,4 +27,6 @@ Route::middleware('admin')->prefix('admin') ->group(function(){
         -> name('admin.home');
     Route::resource('/category', \App\Http\Controllers\Shop\Admin\CategoryController::class)
     ->names('admin.category');
+    Route::resource('/product', \App\Http\Controllers\Shop\Admin\ProductController::class)
+        ->names('admin.product');
 });

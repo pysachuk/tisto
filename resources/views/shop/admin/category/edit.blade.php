@@ -22,6 +22,7 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Сохранить</button>
+                            <a href="{{ route('admin.category.index') }}" class="btn btn-danger">Назад</a>
                         </div>
                     </form>
                 </div>
