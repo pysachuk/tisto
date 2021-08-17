@@ -27,7 +27,7 @@
                             @foreach($category -> products as $product)
                                 <!-- Product -->
                                     <div class="product">
-                                        <div class="product_image"><img src="/storage/{{ $product -> image -> image }}" alt=""></div>
+                                        <div class="product_image"><img src="/storage/{{ $product -> image -> image ?? '' }}" alt=""></div>
                                         <div class="product_extra product_new"><a href="/shop/categories.html">New</a></div>
                                         <div class="product_content">
                                             <div class="product_title"><a href="/shop/product.html">{{ $product -> title }}</a></div>

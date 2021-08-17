@@ -82,7 +82,7 @@ class CategoryController extends Controller
         $category = $this -> categoryRepository -> getCategory($id);
         $category -> title = $request -> title;
         $category -> save();
-        return redirect() -> back() -> with('message', 'Категория успешно Обновлена');
+        return redirect() -> route('admin.category.index') -> with('message', 'Категория успешно Обновлена');
     }
 
     /**

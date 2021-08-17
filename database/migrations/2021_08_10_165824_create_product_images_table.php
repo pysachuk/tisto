@@ -20,7 +20,9 @@ class CreateProductImagesTable extends Migration
             $table->boolean('is_main') ->default(false);
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

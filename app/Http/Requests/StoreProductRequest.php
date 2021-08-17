@@ -29,7 +29,7 @@ class StoreProductRequest extends FormRequest
             'description' => 'required|string',
             'price' => 'required|numeric',
             'weight' => 'required|numeric',
-            'photo' => 'required|image',
+            'photo' => 'image',
         ];
     }
     public function messages()

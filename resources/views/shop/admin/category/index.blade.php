@@ -4,7 +4,9 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-
+                <div class="card-header">
+                    <a href="{{ route('admin.category.create') }}" class="btn btn-success">Добавить</a>
+                </div>
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
                         <thead>
@@ -49,9 +51,6 @@
         $('.delete').click(function (){
             if(!confirm('Вы уверены?'))
                 return false;
-
-            // $( '.del_form' ).submit();
-
         });
     </script>
 @endsection

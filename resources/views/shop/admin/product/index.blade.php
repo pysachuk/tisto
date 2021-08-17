@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Продукты</h3>
+                    <a href="{{ route('admin.product.create') }}" class="btn btn-success">Добавить</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -20,6 +20,7 @@
                             <th>Цена</th>
                             <th>Вес</th>
                             <th>Фото</th>
+                            <th class="text-right">Правка</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -31,7 +32,17 @@
                                 <td>{{ $product -> description }}</td>
                                 <td>{{ $product -> price }}</td>
                                 <td>{{ $product -> weight }}</td>
-                                <td><img src="/storage/{{ $product -> image -> image }}" style="width: 100px"></td>
+                                <td><img src="/storage/{{ $product -> image -> image ?? '' }}" style="width: 100px"></td>
+                            <td class="text-right py-0 align-middle">
+                                <div class="btn-group btn-group-sm">
+                                    <a href="{{ route('admin.product.edit', $product -> id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                    <form class="del_form" method="POST" action="{{ route('admin.product.destroy', $product -> id) }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-danger delete" type="submit"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </td>
                             @empty
                                 <h2>Продуктов нет</h2>
                             @endforelse
@@ -41,16 +52,18 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li>
-                    </ul>
+                    <?php echo $products->links(); ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+    <script>
+        $('.delete').click(function (){
+            if(!confirm('Вы уверены?'))
+                return false;
+        });
+    </script>
 @endsection

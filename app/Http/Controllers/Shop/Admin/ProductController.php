@@ -26,8 +26,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this -> productRepository -> all();
-        $product = $products -> first();
+        $products = $this -> productRepository -> all(10);
         return view('shop.admin.product.index', compact('products'));
     }
 
@@ -52,7 +51,7 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         if($this -> productRepository -> store($request))
-            return redirect() -> back() -> with('message', 'Продукт успешно добавлен');
+            return redirect() -> route('admin.product.index') -> with('message', 'Продукт успешно добавлен');
     }
 
     /**
@@ -74,7 +73,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = $this -> categoryRepository -> all();
+        $product = $this -> productRepository -> getProduct($id);
+        return view('shop.admin.product.edit', compact('categories', 'product'));
     }
 
     /**
@@ -84,9 +85,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreProductRequest $request, $id)
     {
-        //
+        $this -> productRepository -> update($request, $id);
+        return redirect() -> route('admin.product.index') -> with('message', 'Продукт успешно обновлен');
     }
 
     /**
@@ -97,6 +99,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = $this -> productRepository -> getProduct($id);
+        if($product -> delete())
+            return redirect() -> route('admin.product.index') -> with('message', 'Продукт удален');
+
     }
 }

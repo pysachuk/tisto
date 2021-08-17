@@ -11,4 +11,6 @@ interface ProductRepositoryInterface
 {
     public function all();
     public function store(StoreProductRequest $request);
+    public function getProduct($id);
+    public function update(StoreProductRequest $request, $id);
 }
