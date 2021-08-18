@@ -21,6 +21,18 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//CART
+Route::get('/cart', [App\Http\Controllers\Shop\CartController::class, 'index']) -> name('cart.index');
+Route::post('/add-to-cart',[App\Http\Controllers\Shop\CartController::class, 'addToCart'])
+    -> name('addToCart');
+Route::post('/cart/remove_item',[App\Http\Controllers\Shop\CartController::class, 'removeItem'])
+    -> name('cart.remove_item');
+Route::post('/cart/add_count',[App\Http\Controllers\Shop\CartController::class, 'addCount'])
+    -> name('cart.add_count');
+Route::post('/cart/minus_count',[App\Http\Controllers\Shop\CartController::class, 'minusCount'])
+    -> name('cart.minus_count');
+
+
 //ADMIN
 Route::middleware('admin')->prefix('admin') ->group(function(){
     Route::get('/', [\App\Http\Controllers\Shop\Admin\MainController::class, 'index'])
