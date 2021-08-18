@@ -32,6 +32,12 @@ Route::post('/cart/add_count',[App\Http\Controllers\Shop\CartController::class, 
 Route::post('/cart/minus_count',[App\Http\Controllers\Shop\CartController::class, 'minusCount'])
     -> name('cart.minus_count');
 
+//ORDER
+Route::get('cart/checkout', [App\Http\Controllers\Shop\OrderController::class, 'checkout'])
+    -> name('cart.checkout');
+Route::post('cart/checkout/add', [App\Http\Controllers\Shop\OrderController::class, 'addOrder'])
+    -> name('cart.add_order');
+
 
 //ADMIN
 Route::middleware('admin')->prefix('admin') ->group(function(){
@@ -41,4 +47,6 @@ Route::middleware('admin')->prefix('admin') ->group(function(){
     ->names('admin.category');
     Route::resource('/product', \App\Http\Controllers\Shop\Admin\ProductController::class)
         ->names('admin.product');
+    Route::resource('/order', \App\Http\Controllers\Shop\Admin\OrderController::class)
+        ->names('admin.order');
 });

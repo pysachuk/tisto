@@ -37,7 +37,7 @@
                     </td>
                     <td data-title="Product">
                         <div class="cart-product-wrapper">
-                            <img src="/shop/main/assets/img/prods-sm/1.png" alt="prod1">
+                            <img src="/storage/{{ $item -> attributes -> image }}" alt="prod1">
                             <div class="cart-product-body">
                                 <h6> <a href="#">{{ $item -> name }}</a> </h6>
 {{--                                <p>21 Inch</p>--}}
@@ -76,7 +76,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <a href="#" class="btn-custom primary btn-block">Оформити замовлення</a>
+                    <a href="{{ route('cart.checkout') }}" class="btn-custom primary btn-block">Оформити замовлення</a>
                 </div>
             </div>
             <!-- Cart form End -->

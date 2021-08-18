@@ -30,10 +30,7 @@ class CartController extends Controller
             'name' => $product -> title,
             'price' => $product -> price,
             'quantity' => (int)$request -> qty,
-            'attributes' => [
-                'img' => $product -> image -> image ? $product -> image -> image : ''
-
-            ]
+            'attributes'  => ['image' => $product -> image -> image ? $product -> image -> image : ''],
         ]);
         return response() -> json([
             'OK' => 1,
