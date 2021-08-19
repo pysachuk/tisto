@@ -18,7 +18,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
     public function store(Request $request)
     {
-        return Category::create(['title' => $request-> title]) -> save();
+        return Category::create(['title' => $request-> title, 'description' => $request-> description]) -> save();
     }
     public function getCategory($id)
     {

@@ -18,6 +18,10 @@
                                 <label for="title">Название:</label>
                                 <input type="text" value="{{ $category -> title }}"  name="title" class="form-control" id="title" placeholder="Введите название">
                             </div>
+                            <div class="form-group">
+                                <label>Описание</label>
+                                <textarea name="description" class="form-control" rows="3" placeholder="Описание...">{{ $category -> description }}</textarea>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

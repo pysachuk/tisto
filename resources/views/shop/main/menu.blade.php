@@ -25,7 +25,7 @@
             <!-- Category Start -->
             <div class="menu-category dark-overlay dark-overlay-2" style="background-image: url('/shop/main/assets/img/categories-lg/1.jpg')">
                 <h3>{{ $category -> title }}</h3>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
+                <p>{{ $category -> description }}</p>
             </div>
             <div class="row">
                 @foreach($category -> products as $product)

@@ -17,6 +17,10 @@
                             <label for="title">Название:</label>
                             <input type="text"  name="title" class="form-control" id="title" placeholder="Введите название">
                         </div>
+                        <div class="form-group">
+                            <label>Описание</label>
+                            <textarea name="description" class="form-control" rows="3" placeholder="Описание..."></textarea>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
