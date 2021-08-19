@@ -89,6 +89,7 @@
                     if(data['OK'] == 1)
                     {
                         $('.cart-item-count').text(data['count']);
+                        console.log(data);
                     }
                 }
             });

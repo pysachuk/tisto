@@ -263,7 +263,7 @@
                     <a href="{{ route('cart.index') }}">
                         <li class="cart-dropdown-wrapper cart-trigger">
                             <span class="cart-item-count">
-                                {{isset($_COOKIE['cart_id']) ? \Cart::session($_COOKIE['cart_id'])->getTotalQuantity() : 0}}
+                                {{ Session::has('cart_id') ? \Cart::session(session('cart_id'))->getTotalQuantity() : 0}}
                             </span>
                             <i class="flaticon-shopping-bag"></i>
                         </li>

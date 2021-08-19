@@ -12,16 +12,15 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        if(!isset($_COOKIE['cart_id']))
+        if(! session('cart_id'))
         {
-            setcookie('cart_id', uniqid());
+            session(['cart_id' => uniqid()]);
         }
-        \Cart::session($_COOKIE['cart_id']);
     }
 
     public function checkout()
     {
-        $cart_items = \Cart::getContent();
+        $cart_items = \Cart::session(session('cart_id')) -> getContent();
         return view('shop.order.checkout', compact('cart_items'));
     }
     public function addOrder(AddOrderRequest $request)
@@ -29,10 +28,10 @@ class OrderController extends Controller
         $order = new Order;
         $data = $request->only($order->getFillable());
         $order->fill($data);
-        $order -> summ = \Cart::getTotal();
+        $order -> summ = \Cart::session(session('cart_id')) -> getTotal();
         $order -> status = 1; //1 - новый, 2 - принят, 3 - отменен, 4 - завершен
         $order -> save();
-        $order_products = \Cart::getContent();
+        $order_products = \Cart::session(session('cart_id')) -> getContent();
         foreach ($order_products as $product)
         {
             $order_product = new OrderProduct;
@@ -42,7 +41,7 @@ class OrderController extends Controller
             $order_product -> price = $product -> price;
             $order_product -> save();
         }
-        \Cart::clear();
+        \Cart::session(session('cart_id')) -> clear();
         return redirect() -> route('shop.main');
     }
 }
