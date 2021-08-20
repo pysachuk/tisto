@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\Shop\MainController::class, 'index']) -> name('shop.main');
 
-
+Route::get('/test',[\App\Http\Controllers\Test\TestController::class, 'index']);
 
 Auth::routes();
 
