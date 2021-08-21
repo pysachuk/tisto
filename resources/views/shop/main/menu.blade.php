@@ -38,7 +38,7 @@
                         <div class="product-thumb" href="menu-item-v1.html"> <img style="max-width: 220px" src="/storage/{{ $product -> image -> image }}" alt="menu item" /> </div>
                         <div class="product-body">
                             <div class="product-desc">
-                                <h4>{{ $product -> title }}</h4>
+                                <h4 class="product_title" data-id="{{ $product -> id }}">{{ $product -> title }}</h4>
                                 <p>{{ $product -> description }}</p>
 {{--                                <a href="#" class="btn-custom light btn-sm shadow-none" data-toggle="modal" data-target="#customizeModal"> Customize <i class="fas fa-plus"></i> </a>--}}
                             </div>
@@ -61,10 +61,24 @@
 @endsection
 @section('js')
     <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            // timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+    </script>
+    <script>
         $(document).ready(function (){
             $('.add_to_cart').click(function (event){
                 event.preventDefault();
                 product_id = $(this).attr('data-id');
+                product_title = $('.product_title[data-id='+product_id+']').text();
                 add_to_cart();
             })
         });
@@ -89,7 +103,11 @@
                     if(data['OK'] == 1)
                     {
                         $('.cart-item-count').text(data['count']);
-                        console.log(data);
+                        // console.log(data);
+                        Toast.fire({
+                            icon: 'success',
+                            title: '1х '+product_title+' додано до кошика'
+                        })
                     }
                 }
             });

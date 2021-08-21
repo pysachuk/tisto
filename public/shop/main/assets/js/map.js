@@ -44,7 +44,7 @@
       });
 
       var markerHTML = new L.HtmlIcon({
-        html: "<img class='leaflet-marker-icon leaflet-zoom-animated leaflet-interactive' src='assets/img/misc/marker.png' alt='markericon' />",
+        html: "<img class='leaflet-marker-icon leaflet-zoom-animated leaflet-interactive' src='/shop/main/assets/img/misc/marker.png' alt='markericon' />",
       });
 
       L.marker([Lat, Lng], {icon: markerHTML}).addTo(i);

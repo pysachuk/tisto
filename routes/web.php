@@ -13,13 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\Shop\MainController::class, 'index']) -> name('shop.main');
-
 Route::get('/test',[\App\Http\Controllers\Test\TestController::class, 'index']);
 
 Auth::routes();
 
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//MAIN
+Route::get('/', [\App\Http\Controllers\Shop\MainController::class, 'index']) -> name('shop.main');
+Route::get('/info', [\App\Http\Controllers\Shop\MainController::class, 'info']) -> name('shop.info');
 
 //CART
 Route::middleware('web') ->group(function(){

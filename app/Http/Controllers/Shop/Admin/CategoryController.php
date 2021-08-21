@@ -44,6 +44,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this -> categoryRepository -> store($request);
+        \Session::flash('message', "Special message goes here");
         return redirect() -> route('admin.category.index') -> with('message', 'Категория успешно добавлена');
     }
 

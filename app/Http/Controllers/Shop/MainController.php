@@ -14,4 +14,8 @@ class MainController extends Controller
         $categories = Category::all();
         return view('shop.main.menu', compact('categories'));
     }
+    public function info()
+    {
+        return view('shop.main.info');
+    }
 }
