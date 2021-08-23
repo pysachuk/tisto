@@ -19,10 +19,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/payment_status', function (Request $request){
+    // DB::table('payments') -> insert([
+    //     'order_id' => 4,
+    //     'status' => 'test',
+    //     'json' => json_encode($request->signature)
+    // ]);
+    // return response() -> json('123');
     $private_key = Config::get('liqpay.private_key');
     $signature = $request -> signature;
     $data = $request -> data;
-//    $public_key = Config::get('liqpay.public_key');
 
     $verify = base64_encode( sha1(
         $private_key .
@@ -31,10 +36,10 @@ Route::post('/payment_status', function (Request $request){
         , 1 ));
     if( $signature == $verify)
     {
-        $liqpay_data = json_decode($data);
+        $liqpay_data = json_decode(base64_decode($data));
         $order_id = $liqpay_data -> order_id;
         $status = $liqpay_data -> status;
-        $json = $data;
+        $json = base64_decode($data);
         $result = DB::table('payments') -> insert([
             'order_id' => $order_id,
             'status' => $status,

@@ -26,7 +26,7 @@ class PaymentController extends Controller
             'order_id'       => $order -> id,
             'version'        => '3',
             'language'       => Config::get('liqpay.language'),
-            'server_url'     => Config::get('app.url').'/api/payment_status',
+            'server_url'     => 'https://tisto.pp.ua/api/payment_status',
             'result_url'     => Config::get('app.url')
 
         ));
