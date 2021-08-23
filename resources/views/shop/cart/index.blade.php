@@ -27,7 +27,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($cart_items as $item)
+                @forelse($cart_items as $item)
                 <tr class="cart_item" data-id="{{ $item -> id }}">
                     <td class="remove">
                         <button type="button" data-id="{{ $item -> id }}" class="close-btn close-danger remove-from-cart">
@@ -35,7 +35,7 @@
                             <span></span>
                         </button>
                     </td>
-                    <td data-title="Product">
+                    <td data-title="Продукт">
                         <div class="cart-product-wrapper">
                             <img src="/storage/{{ $item -> attributes -> image }}" alt="prod1">
                             <div class="cart-product-body">
@@ -44,22 +44,37 @@
                             </div>
                         </div>
                     </td>
-                    <td data-title="Price"> <strong>{{ $item -> price }} грн</strong> </td>
-                    <td class="quantity" data-title="Quantity">
-                        <button type="button" data-id="{{ $item -> id }}" class="btn btn-success cart_add_count">
-                            +
-                        </button>
-                        <input type="text" data-id="{{ $item -> id }}" class="qty form-control" value="{{ $item -> quantity }}">
-                        <button type="button" data-id="{{ $item -> id }}"  class="btn btn-danger cart_minus_count">
-                            -
-                        </button>
+                    <td data-title="Ціна"> <strong>{{ $item -> price }} грн</strong> </td>
+                    <td class="quantity" data-title="Кількість">
+
+                            <div class="row">
+                                <div class="col-md-3 text-center p-0" style="">
+                                    <button type="button" data-id="{{ $item -> id }}" class="btn btn-success cart_add_count">
+                                        +
+                                    </button>
+                                </div>
+                                <div class="col-md-6 p-1" style="">
+                                    <input type="text" data-id="{{ $item -> id }}" class="qty form-control" value="{{ $item -> quantity }}" readonly>
+                                </div>
+                                <div class="col-md-3 text-center p-0" style="">
+                                    <button type="button" data-id="{{ $item -> id }}"  class="btn btn-danger cart_minus_count">
+                                        -
+                                    </button>
+                                </div>
+                            </div>
+
                     </td>
-                    <td data-title="Total"> <strong class="product_total" data-id="{{ $item -> id }}">{{ ($item -> price * $item -> quantity) }} грн</strong> </td>
+                    <td data-title="Сума"> <strong class="product_total" data-id="{{ $item -> id }}">{{ ($item -> price * $item -> quantity) }} грн</strong> </td>
                 </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center"><h3>Кошик пустий</h3></td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
             <!-- Cart Table End -->
+            @if(!\Cart::session(session('cart_id')) -> isEmpty())
             <!-- Cart form Start -->
             <div class="row ct-cart-form">
                 <div class="offset-lg-6 col-lg-6">
@@ -67,8 +82,8 @@
                     <table>
                         <tbody>
                         <tr>
-                            <th>Сумма</th>
-                            <td class="cart_total">{{ \Cart::getTotal() }} грн</td>
+                            <th>Сума</th>
+                            <td class="cart_total">{{ \Cart::session(session('cart_id')) -> getTotal() }} грн</td>
                         </tr>
                         <tr>
                             <th>Доставка</th>
@@ -80,7 +95,7 @@
                 </div>
             </div>
             <!-- Cart form End -->
-
+            @endif
         </div>
     </section>
     <!-- Cart End -->

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class Admin
+class IsCart
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,8 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (\Auth::user() && \Auth::user()->role -> role == 'admin') {
+        if(!\Cart::session(session('cart_id')) -> isEmpty())
             return $next($request);
-        }
-
-        return redirect()-> route('admin.login');
+        return redirect() -> route('shop.main');
     }
 }

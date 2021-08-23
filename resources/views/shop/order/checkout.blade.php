@@ -33,7 +33,17 @@
             @csrf
             <div class="row">
                 <div class="col-xl-7">
-
+                    <h4>Спосіб оплати:</h4>
+                    <div class="row form-check">
+                        <div class="form-group col-xl-6">
+                            <input class="form-check-input" type="radio" name="payment_method" value="1" id="money" checked>
+                            <label class="form-check-label" for="money">Готівкою(кур'єру)</label>
+                        </div>
+                        <div class="form-group col-xl-6">
+                            <input class="form-check-input" type="radio" name="payment_method" value="2" id="cart" >
+                            <label class="form-check-label" for="cart">Карта(онлайн)</label>
+                        </div>
+                    </div>
                     <!-- Buyer Info -->
                     <h4>Ваші дані</h4>
                     <div class="row">
@@ -51,7 +61,7 @@
                         </div>
                         <div class="form-group col-xl-12 mb-0">
                             <label>Побажання</label>
-                            <textarea name="description" rows="5" class="form-control" placeholder="Примітка(Не обов'язково)"></textarea>
+                            <textarea name="description" rows="5" class="form-control" placeholder="Коментар(Не обов'язково)"></textarea>
                         </div>
                     </div>
 

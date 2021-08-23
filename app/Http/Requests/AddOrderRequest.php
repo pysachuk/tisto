@@ -27,7 +27,8 @@ class AddOrderRequest extends FormRequest
             'name' => 'required|string',
             'phone' => 'required|min:10|numeric',
             'address' => 'required|string',
-            'description' => 'string',
+            'description' => 'nullable|string',
+            'payment_method'    => 'required|numeric'
         ];
     }
 

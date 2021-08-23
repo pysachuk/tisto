@@ -7,6 +7,8 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Http\Requests\AddOrderRequest;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\LiqPay;
 
 class OrderController extends Controller
 {
@@ -16,10 +18,12 @@ class OrderController extends Controller
         {
             session(['cart_id' => uniqid()]);
         }
+        $this->middleware('isCart');
     }
 
     public function checkout()
     {
+//        dd(\Cart::session(session('cart_id'))-> getContent());
         $cart_items = \Cart::session(session('cart_id')) -> getContent();
         return view('shop.order.checkout', compact('cart_items'));
     }
@@ -42,6 +46,25 @@ class OrderController extends Controller
             $order_product -> save();
         }
         \Cart::session(session('cart_id')) -> clear();
-        return redirect() -> route('shop.main');
+        if($order -> payment_method == 2)
+        $public_key = Config::get('liqpay.public_key');
+        $private_key = Config::get('liqpay.private_key');
+        {
+            $liqpay = new LiqPay($public_key, $private_key);
+            $html = $liqpay->cnb_form(array(
+                'action'         => 'pay',
+                'amount'         => $order -> summ,
+                'currency'       => Config::get('liqpay.currency'),
+                'description'    => 'Оплата замовлення № '.$order -> id,
+                'order_id'       => $order -> id,
+                'version'        => '3',
+                'language'       => Config::get('liqpay.language'),
+                'server_url'     => 'https://tisto.pp.ua/api/payment_status',
+                'result_url'     => 'tisto.pp.ua'
+
+            ));
+            return view('shop.order.payment', ['order' => $order, 'button' => $html]);
+        }
+        return view('shop.order.order_accepted',['order_id' => $order -> id]);
     }
 }

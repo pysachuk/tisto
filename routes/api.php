@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,32 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+Route::post('/payment_status', function (Request $request){
+    $private_key = Config::get('liqpay.private_key');
+    $signature = $request -> signature;
+    $data = $request -> data;
+//    $public_key = Config::get('liqpay.public_key');
+
+    $verify = base64_encode( sha1(
+        $private_key .
+        $data .
+        $private_key
+        , 1 ));
+    if( $signature == $verify)
+    {
+        $liqpay_data = json_decode($data);
+        $order_id = $liqpay_data -> order_id;
+        $status = $liqpay_data -> status;
+        $json = $data;
+        $result = DB::table('payments') -> insert([
+            'order_id' => $order_id,
+            'status' => $status,
+            'json' => $json
+        ]);
+        if($result)
+            return response() -> json('Success');
+    }
+    else
+        return response() -> json('Verify failed');
 });

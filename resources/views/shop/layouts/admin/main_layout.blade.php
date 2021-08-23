@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -43,10 +44,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
+                <a href="{{route('admin.home')}}" class="nav-link">Головна</a>
             </li>
         </ul>
 
@@ -54,33 +52,8 @@
         <ul class="navbar-nav ml-auto">
             <!-- Navbar Search -->
             <li class="nav-item">
-                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                    <i class="fas fa-search"></i>
-                </a>
-                <div class="navbar-search-block">
-                    <form class="form-inline">
-                        <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-navbar" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                     <i class="fas fa-expand-arrows-alt"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                    <i class="fas fa-th-large"></i>
                 </a>
             </li>
         </ul>
@@ -105,6 +78,10 @@
                 <div class="info">
                     <a href="#" class="d-block">{{Auth::user() -> name}}</a>
                 </div>
+                <form action="{{route('admin.logout')}}" method="post">
+                    @csrf
+                    <button class="btn btn-danger" type="submit">Вихід</button>
+                </form>
             </div>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
@@ -112,7 +89,7 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="{{ route('admin.home') }}" class="nav-link">
+                        <a href="{{ route('admin.home') }}" class="nav-link @menuActive('admin.home', 'active')">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Главная админки
@@ -125,7 +102,7 @@
                             <p>На сайт</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item  has-treeview menu-open">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -135,20 +112,20 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.category.index') }}" class="nav-link">
+                                <a href="{{ route('admin.category.index') }}" class="nav-link @menuActive('admin.category.index', 'active')">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Все категории</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.category.create') }}" class="nav-link">
+                                <a href="{{ route('admin.category.create') }}" class="nav-link  @menuActive('admin.category.create', 'active')">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Добавить категорию</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -158,35 +135,50 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.product.index') }}" class="nav-link">
+                                <a href="{{ route('admin.product.index') }}" class="nav-link @menuActive('admin.product.index', 'active')">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Все товары</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.product.create') }}" class="nav-link">
+                                <a href="{{ route('admin.product.create') }}" class="nav-link @menuActive('admin.product.create', 'active')">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Добавить товар</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Заказы
+                                Замовлення
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.order.index') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Все заказы</p>
+                                <a href="{{ route('admin.order.new') }}" class="nav-link @menuActive('admin.order.new', 'active')">
+                                    <i class="fas fa-cart-plus nav-icon" style="color: green"></i>
+                                    <p>Нові замовлення</p>
+                                    <span class="right badge badge-success">New</span>
                                 </a>
                             </li>
                         </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.order.index') }}" class="nav-link @menuActive('admin.order.index', 'active')">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Всі замовлення</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.admins.list') }}" class="nav-link @menuActive('admin.admins.list', 'active')">
+                            <i class="fas fa-circle nav-icon"></i>
+                            <p>Список адмінів</p>
+                        </a>
                     </li>
                 </ul>
             </nav>

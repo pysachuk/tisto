@@ -17,9 +17,6 @@ Route::get('/test',[\App\Http\Controllers\Test\TestController::class, 'index']);
 
 Auth::routes();
 
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 //MAIN
 Route::get('/', [\App\Http\Controllers\Shop\MainController::class, 'index']) -> name('shop.main');
 Route::get('/info', [\App\Http\Controllers\Shop\MainController::class, 'info']) -> name('shop.info');
@@ -39,18 +36,29 @@ Route::middleware('web') ->group(function(){
 //ORDER
 Route::get('cart/checkout', [App\Http\Controllers\Shop\OrderController::class, 'checkout'])
     -> name('cart.checkout');
-Route::post('cart/checkout/add', [App\Http\Controllers\Shop\OrderController::class, 'addOrder'])
+Route::post('cart/checkout/accepted', [App\Http\Controllers\Shop\OrderController::class, 'addOrder'])
     -> name('cart.add_order');
 
 
 //ADMIN
-Route::middleware('admin')->prefix('admin') ->group(function(){
+Route::get('/panel/login',[\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])
+    -> name('admin.login');
+Route::post('/panel/login',[\App\Http\Controllers\Auth\LoginController::class, 'login']);
+Route::post('/panel/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])
+    -> name('admin.logout');
+Route::middleware('admin')->prefix('panel') ->group(function(){
     Route::get('/', [\App\Http\Controllers\Shop\Admin\MainController::class, 'index'])
         -> name('admin.home');
     Route::resource('/category', \App\Http\Controllers\Shop\Admin\CategoryController::class)
     ->names('admin.category');
     Route::resource('/product', \App\Http\Controllers\Shop\Admin\ProductController::class)
         ->names('admin.product');
-    Route::resource('/order', \App\Http\Controllers\Shop\Admin\OrderController::class)
-        ->names('admin.order');
+    Route::get('/order', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'index'])
+        ->name('admin.order.index');
+    Route::get('/order/new', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'newOrders'])
+        ->name('admin.order.new');
+    Route::post('/order/approve', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'approveOrder'])
+        ->name('admin.order.approve');
+    Route::get('/admins/list',[\App\Http\Controllers\Shop\Admin\MainController::class, 'adminList'])
+        ->name('admin.admins.list');
 });
