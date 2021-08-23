@@ -4,7 +4,7 @@
     <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/shop/main/assets/img/subheader.jpg')">
         <div class="container">
             <div class="subheader-inner">
-                <h1>Меню</h1>
+                <h1>Про нас</h1>
             </div>
 
         </div>

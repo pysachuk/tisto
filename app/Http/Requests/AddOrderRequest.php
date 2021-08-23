@@ -25,7 +25,7 @@ class AddOrderRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'phone' => 'required|min:10|numeric',
+            'phone' => 'required|regex:#^\+38\([0-9][0-9][0-9]\) [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]#',
             'address' => 'required|string',
             'description' => 'nullable|string',
             'payment_method'    => 'required|numeric'

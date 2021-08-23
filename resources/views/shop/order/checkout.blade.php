@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group col-xl-6">
                             <label>Номер телефону<span class="text-danger">*</span></label>
-                            <input type="text" placeholder="Номер телефону" name="phone" class="form-control" value="" required="">
+                            <input type="text" placeholder="+380999999999" name="phone" class="form-control phone" value="" >
                         </div>
                         <div class="form-group col-xl-12">
                             <label>Адреса доставки<span class="text-danger">*</span></label>
@@ -115,4 +115,13 @@
     </div>
 </section>
 <!-- Checkout End -->
+@endsection
+@section('js')
+    <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function (){
+            $(".phone").mask("+38(099) 999-9999");
+        })
+    </script>
+
 @endsection
