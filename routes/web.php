@@ -38,6 +38,10 @@ Route::get('cart/checkout', [App\Http\Controllers\Shop\OrderController::class, '
     -> name('cart.checkout');
 Route::post('cart/checkout/accepted', [App\Http\Controllers\Shop\OrderController::class, 'addOrder'])
     -> name('cart.add_order');
+Route::get('/cart/pay/{order}', [App\Http\Controllers\Shop\PaymentController::class, 'payPage'])
+-> name('cart.pay_page');
+Route::get('/cart/pay/status/{order_id}', [App\Http\Controllers\Shop\PaymentController::class, 'payStatus'])
+    -> name('cart.pay_status');
 
 
 //ADMIN

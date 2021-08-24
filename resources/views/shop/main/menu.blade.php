@@ -61,19 +61,6 @@
 @endsection
 @section('js')
     <script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1500,
-            // timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-    </script>
-    <script>
         $(document).ready(function (){
             $('.add_to_cart').click(function (event){
                 event.preventDefault();
@@ -85,9 +72,6 @@
 
         function add_to_cart()
         {
-            // let total_qty =parseInt($('.cart-item-count').text());
-            // total_qty += 1;
-            // $('.cart-item-count').text(total_qty);
             let qty = 1;
             $.ajax({
                 url: "{{ route('addToCart') }}",
@@ -103,11 +87,23 @@
                     if(data['OK'] == 1)
                     {
                         $('.cart-item-count').text(data['count']);
-                        // console.log(data);
-                        Toast.fire({
-                            icon: 'success',
-                            title: '1х '+product_title+' додано до кошика'
-                        })
+                        Swal.fire({
+                            icon: "success",
+                            title: '<strong>Успіх</strong>',
+                            html:
+                                '1х '+product_title+' додано до кошика',
+                            showCloseButton: true,
+                            showCancelButton: true,
+                            confirmButtonText:
+                                '<a href="{{ route('cart.index') }}" style="color: white;">Кошик</a>',
+                            cancelButtonText:
+                                '<b">Назад до меню</b>',
+                            timer: 3000,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
                     }
                 }
             });

@@ -31,8 +31,7 @@ class OrderController extends Controller
         \Cart::session(session('cart_id')) -> clear();
         if($order -> payment_method == 2)
         {
-            $html = PaymentController::getPaymentButton($order);
-            return view('shop.order.payment', ['order' => $order, 'button' => $html]);
+            return redirect() -> route('cart.pay_page', $order);
         }
         return view('shop.order.order_accepted',['order_id' => $order -> id]);
     }

@@ -7,6 +7,7 @@ use App\Http\Controllers\LiqPay;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -27,8 +28,28 @@ class PaymentController extends Controller
             'version'        => '3',
             'language'       => Config::get('liqpay.language'),
             'server_url'     => 'https://tisto.pp.ua/api/payment_status',
-            'result_url'     => Config::get('app.url')
+            'result_url'     => 'https://tisto.pp.ua/cart/pay/status/'.$order -> id
 
         ));
+    }
+    public function payPage(Order $order)
+    {
+        $html = self::getPaymentButton($order);
+        return view('shop.order.payment', ['order' => $order, 'button' => $html]);
+    }
+
+    public function payStatus($order_id)
+    {
+        $payment = DB::table('payments') -> where('order_id', $order_id) -> first();
+        if($payment -> status == 'success')
+        {
+            dd('Заказ оплачен');
+        }
+        else
+        {
+            $payment = json_decode($payment -> json);
+            $error = $payment -> err_description;
+            dd('Ошибка оплаты: '.$error);
+        }
     }
 }
