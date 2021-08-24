@@ -23,7 +23,7 @@
         <div class="container">
             @foreach($categories as $category)
             <!-- Category Start -->
-            <div class="menu-category dark-overlay dark-overlay-2" style="background-image: url('/shop/main/assets/img/categories-lg/1.jpg')">
+            <div class="menu-category dark-overlay dark-overlay-2" style="background-image: url('/storage/{{ $category -> image_url }}')">
                 <h3>{{ $category -> title }}</h3>
                 <p>{{ $category -> description }}</p>
             </div>
@@ -40,7 +40,7 @@
                             <div class="product-desc">
                                 <h4 class="product_title" data-id="{{ $product -> id }}">{{ $product -> title }}</h4>
                                 <p>{{ $product -> description }}</p>
-{{--                                <a href="#" class="btn-custom light btn-sm shadow-none" data-toggle="modal" data-target="#customizeModal"> Customize <i class="fas fa-plus"></i> </a>--}}
+                                <p class="product-price"><i class="fas fa-weight" style="color: silver;"></i> {{ $product -> weight }}г</p>
                             </div>
                             <div class="product-controls">
                                 <p class="product-price">{{ $product -> price }} грн</p>
@@ -60,53 +60,5 @@
     <!-- Menu Wrapper End -->
 @endsection
 @section('js')
-    <script>
-        $(document).ready(function (){
-            $('.add_to_cart').click(function (event){
-                event.preventDefault();
-                product_id = $(this).attr('data-id');
-                product_title = $('.product_title[data-id='+product_id+']').text();
-                add_to_cart();
-            })
-        });
-
-        function add_to_cart()
-        {
-            let qty = 1;
-            $.ajax({
-                url: "{{ route('addToCart') }}",
-                type: "POST",
-                data: {
-                    id: product_id,
-                    qty: qty,
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: (data) => {
-                    if(data['OK'] == 1)
-                    {
-                        $('.cart-item-count').text(data['count']);
-                        Swal.fire({
-                            icon: "success",
-                            title: '<strong>'+product_title+'</strong>',
-                            html:
-                                'Додано до кошика',
-                            showCloseButton: true,
-                            showCancelButton: true,
-                            confirmButtonText:
-                                '<a href="{{ route('cart.index') }}" style="color: white;"><i class="fas fa-shopping-cart"></i> Кошик</a>',
-                            cancelButtonText:
-                                '<b><i class="fas fa-chevron-left"></i> Назад до меню</b>',
-                            timer: 3000,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        });
-                    }
-                }
-            });
-        }
-    </script>
+    <script src="/shop/main/assets/js/menu.js"></script>
 @endsection

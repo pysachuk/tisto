@@ -32,8 +32,8 @@
                                 <td>{{ $order -> address }}</td>
                                 <td>{{ $order -> summ }} грн</td>
                                 <td>
-                                    {{ ($order -> payment_method == 1) ? 'Готівка': ''}}
-                                    {{ ($order -> payment_method == 2) ? 'Карта': ''}}
+                                    {!! ($order -> payment_method == 1) ? 'Готівка <i class="bi bi-currency-dollar"></i>': ''!!}
+                                    {!!   ($order -> payment_method == 2) ? 'Картка <i class="bi bi-credit-card"></i>': ''!!}
                                 </td>
                                 <td>
                                     @if($order -> status == 1)
@@ -99,6 +99,7 @@
                             </tbody>
                         </table>
                     </div>
+                {{ $orders->links() }}
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->

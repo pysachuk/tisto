@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/test',[\App\Http\Controllers\Test\TestController::class, 'index']);
 
-Auth::routes();
+//Auth::routes();
 
 //MAIN
 Route::get('/', [\App\Http\Controllers\Shop\MainController::class, 'index']) -> name('shop.main');
@@ -63,8 +63,10 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
         ->name('admin.order.new');
     Route::post('/order/approve', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'approveOrder'])
         ->name('admin.order.approve');
-    Route::get('/admins/list',[\App\Http\Controllers\Shop\Admin\MainController::class, 'adminList'])
-        ->name('admin.admins.list');
     Route::post('/order/pay_status', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'checkPay'])
         ->name('admin.order.payStatus');
+    Route::get('/user', [\App\Http\Controllers\Shop\Admin\MainController::class, 'user'])
+    ->name('admin.user');
+    Route::post('/user', [\App\Http\Controllers\Shop\Admin\MainController::class, 'userUpdate'])
+        ->name('admin.user.update');
 });

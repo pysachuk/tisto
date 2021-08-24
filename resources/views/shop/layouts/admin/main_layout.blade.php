@@ -6,6 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -76,7 +78,7 @@
                     <img src="/shop/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{Auth::user() -> name}}</a>
+                    <a href="{{ route('admin.user') }}" class="d-block">{{Auth::user() -> name}}</a>
                 </div>
                 <form action="{{route('admin.logout')}}" method="post">
                     @csrf
@@ -102,7 +104,7 @@
                             <p>На сайт</p>
                         </a>
                     </li>
-                    <li class="nav-item  has-treeview menu-open">
+                    <li class="nav-item  has-treeview @menuActive('admin.category.index', 'menu-open') @menuActive('admin.category.create', 'menu-open')">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -125,7 +127,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview menu-open">
+                    <li class="nav-item has-treeview @menuActive('admin.product.index', 'menu-open') @menuActive('admin.product.create', 'menu-open')">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -148,7 +150,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview menu-open">
+                    <li class="nav-item has-treeview @menuActive('admin.order.new', 'menu-open') @menuActive('admin.order.index', 'menu-open')">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -174,12 +176,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.admins.list') }}" class="nav-link @menuActive('admin.admins.list', 'active')">
-                            <i class="fas fa-circle nav-icon"></i>
-                            <p>Список адмінів</p>
-                        </a>
-                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -193,7 +189,12 @@
             <div class="alert alert-success">
                 {{ session()->get('message') }}
             </div>
-    @endif
+        @endif
+            @if(session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session()->get('error') }}
+                </div>
+        @endif
         <!-- Main content -->
         @yield('content')
 

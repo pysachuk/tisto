@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Shop\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -44,7 +46,6 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this -> categoryRepository -> store($request);
-        \Session::flash('message', "Special message goes here");
         return redirect() -> route('admin.category.index') -> with('message', 'Категория успешно добавлена');
     }
 
@@ -83,6 +84,11 @@ class CategoryController extends Controller
         $category = $this -> categoryRepository -> getCategory($id);
         $category -> title = $request -> title;
         $category -> description = $request -> description;
+        if($request -> file('photo')) {
+            $photo_path = Storage::disk('public')
+                ->putFile('categories', $request->file('photo'), 'public');
+            $category -> image_url = $photo_path;
+        }
         $category -> save();
         return redirect() -> route('admin.category.index') -> with('message', 'Категория успешно Обновлена');
     }

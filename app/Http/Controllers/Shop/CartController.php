@@ -15,7 +15,7 @@ class CartController extends Controller
             session(['cart_id' => uniqid()]);
         }
     }
-    public function index(Request $request)
+    public function index()
     {
         $cart_items = \Cart::session(session('cart_id')) -> getContent();
         return view('shop.cart.index', compact('cart_items'));

@@ -28,7 +28,7 @@ class OrderController extends Controller
      */
     public function newOrders()
     {
-        $orders = Order::where('status', 1) -> orderBy('created_at', 'DESC') -> get();
+        $orders = Order::where('status', 1) -> orderBy('created_at', 'DESC') -> paginate(15);
         return view('shop.admin.order.index',compact('orders'));
     }
     public function approveOrder(Request $request)

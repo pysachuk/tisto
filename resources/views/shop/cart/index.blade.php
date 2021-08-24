@@ -19,22 +19,16 @@
             <table class="ct-responsive-table">
                 <thead>
                 <tr>
-                    <th class="remove-item"></th>
                     <th>Продукт</th>
                     <th>Ціна</th>
                     <th>Кількість</th>
                     <th>Сумма</th>
+                    <th class="remove-item"></th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse($cart_items as $item)
                 <tr class="cart_item" data-id="{{ $item -> id }}">
-                    <td class="remove">
-                        <button type="button" data-id="{{ $item -> id }}" class="close-btn close-danger remove-from-cart">
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </td>
                     <td data-title="Продукт">
                         <div class="cart-product-wrapper">
                             <img src="/storage/{{ $item -> attributes -> image }}" alt="prod1">
@@ -61,6 +55,12 @@
                         </div>
                     </td>
                     <td data-title="Сума"> <strong class="product_total" data-id="{{ $item -> id }}">{{ ($item -> price * $item -> quantity) }} грн</strong> </td>
+                    <td class="remove">
+                        <button type="button" data-id="{{ $item -> id }}" class="close-btn close-danger remove-from-cart">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </td>
                 </tr>
                 @empty
                     <tr>
@@ -97,93 +97,5 @@
     <!-- Cart End -->
 @endsection
 @section('js')
-    <script>
-        $(document).ready(function (){
-            $('.remove-from-cart').click(function (event){
-                product_id = $(this).attr('data-id');
-                remove_from_cart();
-            });
-            $('.cart_add_count').click(function (event){
-                product_id = $(this).attr('data-id');
-                cart_add_count();
-            });
-            $('.cart_minus_count').click(function (event){
-                product_id = $(this).attr('data-id');
-                cart_minus_count();
-            });
-
-        });
-
-        function cart_minus_count()
-        {
-            $.ajax({
-                url: "{{ route('cart.minus_count') }}",
-                type: "POST",
-                data: {
-                    product_id: product_id,
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: (data) => {
-                    console.log(data);
-                    if(data['OK'] == 1)
-                    {
-                        $('.cart_total').text(data['cart_total']+' грн');
-                        $('input.qty[data-id='+product_id+']').val(data['quantity']);
-                        $('strong.product_total[data-id='+product_id+']').text(data['total']+' грн');
-                    }
-
-                }
-            });
-        }
-
-        function cart_add_count()
-        {
-            $.ajax({
-                url: "{{ route('cart.add_count') }}",
-                type: "POST",
-                data: {
-                    product_id: product_id,
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: (data) => {
-                    console.log(data);
-                    if(data['OK'] == 1)
-                    {
-                        $('.cart_total').text(data['cart_total']+' грн');
-                        $('input.qty[data-id='+product_id+']').val(data['quantity']);
-                        $('strong.product_total[data-id='+product_id+']').text(data['total']+' грн');
-                    }
-
-                }
-            });
-        }
-
-        function remove_from_cart()
-        {
-            $.ajax({
-                url: "{{ route('cart.remove_item') }}",
-                type: "POST",
-                data: {
-                    product_id: product_id,
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: (data) => {
-                    console.log(data);
-                    $('.cart_total').text(data['cart_total']+' грн');
-                    if(data['OK'] == 1)
-                    {
-                        $('button.remove-from-cart[data-id='+product_id+']').parent().parent().fadeOut();
-                        $('.cart-item-count').text(data['count']);
-                    }
-
-                }
-            });
-        }
-    </script>
+    <script src="/shop/main/assets/js/cart.js"></script>
 @endsection

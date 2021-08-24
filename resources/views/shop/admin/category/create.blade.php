@@ -10,7 +10,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="{{ route('admin.category.store') }}">
+                <form method="POST" action="{{ route('admin.category.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -20,6 +20,15 @@
                         <div class="form-group">
                             <label>Описание</label>
                             <textarea name="description" class="form-control" rows="3" placeholder="Описание..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input name="photo" value="" type="file" class="custom-file-input" id="photo_input">
+                                <label class="custom-file-label" for="photo_input">Выберите фото...</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Загрузить</span>
+                            </div>
                         </div>
                     </div>
                     <!-- /.card-body -->
