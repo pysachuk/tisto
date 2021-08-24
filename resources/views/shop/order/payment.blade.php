@@ -14,8 +14,8 @@
     <!--Cart Start -->
     <section class="section">
         <div class="container">
-            <h4>Ваш заказ {{ $order -> id }} Принят</h4>
-            <p>Оплатіть {{ $order -> summ }} грн</p>
+            <h4>Замовлення № {{ $order -> id }} прийнято</h4>
+            <p>Оплатіть <b>{{ $order -> summ }}</b> грн</p>
             {!! $button !!}
         </div>
     </section>
