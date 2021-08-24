@@ -41,15 +41,17 @@ class PaymentController extends Controller
     public function payStatus($order_id)
     {
         $payment = DB::table('payments') -> where('order_id', $order_id) -> first();
+        $data['order_id'] = $order_id;
         if($payment -> status == 'success')
         {
-            dd('Заказ оплачен');
+            $data['status'] = $payment -> status;
+            return view('shop.order.order_status', compact('data'));
         }
         else
         {
             $payment = json_decode($payment -> json);
-            $error = $payment -> err_description;
-            dd('Ошибка оплаты: '.$error);
+            $data['error'] = $payment -> err_description;
+            return view('shop.order.order_status', compact('data'));
         }
     }
 }

@@ -33,6 +33,8 @@ class OrderController extends Controller
         {
             return redirect() -> route('cart.pay_page', $order);
         }
-        return view('shop.order.order_accepted',['order_id' => $order -> id]);
+        $data['order_id'] = $order -> id;
+        $data['payment'] = 'money';
+        return view('shop.order.order_status',compact('data'));
     }
 }
