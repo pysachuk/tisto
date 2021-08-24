@@ -46,23 +46,19 @@
                     </td>
                     <td data-title="Ціна"> <strong>{{ $item -> price }} грн</strong> </td>
                     <td class="quantity" data-title="Кількість">
-
-                            <div class="row">
-                                <div class="col-md-3 text-center p-0" style="">
-                                    <button type="button" data-id="{{ $item -> id }}" class="btn btn-success cart_add_count">
-                                        +
-                                    </button>
-                                </div>
-                                <div class="col-md-6 p-1" style="">
-                                    <input type="text" data-id="{{ $item -> id }}" class="qty form-control" value="{{ $item -> quantity }}" readonly>
-                                </div>
-                                <div class="col-md-3 text-center p-0" style="">
-                                    <button type="button" data-id="{{ $item -> id }}"  class="btn btn-danger cart_minus_count">
-                                        -
-                                    </button>
-                                </div>
-                            </div>
-
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <button type="button" data-id="{{ $item -> id }}" class="btn btn-outline-secondary btn-number cart_minus_count" data-type="minus" data-field="quant[1]">
+                                    <span class="fa fa-minus"></span>
+                                </button>
+                            </span>
+                            <input type="text" data-id="{{ $item -> id }}" name="quant[1]" class="form-control input-number qty" value="{{ $item -> quantity }}" min="1" max="10" readonly>
+                            <span class="input-group-append">
+                                <button type="button" data-id="{{ $item -> id }}" class="btn btn-outline-secondary btn-number cart_add_count" data-type="plus" data-field="quant[1]">
+                                    <span class="fa fa-plus"></span>
+                                </button>
+                            </span>
+                        </div>
                     </td>
                     <td data-title="Сума"> <strong class="product_total" data-id="{{ $item -> id }}">{{ ($item -> price * $item -> quantity) }} грн</strong> </td>
                 </tr>

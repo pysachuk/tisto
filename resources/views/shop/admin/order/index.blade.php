@@ -31,7 +31,10 @@
                                 <td>{{ $order -> phone }}</td>
                                 <td>{{ $order -> address }}</td>
                                 <td>{{ $order -> summ }} грн</td>
-                                <td>{{ ($order -> payment_method == 1) ? 'Готівка': ''}}{{ ($order -> payment_method == 2) ? 'Карта': ''}}</td>
+                                <td>
+                                    {{ ($order -> payment_method == 1) ? 'Готівка': ''}}
+                                    {{ ($order -> payment_method == 2) ? 'Карта': ''}}
+                                </td>
                                 <td>
                                     @if($order -> status == 1)
                                         <span class="bg-success">NEW</span>
@@ -82,6 +85,11 @@
                                             <!-- /.card-body -->
                                             <div class="card-footer clearfix">
                                                 <button data-id="{{ $order -> id }}" type="submit" href="#" class="btn btn-success approve_order">Одобрить</button>
+                                                @if($order -> payment_method == 2)
+                                                    <button type="button" class="btn btn-outline-info check_pay" data-id="{{ $order -> id }}">
+                                                        Перевірити платіж
+                                                    </button>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -97,16 +105,73 @@
             </div>
         </div>
     </div>
+    <div class="modal pay_status_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Статус оплати замовлення # <b class="modal_order_id"></b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4>Статус: <b class="pay_status"></b></h4>
+                    <b class="pay_status_error" style="color: red;"></b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('js')
     <script>
         $(document).ready(function (){
+
             $('.approve_order').click(function (event){
                 event.preventDefault();
                 order_id = ($(this).attr('data-id'));
                 approve_order();
+            });
+            $('.check_pay').click(function (event){
+                event.preventDefault();
+                order_id = ($(this).attr('data-id'));
+                check_pay();
             })
         });
+
+        function check_pay()
+        {
+            $.ajax({
+                url: "{{ route('admin.order.payStatus') }}",
+                type: "POST",
+                data: {
+                    order_id: order_id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: (data) => {
+                    $('.modal_order_id').text(data['order_id']);
+                    if(data['status'] == 'success')
+                    {
+                        $('.pay_status').css('color', 'green');
+                        $('.pay_status').text('Оплата успішна');
+                        $('.pay_status_error').text('');
+                    }
+                    else if(data['json'])
+                    {
+                        $('.pay_status').css('color', 'red');
+                        $('.pay_status').text('Помилка оплати');
+                        json = JSON.parse(data['json']);
+                        $('.pay_status_error').text(json['err_description']);
+                    }
+                    $('.pay_status_modal').modal('show');
+                    console.log(data);
+                }
+            });
+        }
 
         function approve_order()
         {

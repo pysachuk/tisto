@@ -9,7 +9,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{$orders_count}}</h3>
+                            <h3>{{$data['new_orders_count']}}</h3>
 
                             <p>Нових замовленнь</p>
                         </div>
@@ -24,14 +24,14 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                            <p>Bounce Rate</p>
+                            <h3>{{ $data['current_month_orders_count'] }}</h3>
+                            <p>Замовлень на сайті</p>
+                            <p>Зроблено в <b>поточному</b> місяці</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+{{--                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--}}
                     </div>
                 </div>
                 <!-- ./col -->
@@ -39,14 +39,14 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
-
-                            <p>User Registrations</p>
+                            <h3>{{ $data['current_month_summ'] }} грн</h3>
+                            <p>Через сайт</p>
+                            <p>У <b>поточному</b> місяці</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="ion ion-pie-graph"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+{{--                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--}}
                     </div>
                 </div>
                 <!-- ./col -->
@@ -54,14 +54,14 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
-
-                            <p>Unique Visitors</p>
+                            <h3>{{ $data['total_amount'] }} грн</h3>
+                            <p>Через сайт</p>
+                            <p>За весь час</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        {{--                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--}}
                     </div>
                 </div>
                 <!-- ./col -->

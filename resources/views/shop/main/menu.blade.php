@@ -89,15 +89,15 @@
                         $('.cart-item-count').text(data['count']);
                         Swal.fire({
                             icon: "success",
-                            title: '<strong>Успіх</strong>',
+                            title: '<strong>'+product_title+'</strong>',
                             html:
-                                '1х '+product_title+' додано до кошика',
+                                'Додано до кошика',
                             showCloseButton: true,
                             showCancelButton: true,
                             confirmButtonText:
-                                '<a href="{{ route('cart.index') }}" style="color: white;">Кошик</a>',
+                                '<a href="{{ route('cart.index') }}" style="color: white;"><i class="fas fa-shopping-cart"></i> Кошик</a>',
                             cancelButtonText:
-                                '<b">Назад до меню</b>',
+                                '<b><i class="fas fa-chevron-left"></i> Назад до меню</b>',
                             timer: 3000,
                             didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)

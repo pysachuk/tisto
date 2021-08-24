@@ -65,4 +65,6 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
         ->name('admin.order.approve');
     Route::get('/admins/list',[\App\Http\Controllers\Shop\Admin\MainController::class, 'adminList'])
         ->name('admin.admins.list');
+    Route::post('/order/pay_status', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'checkPay'])
+        ->name('admin.order.payStatus');
 });

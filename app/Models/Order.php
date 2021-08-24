@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Requests\AddOrderRequest;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderProduct;
@@ -43,6 +44,34 @@ class Order extends Model
             $order_product -> save();
         }
         return $order;
+    }
+
+    public static function getCurrentMonthOrders()
+    {
+        return self::whereMonth('created_at', Carbon::now()->month)
+            -> get();
+    }
+
+    public static function getCurrentMonthSumm()
+    {
+        $orders = self::getCurrentMonthOrders();
+        $summ = 0;
+        foreach ($orders as $order)
+        {
+            $summ += $order -> summ;
+        }
+        return $summ;
+    }
+
+    public static function getTotalAmount()
+    {
+        $orders = self::all();
+        $summ = 0;
+        foreach ($orders as $order)
+        {
+            $summ += $order -> summ;
+        }
+        return $summ;
     }
 }
 

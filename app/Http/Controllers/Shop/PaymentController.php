@@ -42,6 +42,12 @@ class PaymentController extends Controller
     {
         $payment = DB::table('payments') -> where('order_id', $order_id) -> first();
         $data['order_id'] = $order_id;
+        if(!$payment)
+        {
+            $data['status'] = 'pay_cancelled';
+            $data['error'] = 'Відміна оплати!';
+            return view('shop.order.order_status', compact('data'));
+        }
         if($payment -> status == 'success')
         {
             $data['status'] = $payment -> status;
@@ -50,6 +56,7 @@ class PaymentController extends Controller
         else
         {
             $payment = json_decode($payment -> json);
+            $data['status'] = $payment -> status;
             $data['error'] = $payment -> err_description;
             return view('shop.order.order_status', compact('data'));
         }
