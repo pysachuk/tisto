@@ -1,17 +1,10 @@
 @extends('shop.layouts.shop.main_layout')
 @section('content')
     <!-- Subheader Start -->
-    <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/shop/main/assets/img/subheader.jpg')">
+    <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('{{ $header_image ? '/storage/'.$header_image : '/shop/main/assets/img/subheader.jpg' }}')">
         <div class="container">
             <div class="subheader-inner">
                 <h1>Меню</h1>
-{{--                <nav aria-label="breadcrumb">--}}
-{{--                    <ol class="breadcrumb">--}}
-{{--                        <li class="breadcrumb-item"><a href="#">Home</a></li>--}}
-{{--                        <li class="breadcrumb-item"><a href="#">Menu</a></li>--}}
-{{--                        <li class="breadcrumb-item active" aria-current="page">Menu v2</li>--}}
-{{--                    </ol>--}}
-{{--                </nav>--}}
             </div>
 
         </div>

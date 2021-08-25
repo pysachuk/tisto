@@ -168,6 +168,12 @@
                         json = JSON.parse(data['json']);
                         $('.pay_status_error').text(json['err_description']);
                     }
+                    else
+                    {
+                        $('.pay_status').css('color', 'red');
+                        $('.pay_status').text('Не оплачено!');
+                        $('.pay_status_error').text('');
+                    }
                     $('.pay_status_modal').modal('show');
                     console.log(data);
                 }

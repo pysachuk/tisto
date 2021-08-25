@@ -69,4 +69,11 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
     ->name('admin.user');
     Route::post('/user', [\App\Http\Controllers\Shop\Admin\MainController::class, 'userUpdate'])
         ->name('admin.user.update');
+    Route::get('/pages/main/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainEdit'])
+        ->name('admin.pages.main.edit');
+    Route::get('/pages/info/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'infoEdit'])
+        ->name('admin.pages.info.edit');
+    Route::post('/pages/main/update', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainUpdate'])
+        -> name('admin.pages.main.update');
+
 });
