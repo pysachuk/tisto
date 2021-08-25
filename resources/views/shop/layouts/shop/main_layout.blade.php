@@ -113,9 +113,11 @@
 
 </header>
 <!-- Header End -->
-
-
-
+@if(session()->has('message'))
+    <script>
+        var message = '{{ session()->get('message') }}';
+    </script>
+@endif
 @yield('content')
 <!-- Footer Start -->
 <footer class="ct-footer footer-dark">
@@ -140,7 +142,6 @@
 
 </footer>
 <!-- Footer End -->
-
 <!-- Vendor Scripts -->
 <script src="/shop/main/assets/js/plugins/jquery-3.4.1.min.js"></script>
 <script src="/shop/main/assets/js/plugins/popper.min.js"></script>
@@ -158,6 +159,16 @@
 <script src="/shop/main/assets/js/main.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    if(typeof message !== "undefined")
+    {
+        Swal.fire(
+            'Помилка',
+             message,
+            'info'
+        );
+    }
+</script>
 @yield('js')
 
 </body>

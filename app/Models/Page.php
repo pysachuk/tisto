@@ -11,17 +11,23 @@ class Page extends Model
 
     public static function getHeaderImage($page)
     {
-        $data = json_decode(self::where('page', $page) -> select('data_json') -> first() -> data_json);
-        return $data -> header_image;
+        $data = self::where('page', $page) -> select('data_json') -> first();
+        $data = ($data) ? json_decode($data -> data_json) : null;
+        return ($data) ? $data -> header_image : null;
     }
 
     public static function updateHeaderImage($page, $image_url)
     {
         $page = self::where('page', $page) -> first();
-        $json = json_decode($page -> data_json);
-        $json -> header_image = $image_url;
-        $json = json_encode($json);
-        $page -> data_json = $json;
-        return $page -> save();
+        if($page)
+        {
+            $json = json_decode($page -> data_json);
+            $json -> header_image = $image_url;
+            $json = json_encode($json);
+            $page -> data_json = $json;
+            return $page -> save();
+        }
+            return false;
+
     }
 }

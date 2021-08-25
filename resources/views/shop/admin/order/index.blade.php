@@ -10,8 +10,8 @@
                     </div>
                     <!-- ./card-header -->
                     <div class="card-body">
-                        <table class="table table-bordered table-hover">
-                            <thead>
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead class="thead-light">
                             <tr>
                                 <th>№ заказа</th>
                                 <th>Имя</th>
@@ -35,9 +35,9 @@
                                     {!! ($order -> payment_method == 1) ? 'Готівка <i class="bi bi-currency-dollar"></i>': ''!!}
                                     {!!   ($order -> payment_method == 2) ? 'Картка <i class="bi bi-credit-card"></i>': ''!!}
                                 </td>
-                                <td>
+                                <td class="bg-success">
                                     @if($order -> status == 1)
-                                        <span class="bg-success">NEW</span>
+                                        <span>Нове</span>
                                     @elseif($order -> status == 2)
                                         <p class="bg-danger">Старий</p>
                                     @endif

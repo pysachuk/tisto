@@ -11,11 +11,12 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        if(! session('cart_id'))
-        {
-            session(['cart_id' => uniqid()]);
-        }
+//        if(! session('cart_id'))
+//        {
+//            session(['cart_id' => uniqid()]);
+//        }
         $this->middleware('isCart');
+        $this -> middleware('isWorkTime');
     }
 
     public function checkout()
