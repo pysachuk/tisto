@@ -43,11 +43,11 @@ class PaymentController extends Controller
 //        $payment = Payment::where('order_id', $order_id) -> first();
         $order = Order::find($order_id);
         $payment = $order -> payment;
-        $data['order_id'] = $order_id;
+        $data['order'] = $order;
         if(!$payment)
         {
             $data['status'] = 'pay_cancelled';
-            $data['error'] = 'Оплату скасовано!';
+            $data['error'] = 'Товар не оплачено!';
 //            $data['payment_button'] = self::getPaymentButton($order);
             return view('shop.order.order_status', compact('data'));
         }
