@@ -30,15 +30,16 @@ class OrderRepository implements OrderRepositoryInterface
         return $order -> save();
     }
 
-    public function getCurrentMonthOrders()
+    public function getCurrentMonthAcceptedOrders()
     {
         return Order::whereMonth('created_at', Carbon::now()->month)
+            ->where('status', 2)
             -> get();
     }
 
     public function getCurrentMonthSumm()
     {
-        $orders =  $this -> getCurrentMonthOrders();
+        $orders =  $this -> getCurrentMonthAcceptedOrders();
         $summ = 0;
         foreach ($orders as $order)
         {
@@ -49,7 +50,7 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function getTotalAmount()
     {
-        $orders = Order::all();
+        $orders = Order::where('status', 2) -> get();
         $summ = 0;
         foreach ($orders as $order)
         {
@@ -64,6 +65,7 @@ class OrderRepository implements OrderRepositoryInterface
         $data = $request->only($order->getFillable());
         $order->fill($data);
         $order -> status = 1; //1 - новый, 2 - принят, 3 - отменен, 4 - завершен
+        $order -> cart_id = session('cart_id');
         $order -> save();
         foreach ($products as $product)
         {

@@ -25,8 +25,8 @@
                     <div class="small-box bg-success">
                         <div class="inner">
                             <h3>{{ $data['current_month_orders_count'] }}</h3>
-                            <p>Замовлень на сайті</p>
-                            <p>Зроблено в <b>поточному</b> місяці</p>
+                            <p>Прийнято замовлень</p>
+                            <p>В <b>поточному</b> місяці</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>

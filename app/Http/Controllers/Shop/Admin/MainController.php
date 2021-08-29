@@ -24,7 +24,7 @@ class MainController extends Controller
     public function index()
     {
         $data['new_orders_count'] = $this -> orderRepository -> getOrdersByStatus(1) -> count();
-        $data['current_month_orders_count'] = $this -> orderRepository -> getCurrentMonthOrders() -> count();
+        $data['current_month_orders_count'] = $this -> orderRepository -> getCurrentMonthAcceptedOrders() -> count();
         $data['current_month_summ'] = $this -> orderRepository -> getCurrentMonthSumm();
         $data['total_amount'] = $this -> orderRepository -> getTotalAmount();
         return view('shop.admin.main.main', compact('data'));

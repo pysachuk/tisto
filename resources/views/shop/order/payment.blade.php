@@ -15,8 +15,12 @@
     <section class="section">
         <div class="container">
             <h4>Замовлення № {{ $order -> id }} прийнято</h4>
-            <p>Оплатіть <b>{{ $order -> summ }}</b> грн</p>
-            {!! $button !!}
+            @if(isset($order -> payment) && $order -> payment -> status == 'success')
+                <p>Оплачено {{ $order -> summ }} грн</p>
+            @else
+                <p>Оплатіть <b>{{ $order -> summ }}</b> грн</p>
+                {!! $button !!}
+            @endif
         </div>
     </section>
 @endsection

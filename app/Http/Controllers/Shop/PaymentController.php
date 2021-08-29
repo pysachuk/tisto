@@ -14,6 +14,12 @@ class PaymentController extends Controller
     protected static $public_key;
     protected static $private_key;
 
+    protected function verifedOrder(Order $order)
+    {
+        if($order -> cart_id != session('cart_id'))
+            return abort(404);
+    }
+
     public static function getPaymentButton(Order $order)
     {
         self::$public_key = Config::get('liqpay.public_key');
@@ -34,14 +40,15 @@ class PaymentController extends Controller
     }
     public function payPage(Order $order)
     {
+        $this -> verifedOrder($order);
         $html = self::getPaymentButton($order);
         return view('shop.order.payment', ['order' => $order, 'button' => $html]);
     }
 
     public function payStatus($order_id)
     {
-//        $payment = Payment::where('order_id', $order_id) -> first();
         $order = Order::find($order_id);
+        $this -> verifedOrder($order);
         $payment = $order -> payment;
         $data['order'] = $order;
         if(!$payment)
