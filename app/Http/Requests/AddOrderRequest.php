@@ -28,7 +28,8 @@ class AddOrderRequest extends FormRequest
             'phone' => 'required|regex:#^\+38\([0-9][0-9][0-9]\) [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]#',
             'address' => 'required|string',
             'description' => 'nullable|string',
-            'payment_method'    => 'required|numeric'
+            'payment_method'    => 'required|numeric',
+            'summ' => 'required'
         ];
     }
 

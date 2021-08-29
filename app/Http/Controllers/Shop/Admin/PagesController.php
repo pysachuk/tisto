@@ -23,10 +23,10 @@ class PagesController extends Controller
             $image_url = Storage::disk('public')
                 ->putFile('pages/main/', $request->file('image'), 'public');
             Page::updateHeaderImage('main', $image_url);
-            return redirect() -> back() -> with('message', 'Нове зображення збережено');
+            return redirect() -> back() -> with('success', 'Нове зображення збережено');
         }
         else
-            return redirect() -> back() -> with('message', 'Збережено');
+            return redirect() -> back() -> with('success', 'Збережено');
     }
 
     public function infoEdit()

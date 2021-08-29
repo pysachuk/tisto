@@ -51,18 +51,7 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         if($this -> productRepository -> store($request))
-            return redirect() -> route('admin.product.index') -> with('message', 'Продукт успешно добавлен');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+            return redirect() -> route('admin.product.index') -> with('success', 'Продукт додано');
     }
 
     /**
@@ -88,7 +77,7 @@ class ProductController extends Controller
     public function update(StoreProductRequest $request, $id)
     {
         $this -> productRepository -> update($request, $id);
-        return redirect() -> route('admin.product.index') -> with('message', 'Продукт успешно обновлен');
+        return redirect() -> route('admin.product.index') -> with('success', 'Продукт оновлено');
     }
 
     /**
@@ -101,7 +90,7 @@ class ProductController extends Controller
     {
         $product = $this -> productRepository -> getProduct($id);
         if($product -> delete())
-            return redirect() -> route('admin.product.index') -> with('message', 'Продукт удален');
+            return redirect() -> route('admin.product.index') -> with('info', 'Продукт видалено');
 
     }
 }

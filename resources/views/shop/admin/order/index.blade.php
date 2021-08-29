@@ -99,7 +99,7 @@
                             </tbody>
                         </table>
                     </div>
-                {{ $orders->links() }}
+                    {{ $orders->links() }}
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Order;
 use App\Models\User;
+use App\Repositories\Interfaces\OrderRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -13,19 +14,25 @@ use Illuminate\Support\Facades\Hash;
 
 class MainController extends Controller
 {
+    private $orderRepository;
+
+    public function __construct(OrderRepositoryInterface $orderRepository)
+    {
+        $this -> orderRepository = $orderRepository;
+    }
+
     public function index()
     {
-        $data['new_orders_count'] = Order::where('status', 1)->count();
-        $data['current_month_orders_count'] = count(Order::getCurrentMonthOrders());
-        $data['current_month_summ'] = Order::getCurrentMonthSumm();
-        $data['total_amount'] = Order::getTotalAmount();
+        $data['new_orders_count'] = $this -> orderRepository -> getOrdersByStatus(1) -> count();
+        $data['current_month_orders_count'] = $this -> orderRepository -> getCurrentMonthOrders() -> count();
+        $data['current_month_summ'] = $this -> orderRepository -> getCurrentMonthSumm();
+        $data['total_amount'] = $this -> orderRepository -> getTotalAmount();
         return view('shop.admin.main.main', compact('data'));
     }
 
     public function user()
     {
         $user = User::where('id', Auth::id()) -> first();
-//        dd($user);
         return view('shop.admin.user.index', compact('user'));
     }
     public function userUpdate(UserUpdateRequest $request)
@@ -38,7 +45,7 @@ class MainController extends Controller
         if($request -> new_password && $request -> new_password == $request -> new_password_confirmation)
             $user -> password = Hash::make($request -> new_password);
         $user -> save();
-        return redirect() -> back() -> with('message', 'Дані успішно змінено!');
+        return redirect() -> back() -> with('success', 'Дані успішно змінено!');
 
     }
 }

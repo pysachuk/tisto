@@ -89,9 +89,9 @@
                                     </div>
                                 </div>
                             </td>
-                            <td data-title="Quantity">x{{ $item -> quantity }}</td>
-                            <td data-title="Price">{{ $item -> price }} грн</td>
-                            <td data-title="Total"> <strong>{{ ($item -> price * $item -> quantity) }} грн</strong> </td>
+                            <td data-title="Кількість">x{{ $item -> quantity }}</td>
+                            <td data-title="Ціна">{{ $item -> price }} грн</td>
+                            <td data-title="Сума"> <strong>{{ ($item -> price * $item -> quantity) }} грн</strong> </td>
                         </tr>
                         @endforeach
                         <tr class="total">
@@ -100,10 +100,11 @@
                             </td>
                             <td></td>
                             <td></td>
-                            <td> <strong>{{ \Cart::getTotal() }} грн</strong> </td>
+                            <td> <strong>{{ \Cart::session(session('cart_id')) -> getTotal() }} грн</strong> </td>
                         </tr>
                         </tbody>
                     </table>
+                    <input type="hidden" name="summ" value="{{ \Cart::session(session('cart_id')) -> getTotal() }}">
                     <button type="submit" class="btn-custom primary btn-block">Замовити</button>
 
                     <!-- Order Details End -->

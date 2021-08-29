@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//TEST
 Route::get('/test',[\App\Http\Controllers\Test\TestController::class, 'index']);
 
 //Auth::routes();
@@ -44,36 +44,54 @@ Route::get('/cart/pay/status/{order_id}', [App\Http\Controllers\Shop\PaymentCont
     -> name('cart.pay_status');
 
 
-//ADMIN
+//ADMIN AUTH
 Route::get('/panel/login',[\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])
     -> name('admin.login');
 Route::post('/panel/login',[\App\Http\Controllers\Auth\LoginController::class, 'login']);
 Route::post('/panel/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])
     -> name('admin.logout');
+//ADMIN
 Route::middleware('admin')->prefix('panel') ->group(function(){
+    //HOME
     Route::get('/', [\App\Http\Controllers\Shop\Admin\MainController::class, 'index'])
         -> name('admin.home');
+
+    //CATEGORIES
     Route::resource('/category', \App\Http\Controllers\Shop\Admin\CategoryController::class)
     ->names('admin.category');
+
+    //PRODUCTS
     Route::resource('/product', \App\Http\Controllers\Shop\Admin\ProductController::class)
         ->names('admin.product');
-    Route::get('/order', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'index'])
-        ->name('admin.order.index');
+
+    //ORDERS
     Route::get('/order/new', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'newOrders'])
         ->name('admin.order.new');
+    Route::get('/order/accepted', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'acceptedOrders'])
+        ->name('admin.order.accepted');
+    Route::get('/order/rejected', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'rejectedOrders'])
+        ->name('admin.order.rejected');
+    Route::get('/order/view/{order}', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'viewOrder'])
+        ->name('admin.order.view');
     Route::post('/order/approve', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'approveOrder'])
         ->name('admin.order.approve');
-    Route::post('/order/pay_status', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'checkPay'])
+    Route::post('/order/reject', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'rejectOrder'])
+        ->name('admin.order.reject');
+    Route::post('/order/pay_status', [\App\Http\Controllers\Shop\Admin\PaymentController::class, 'checkPay'])
         ->name('admin.order.payStatus');
+
+    //USER
     Route::get('/user', [\App\Http\Controllers\Shop\Admin\MainController::class, 'user'])
     ->name('admin.user');
     Route::post('/user', [\App\Http\Controllers\Shop\Admin\MainController::class, 'userUpdate'])
         ->name('admin.user.update');
+
+    //PAGES
     Route::get('/pages/main/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainEdit'])
         ->name('admin.pages.main.edit');
-    Route::get('/pages/info/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'infoEdit'])
-        ->name('admin.pages.info.edit');
     Route::post('/pages/main/update', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainUpdate'])
         -> name('admin.pages.main.update');
+    Route::get('/pages/info/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'infoEdit'])
+        ->name('admin.pages.info.edit');
 
 });

@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LiqPay;
 use App\Models\Order;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -40,12 +40,15 @@ class PaymentController extends Controller
 
     public function payStatus($order_id)
     {
-        $payment = DB::table('payments') -> where('order_id', $order_id) -> first();
+//        $payment = Payment::where('order_id', $order_id) -> first();
+        $order = Order::find($order_id);
+        $payment = $order -> payment;
         $data['order_id'] = $order_id;
         if(!$payment)
         {
             $data['status'] = 'pay_cancelled';
-            $data['error'] = 'Відміна оплати!';
+            $data['error'] = 'Оплату скасовано!';
+//            $data['payment_button'] = self::getPaymentButton($order);
             return view('shop.order.order_status', compact('data'));
         }
         if($payment -> status == 'success')
@@ -60,5 +63,10 @@ class PaymentController extends Controller
             $data['error'] = $payment -> err_description;
             return view('shop.order.order_status', compact('data'));
         }
+    }
+    public function checkPay(Request $request)
+    {
+        $payment = Payment::where('order_id', $request -> order_id) -> first();
+        return response() -> json($payment);
     }
 }

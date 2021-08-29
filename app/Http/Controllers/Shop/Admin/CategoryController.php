@@ -50,17 +50,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -90,7 +79,7 @@ class CategoryController extends Controller
             $category -> image_url = $photo_path;
         }
         $category -> save();
-        return redirect() -> route('admin.category.index') -> with('message', 'Категория успешно Обновлена');
+        return redirect() -> route('admin.category.index') -> with('success', 'Категорію оновлено');
     }
 
     /**
@@ -103,6 +92,6 @@ class CategoryController extends Controller
     {
         $category = $this -> categoryRepository -> getCategory($id);
         $category -> delete();
-        return redirect() -> route('admin.category.index') -> with('message', 'Категория успешно Удалена');
+        return redirect() -> route('admin.category.index') -> with('info', 'Категорію виделено');
     }
 }

@@ -150,7 +150,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview @menuActive('admin.order.new', 'menu-open') @menuActive('admin.order.index', 'menu-open')">
+                    <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -161,7 +161,7 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('admin.order.new') }}" class="nav-link @menuActive('admin.order.new', 'active')">
-                                    <i class="fas fa-cart-plus nav-icon" style="color: green"></i>
+                                    <i class="fas fa-cart-plus nav-icon" style="color: #28a745!important"></i>
                                     <p>Нові замовлення</p>
                                     <span class="right badge badge-success">New</span>
                                 </a>
@@ -169,9 +169,17 @@
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.order.index') }}" class="nav-link @menuActive('admin.order.index', 'active')">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Всі замовлення</p>
+                                <a href="{{ route('admin.order.accepted') }}" class="nav-link @menuActive('admin.order.accepted', 'active')">
+                                    <i class="fas fa-cart-plus nav-icon" style="color: #007bff!important"></i>
+                                    <p>Прийняті замовлення</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.order.rejected') }}" class="nav-link @menuActive('admin.order.rejected', 'active')">
+                                    <i class="fas fa-cart-plus nav-icon" style="color: #dc3545!important"></i>
+                                    <p>Відхилені замовлення</p>
                                 </a>
                             </li>
                         </ul>
@@ -210,19 +218,8 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @if(session()->has('message'))
-            <div class="alert alert-success">
-                {{ session()->get('message') }}
-            </div>
-        @endif
-            @if(session()->has('error'))
-                <div class="alert alert-danger">
-                    {{ session()->get('error') }}
-                </div>
-        @endif
         <!-- Main content -->
         @yield('content')
-
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -276,6 +273,51 @@
 {{--<script src="/shop/admin/dist/js/demo.js"></script>--}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/shop/admin/dist/js/pages/dashboard.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session()->has('success'))
+    <script>
+        var success = '{{ session()->get('success') }}';
+    </script>
+@elseif(session()->has('error'))
+    <script>
+        var error = '{{ session()->get('error') }}';
+    </script>
+@elseif(session()->has('info'))
+    <script>
+        var info = '{{ session()->get('info') }}';
+    </script>
+@endif
+<script>
+    $(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
+        if(typeof success !== "undefined")
+        {
+            Swal.fire(
+                'Успіх',
+                success,
+                'success'
+            );
+        }
+        if(typeof info !== "undefined")
+        {
+            Swal.fire(
+                'Інфо',
+                info,
+                'info'
+            );
+        }
+        if(typeof error !== "undefined")
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'Упс...',
+                text: error,
+            })
+        }
+    });
+</script>
 @yield('js')
 </body>
 </html>
