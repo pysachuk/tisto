@@ -1,7 +1,7 @@
 @extends('shop.layouts.shop.main_layout')
 @section('content')
     <!-- Subheader Start -->
-    <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/shop/main/assets/img/subheader.jpg')">
+    <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/storage/{{$header_image}}')">
         <div class="container">
             <div class="subheader-inner">
                 <h1>Кошик</h1>

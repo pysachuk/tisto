@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -17,8 +18,9 @@ class CartController extends Controller
     }
     public function index()
     {
+        $header_image = Page::getHeaderImage('main');
         $cart_items = \Cart::session(session('cart_id')) -> getContent();
-        return view('shop.cart.index', compact('cart_items'));
+        return view('shop.cart.index', compact('cart_items', 'header_image'));
 
     }
     public function addToCart(Request $request)
