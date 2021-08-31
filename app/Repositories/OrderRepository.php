@@ -9,6 +9,11 @@ use Carbon\Carbon;
 
 class OrderRepository implements OrderRepositoryInterface
 {
+    public function getNewOrdersCount()
+    {
+        return Order::where('status', 1) -> count();
+    }
+
     public function getOrdersByStatus($status, $paginate = null)
     {
         if($paginate)
@@ -37,26 +42,23 @@ class OrderRepository implements OrderRepositoryInterface
             -> get();
     }
 
+    public function getCurrentMonthAcceptedOrdersCount()
+    {
+        return Order::whereMonth('created_at', Carbon::now()->month)
+            ->where('status', 2)
+            -> count();
+    }
+
     public function getCurrentMonthSumm()
     {
-        $orders =  $this -> getCurrentMonthAcceptedOrders();
-        $summ = 0;
-        foreach ($orders as $order)
-        {
-            $summ += $order -> summ;
-        }
-        return $summ;
+        return Order::whereMonth('created_at', Carbon::now()->month)
+            ->where('status', 2)
+            -> sum('summ');
     }
 
     public function getTotalAmount()
     {
-        $orders = Order::where('status', 2) -> get();
-        $summ = 0;
-        foreach ($orders as $order)
-        {
-            $summ += $order -> summ;
-        }
-        return $summ;
+        return Order::where('status', 2) -> sum('summ');
     }
 
     public function addOrder(AddOrderRequest $request, $products)

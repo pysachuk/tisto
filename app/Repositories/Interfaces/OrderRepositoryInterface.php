@@ -11,6 +11,8 @@ interface OrderRepositoryInterface
     public function approveOrder($id);
     public function rejectOrder($id);
     public function getCurrentMonthAcceptedOrders();
+    public function getCurrentMonthAcceptedOrdersCount();
+    public function getNewOrdersCount();
     public function getCurrentMonthSumm();
     public function getTotalAmount();
     public function addOrder(AddOrderRequest $request, $products);
