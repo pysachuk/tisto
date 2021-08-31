@@ -14,11 +14,11 @@ class PaymentController extends Controller
     protected static $public_key;
     protected static $private_key;
 
-    protected function verifedOrder(Order $order)
-    {
-        if($order -> cart_id != session('cart_id'))
-            return abort(404);
-    }
+//    protected function verifedOrder(Order $order)
+//    {
+//        if($order -> cart_id != session('cart_id'))
+//            return abort(404);
+//    }
 
     public static function getPaymentButton(Order $order)
     {
@@ -40,7 +40,7 @@ class PaymentController extends Controller
     }
     public function payPage(Order $order)
     {
-        $this -> verifedOrder($order);
+//        $this -> verifedOrder($order);
         $html = self::getPaymentButton($order);
         return view('shop.order.payment', ['order' => $order, 'button' => $html]);
     }
@@ -48,14 +48,13 @@ class PaymentController extends Controller
     public function payStatus($order_id)
     {
         $order = Order::find($order_id);
-        $this -> verifedOrder($order);
+//        $this -> verifedOrder($order);
         $payment = $order -> payment;
         $data['order'] = $order;
         if(!$payment)
         {
             $data['status'] = 'pay_cancelled';
             $data['error'] = 'Товар не оплачено!';
-//            $data['payment_button'] = self::getPaymentButton($order);
             return view('shop.order.order_status', compact('data'));
         }
         if($payment -> status == 'success')
