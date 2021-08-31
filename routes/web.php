@@ -77,10 +77,21 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
         ->name('admin.order.payStatus');
 
     //USER
-    Route::get('/user', [\App\Http\Controllers\Shop\Admin\MainController::class, 'user'])
+    Route::get('/user', [\App\Http\Controllers\Shop\Admin\UserController::class, 'user'])
     ->name('admin.user');
-    Route::post('/user', [\App\Http\Controllers\Shop\Admin\MainController::class, 'userUpdate'])
+    Route::post('/user', [\App\Http\Controllers\Shop\Admin\UserController::class, 'userUpdate'])
         ->name('admin.user.update');
+
+    //USERS
+    Route::get('/users', [\App\Http\Controllers\Shop\Admin\UserController::class, 'users'])
+        ->name('admin.users');
+    Route::get('/users/create', [\App\Http\Controllers\Shop\Admin\UserController::class, 'createUser'])
+        ->name('admin.users.create');
+    Route::post('/users/store', [\App\Http\Controllers\Shop\Admin\UserController::class, 'storeUser'])
+        ->name('admin.users.store');
+    Route::delete('/users/delete/{user}', [\App\Http\Controllers\Shop\Admin\UserController::class, 'deleteUser'])
+        ->name('admin.users.delete');
+
 
     //PAGES
     Route::post('/pages/info/getPage', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'getPage'])

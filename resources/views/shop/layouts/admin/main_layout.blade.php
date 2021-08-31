@@ -99,6 +99,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('admin.users') }}" class="nav-link @menuActive('admin.users', 'active')">
+                            <i class="fas fa-circle nav-icon"></i>
+                            <p>Користувачі</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('shop.main') }}" class="nav-link" target="_blank">
                             <i class="fas fa-circle nav-icon"></i>
                             <p>На сайт</p>
@@ -150,6 +156,31 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item has-treeview @menuActive('admin.pages.main.edit', 'menu-open') @menuActive('admin.pages.info.edit', 'menu-open')">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Сторінки
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.pages.main.edit') }}" class="nav-link @menuActive('admin.pages.main.edit', 'active')">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Головна</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.pages.info.edit') }}" class="nav-link @menuActive('admin.pages.info.edit', 'active')">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Про нас</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -180,31 +211,6 @@
                                 <a href="{{ route('admin.order.rejected') }}" class="nav-link @menuActive('admin.order.rejected', 'active')">
                                     <i class="fas fa-cart-plus nav-icon" style="color: #dc3545!important"></i>
                                     <p>Відхилені замовлення</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview @menuActive('admin.pages.main.edit', 'menu-open') @menuActive('admin.pages.info.edit', 'menu-open')">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Сторінки
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.pages.main.edit') }}" class="nav-link @menuActive('admin.pages.main.edit', 'active')">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Головна</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.pages.info.edit') }}" class="nav-link @menuActive('admin.pages.info.edit', 'active')">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Про нас</p>
                                 </a>
                             </li>
                         </ul>
