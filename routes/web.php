@@ -12,10 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//TEST
-Route::get('/test',[\App\Http\Controllers\Test\TestController::class, 'index']);
-
-//Auth::routes();
 
 //MAIN
 Route::get('/', [\App\Http\Controllers\Shop\MainController::class, 'index']) -> name('shop.main');
@@ -87,11 +83,15 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
         ->name('admin.user.update');
 
     //PAGES
+    Route::post('/pages/info/getPage', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'getPage'])
+        -> name('admin.pages.info.getPage');
     Route::get('/pages/main/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainEdit'])
         ->name('admin.pages.main.edit');
     Route::post('/pages/main/update', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainUpdate'])
         -> name('admin.pages.main.update');
     Route::get('/pages/info/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'infoEdit'])
         ->name('admin.pages.info.edit');
+    Route::post('/pages/info/update', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'infoUpdate'])
+        -> name('admin.pages.info.update');
 
 });

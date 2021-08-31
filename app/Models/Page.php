@@ -16,6 +16,13 @@ class Page extends Model
         return ($data) ? $data -> header_image : null;
     }
 
+    public static function getPage($page)
+    {
+        $data = self::where('page', $page) -> select('data_json') -> first();
+        $data = ($data) ? json_decode($data -> data_json) : null;
+        return ($data) ? $data : null;
+    }
+
     public static function updateHeaderImage($page, $image_url)
     {
         $page = self::where('page', $page) -> first();
@@ -29,5 +36,34 @@ class Page extends Model
         }
             return false;
 
+    }
+
+    public static function updateImage($page, $image_url)
+    {
+        $page = self::where('page', $page) -> first();
+        if($page)
+        {
+            $json = json_decode($page -> data_json);
+            $json -> image = $image_url;
+            $json = json_encode($json);
+            $page -> data_json = $json;
+            return $page -> save();
+        }
+        return false;
+
+    }
+
+    public static function updateText($page, $text)
+    {
+        $page = self::where('page', $page) -> first();
+        if($page)
+        {
+            $json = json_decode($page -> data_json);
+            $json -> text = $text;
+            $json = json_encode($json);
+            $page -> data_json = $json;
+            return $page -> save();
+        }
+        return false;
     }
 }

@@ -1,7 +1,7 @@
 @extends('shop.layouts.shop.main_layout')
 @section('content')
     <!-- Subheader Start -->
-    <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/shop/main/assets/img/subheader.jpg')">
+    <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/storage/{{ $data['header_image'] }}')">
         <div class="container">
             <div class="subheader-inner">
                 <h1>Про нас</h1>
@@ -17,19 +17,12 @@
             <div class="row align-items-center">
 
                 <div class="col-lg-6 mb-lg-30 ct-single-img-wrapper">
-                    <img src="/shop/main/assets/img/auth.jpg" alt="img">
+                    <img src="/storage/{{ $data['info'] -> image }}" alt="img">
                     <div class="ct-dots"></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="section-title-wrap mr-lg-30">
-                        <h5 class="custom-primary">Про нас</h5>
-                        <h2 class="title">Serving Pizzas By The Slice Since 1987</h2>
-                        <p class="subtitle">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        </p>
-                        <p class="subtitle">
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-                        </p>
+                        {!!  $data['info'] -> text !!}
                         <a href="menu-v1.html" class="btn-custom">Наше меню</a>
                     </div>
                 </div>
@@ -47,21 +40,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="location-item-inner">
-                            <img src="/shop/main/assets/img/locations/1.jpg" alt="location">
+                            <img src="/storage/{{ $data['contacts'] -> image }}" alt="location">
                             <div class="location-desc">
                                 <h3>TISTO</h3>
                             </div>
                             <div class="location-info">
                                 <div class="row">
-                                    <div class="col-6">
-                                        <span>с.Світязь</span>
-                                        <span>вулиця Вереснева, 1</span>
-                                        <span>Волинська область, Україна, 44021</span>
-                                    </div>
-                                    <div class="col-6">
-                                        <span> Телефон: <a href="tel:+380980008050">(098) 000-8050</a> </span>
-                                        <span> Email: <a href="#">admin@tisto.pp.ua</a> </span>
-                                    </div>
+                                    {!!  $data['contacts'] -> text !!}
                                 </div>
                             </div>
                         </div>

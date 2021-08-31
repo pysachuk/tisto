@@ -19,6 +19,9 @@ class MainController extends Controller
     }
     public function info()
     {
-        return view('shop.main.info');
+        $data['header_image'] = Page::getHeaderImage('main');
+        $data['info'] = Page::getPage('info');
+        $data['contacts'] = Page::getPage('contacts');
+        return view('shop.main.info', compact('data'));
     }
 }
