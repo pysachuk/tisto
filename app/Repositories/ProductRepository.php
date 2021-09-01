@@ -15,6 +15,10 @@ class ProductRepository implements ProductRepositoryInterface
             return ($paginate) ? Product::paginate($paginate) : Product::all();
 
     }
+    public function getCategoryProducts($category_id)
+    {
+        return Product::where('category_id', $category_id) -> get();
+    }
     public function store(StoreProductRequest $request)
     {
         $product = new Product;

@@ -17,8 +17,8 @@ class OrderRepository implements OrderRepositoryInterface
     public function getOrdersByStatus($status, $paginate = null)
     {
         if($paginate)
-            return Order::where('status', $status) -> orderBy('created_at', 'DESC') -> paginate($paginate);
-        return Order::where('status', $status) -> orderBy('created_at', 'DESC') -> get();
+            return Order::where('status', $status) -> orderBy('updated_at', 'DESC') -> paginate($paginate);
+        return Order::where('status', $status) -> orderBy('updated_at', 'DESC') -> get();
     }
 
     public function approveOrder($id)
@@ -37,21 +37,21 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function getCurrentMonthAcceptedOrders()
     {
-        return Order::whereMonth('created_at', Carbon::now()->month)
+        return Order::whereMonth('updated_at', Carbon::now()->month)
             ->where('status', 2)
             -> get();
     }
 
     public function getCurrentMonthAcceptedOrdersCount()
     {
-        return Order::whereMonth('created_at', Carbon::now()->month)
+        return Order::whereMonth('updated_at', Carbon::now()->month)
             ->where('status', 2)
             -> count();
     }
 
     public function getCurrentMonthSumm()
     {
-        return Order::whereMonth('created_at', Carbon::now()->month)
+        return Order::whereMonth('updated_at', Carbon::now()->month)
             ->where('status', 2)
             -> sum('summ');
     }

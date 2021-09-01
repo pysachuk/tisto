@@ -26,8 +26,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this -> productRepository -> all(10);
-        return view('shop.admin.product.index', compact('products'));
+        $categories = $this -> categoryRepository -> all();
+        return view('shop.admin.product.index', compact('categories'));
+    }
+
+    public function getCategoryProducts(Request $request)
+    {
+        $products = $this -> productRepository -> getCategoryProducts($request -> category_id);
+        return view('shop.admin.product.products', compact('products'));
     }
 
     /**

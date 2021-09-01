@@ -94,7 +94,7 @@
                         <a href="{{ route('admin.home') }}" class="nav-link @menuActive('admin.home', 'active')">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
-                                Главная админки
+                                Головна адмінки
                             </p>
                         </a>
                     </li>
@@ -114,7 +114,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Категории
+                                Категорії
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -122,13 +122,13 @@
                             <li class="nav-item">
                                 <a href="{{ route('admin.category.index') }}" class="nav-link @menuActive('admin.category.index', 'active')">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Все категории</p>
+                                    <p>Всі категорії</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.category.create') }}" class="nav-link  @menuActive('admin.category.create', 'active')">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Добавить категорию</p>
+                                    <p>Додати категорію</p>
                                 </a>
                             </li>
                         </ul>
@@ -137,7 +137,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Товары
+                                Продукти
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -145,13 +145,13 @@
                             <li class="nav-item">
                                 <a href="{{ route('admin.product.index') }}" class="nav-link @menuActive('admin.product.index', 'active')">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Все товары</p>
+                                    <p>Всі продукти</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.product.create') }}" class="nav-link @menuActive('admin.product.create', 'active')">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Добавить товар</p>
+                                    <p>Додати продукт</p>
                                 </a>
                             </li>
                         </ul>
@@ -278,7 +278,7 @@
 <!-- AdminLTE for demo purposes -->
 {{--<script src="/shop/admin/dist/js/demo.js"></script>--}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/shop/admin/dist/js/pages/dashboard.js"></script>
+{{--<script src="/shop/admin/dist/js/pages/dashboard.js"></script>--}}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if(session()->has('success'))
     <script>

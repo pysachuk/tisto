@@ -59,6 +59,8 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
     //PRODUCTS
     Route::resource('/product', \App\Http\Controllers\Shop\Admin\ProductController::class)
         ->names('admin.product');
+    Route::post('/category_products', [\App\Http\Controllers\Shop\Admin\ProductController::class, 'getCategoryProducts'])
+        ->name('admin.category_products');
 
     //ORDERS
     Route::get('/order/new', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'newOrders'])
