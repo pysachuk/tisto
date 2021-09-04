@@ -40,6 +40,8 @@ Route::get('/cart/pay/status/{order_id}', [App\Http\Controllers\Shop\PaymentCont
     -> name('cart.pay_status');
 
 
+
+
 //ADMIN AUTH
 Route::get('/panel/login',[\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])
     -> name('admin.login');
@@ -51,16 +53,6 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
     //HOME
     Route::get('/', [\App\Http\Controllers\Shop\Admin\MainController::class, 'index'])
         -> name('admin.home');
-
-    //CATEGORIES
-    Route::resource('/category', \App\Http\Controllers\Shop\Admin\CategoryController::class)
-    ->names('admin.category');
-
-    //PRODUCTS
-    Route::resource('/product', \App\Http\Controllers\Shop\Admin\ProductController::class)
-        ->names('admin.product');
-    Route::post('/category_products', [\App\Http\Controllers\Shop\Admin\ProductController::class, 'getCategoryProducts'])
-        ->name('admin.category_products');
 
     //ORDERS
     Route::get('/order/new', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'newOrders'])
@@ -80,31 +72,44 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
 
     //USER
     Route::get('/user', [\App\Http\Controllers\Shop\Admin\UserController::class, 'user'])
-    ->name('admin.user');
+        ->name('admin.user');
     Route::post('/user', [\App\Http\Controllers\Shop\Admin\UserController::class, 'userUpdate'])
         ->name('admin.user.update');
 
-    //USERS
-    Route::get('/users', [\App\Http\Controllers\Shop\Admin\UserController::class, 'users'])
-        ->name('admin.users');
-    Route::get('/users/create', [\App\Http\Controllers\Shop\Admin\UserController::class, 'createUser'])
-        ->name('admin.users.create');
-    Route::post('/users/store', [\App\Http\Controllers\Shop\Admin\UserController::class, 'storeUser'])
-        ->name('admin.users.store');
-    Route::delete('/users/delete/{user}', [\App\Http\Controllers\Shop\Admin\UserController::class, 'deleteUser'])
-        ->name('admin.users.delete');
+    Route::middleware('can:view-admin-part') -> group(function (){
+        //CATEGORIES
+        Route::resource('/category', \App\Http\Controllers\Shop\Admin\CategoryController::class)
+            ->names('admin.category');
+
+        //PRODUCTS
+        Route::resource('/product', \App\Http\Controllers\Shop\Admin\ProductController::class)
+            ->names('admin.product');
+        Route::post('/category_products', [\App\Http\Controllers\Shop\Admin\ProductController::class, 'getCategoryProducts'])
+            ->name('admin.category_products');
+
+        //USERS
+        Route::get('/users', [\App\Http\Controllers\Shop\Admin\UserController::class, 'users'])
+            ->name('admin.users');
+        Route::get('/users/create', [\App\Http\Controllers\Shop\Admin\UserController::class, 'createUser'])
+            ->name('admin.users.create');
+        Route::post('/users/store', [\App\Http\Controllers\Shop\Admin\UserController::class, 'storeUser'])
+            ->name('admin.users.store');
+        Route::delete('/users/delete/{user}', [\App\Http\Controllers\Shop\Admin\UserController::class, 'deleteUser'])
+            ->name('admin.users.delete');
 
 
-    //PAGES
-    Route::post('/pages/info/getPage', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'getPage'])
-        -> name('admin.pages.info.getPage');
-    Route::get('/pages/main/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainEdit'])
-        ->name('admin.pages.main.edit');
-    Route::post('/pages/main/update', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainUpdate'])
-        -> name('admin.pages.main.update');
-    Route::get('/pages/info/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'infoEdit'])
-        ->name('admin.pages.info.edit');
-    Route::post('/pages/info/update', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'infoUpdate'])
-        -> name('admin.pages.info.update');
+        //PAGES
+        Route::post('/pages/info/getPage', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'getPage'])
+            -> name('admin.pages.info.getPage');
+        Route::get('/pages/main/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainEdit'])
+            ->name('admin.pages.main.edit');
+        Route::post('/pages/main/update', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainUpdate'])
+            -> name('admin.pages.main.update');
+        Route::get('/pages/info/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'infoEdit'])
+            ->name('admin.pages.info.edit');
+        Route::post('/pages/info/update', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'infoUpdate'])
+            -> name('admin.pages.info.update');
+
+    });
 
 });

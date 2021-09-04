@@ -98,6 +98,7 @@
                             </p>
                         </a>
                     </li>
+                    @can('view-admin-part')
                     <li class="nav-item">
                         <a href="{{ route('admin.users') }}" class="nav-link @menuActive('admin.users', 'active')">
                             <i class="fas fa-circle nav-icon"></i>
@@ -181,6 +182,7 @@
                             </li>
                         </ul>
                     </li>
+                    @endcan
                     <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>

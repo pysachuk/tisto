@@ -30,7 +30,6 @@ class AppServiceProvider extends ServiceProvider
             list($route, $class) = explode(', ', $expression);
             //then we check if the route is the same as the one we are passing.
             return "{{ \Route::is({$route}) ? {$class} : '' }}";
-
         });
     }
 }
