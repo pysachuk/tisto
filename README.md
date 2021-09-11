@@ -8,7 +8,11 @@
 </p>
 
 Ссылка на [сайт](https://test.tisto.pp.ua).
+<br>
 Ссылка на админ [панель](https://test.tisto.pp.ua/panel) 
+<br>
 Данные для входа:
+<br>
 Администратор: `admin@tisto.com : 123123`
+<br>
 Менеджер: `manager@tisto.com : 123123`
