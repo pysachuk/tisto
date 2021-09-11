@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-Ссылка на [сайт](https://test.tisto.pp.ua).
+Ссылка на тестовый [сайт](https://test.tisto.pp.ua).
 <br>
 Ссылка на админ [панель](https://test.tisto.pp.ua/panel) 
 <br>
