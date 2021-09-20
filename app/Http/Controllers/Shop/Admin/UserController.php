@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
-use App\Models\UserRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,13 +19,12 @@ class UserController extends Controller
     public function userUpdate(UserUpdateRequest $request)
     {
 
-        $user = User::where('id', Auth::id()) -> first();
+        $user = User::findOrFail(Auth::id());
         if(!Hash::check($request -> old_password, $user->password))
             return redirect() -> back() -> with('error', 'Не вірний поточний пароль!');
         $user -> name = $request -> name;
         $user -> email = $request -> email;
-        if($request -> new_password && $request -> new_password == $request -> new_password_confirmation)
-            $user -> password = Hash::make($request -> new_password);
+        $user -> password = Hash::make($request -> new_password);
         $user -> save();
         return redirect() -> back() -> with('success', 'Дані успішно змінено!');
 
@@ -49,14 +47,10 @@ class UserController extends Controller
         $data = $request->only($user->getFillable());
         $user->fill($data);
         $user -> password = Hash::make($request -> password);
-        if($user -> save())
-        {
-            $role = new UserRole;
-            $role -> user_id = $user -> id;
-            $role -> role = $request -> role;
-            $role -> save();
-        }
-            return redirect() -> route('admin.users') -> with('success', 'Користувач успішно створено');
+        $user -> save();
+        $user -> role() -> create(['role' => $request -> role]);
+        return redirect() -> route('admin.users') -> with('success', 'Користувач успішно створено');
+
     }
 
     public function deleteUser(User $user)

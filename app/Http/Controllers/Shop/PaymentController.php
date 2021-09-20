@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
-//use App\Services\Payment\Liqpay\Liqpay;
 use App\Services\Payment\Liqpay\LiqPayService;
 use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Config;
 
 class PaymentController extends Controller
 {

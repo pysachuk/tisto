@@ -16,7 +16,6 @@ class MainController extends Controller
     public function __construct(OrderRepositoryInterface $orderRepository)
     {
         $this -> orderRepository = $orderRepository;
-
     }
 
     public function index()

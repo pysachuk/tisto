@@ -23,4 +23,23 @@ class LiqPayService
 
         ));
     }
+
+    public static function verifyRequest($signature, $data)
+    {
+        $private_key = Config::get('liqpay.private_key');
+        $verify = base64_encode( sha1(
+            $private_key .
+            $data .
+            $private_key
+            , 1 ));
+        if( $signature == $verify)
+            return true;
+        else
+            return false;
+    }
+
+    public static function decodeRequestData($data)
+    {
+        return json_decode(base64_decode($data));
+    }
 }

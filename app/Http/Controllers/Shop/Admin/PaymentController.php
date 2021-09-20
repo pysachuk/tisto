@@ -11,7 +11,7 @@ class PaymentController extends Controller
     public function checkPay(Request $request)
     {
         $data['order_id'] = $request -> order_id;
-        $payment = Payment::where('order_id', $request -> order_id) -> first();
+        $payment = Payment::checkPay($request -> order_id);
         if(!empty($payment))
         {
             $data['status'] = $payment -> status;
