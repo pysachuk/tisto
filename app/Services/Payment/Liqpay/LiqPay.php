@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Services\Payment\Liqpay;
 /**
  * Liqpay Payment Module
  *

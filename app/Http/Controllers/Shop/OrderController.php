@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddOrderRequest;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
+use App\Services\Payment\Liqpay\LiqPayService;
 
 
 class OrderController extends Controller
@@ -29,9 +30,10 @@ class OrderController extends Controller
         \Cart::session(session('cart_id')) -> clear();
         if($order -> payment_method == 2)
             return redirect() -> route('cart.pay_page', $order);
-        $data['order'] = $order;
-        $data['payment'] = 'money';
-        $data['payment_button'] = PaymentController::getPaymentButton($order);
-        return view('shop.order.order_status',compact('data'));
+        else
+        {
+            $button = LiqPayService::getPaymentButton($order);
+            return view('shop.order.order_status',compact('button', 'order'));
+        }
     }
 }
