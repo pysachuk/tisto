@@ -40,6 +40,7 @@ class LiqPayService
 
     public static function decodeRequestData($data)
     {
-        return json_decode(base64_decode($data));
+        $json = base64_decode($data);
+        return json_decode($json);
     }
 }

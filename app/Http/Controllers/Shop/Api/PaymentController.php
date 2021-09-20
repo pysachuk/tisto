@@ -16,7 +16,7 @@ class PaymentController extends Controller
             $liqpay_data = LiqPayService::decodeRequestData($request -> data);
             $order_id = $liqpay_data -> order_id;
             $status = $liqpay_data -> status;
-            $json = json_decode($liqpay_data);
+            $json = json_encode($liqpay_data);
             $payment = new Payment;
             $payment -> fill([
                 'order_id' => $order_id,
