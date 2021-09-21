@@ -16,7 +16,7 @@
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="{{ route('admin.order.new') }}" class="small-box-footer">Дивитись <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.orders', 'new') }}" class="small-box-footer">Дивитись <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->

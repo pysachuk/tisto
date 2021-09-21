@@ -5,22 +5,25 @@ $(document).ready(function (){
     });
     $('.cart_add_count').click(function (event){
         product_id = $(this).attr('data-id');
-        cart_add_count();
+        operation = +1;
+        cart_edit_count();
     });
     $('.cart_minus_count').click(function (event){
         product_id = $(this).attr('data-id');
-        cart_minus_count();
+        operation = -1;
+        cart_edit_count();
     });
 
 });
 
-function cart_minus_count()
+function cart_edit_count()
 {
     $.ajax({
-        url: "/cart/minus_count",
+        url: "/cart/edit_count",
         type: "POST",
         data: {
             product_id: product_id,
+            operation: operation
         },
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -38,29 +41,29 @@ function cart_minus_count()
     });
 }
 
-function cart_add_count()
-{
-    $.ajax({
-        url: "/cart/add_count",
-        type: "POST",
-        data: {
-            product_id: product_id,
-        },
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: (data) => {
-            console.log(data);
-            if(data['OK'] == 1)
-            {
-                $('.cart_total').text(data['cart_total']+' грн');
-                $('input.qty[data-id='+product_id+']').val(data['quantity']);
-                $('strong.product_total[data-id='+product_id+']').text(data['total']+' грн');
-            }
-
-        }
-    });
-}
+// function cart_add_count()
+// {
+//     $.ajax({
+//         url: "/cart/add_count",
+//         type: "POST",
+//         data: {
+//             product_id: product_id,
+//         },
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         },
+//         success: (data) => {
+//             console.log(data);
+//             if(data['OK'] == 1)
+//             {
+//                 $('.cart_total').text(data['cart_total']+' грн');
+//                 $('input.qty[data-id='+product_id+']').val(data['quantity']);
+//                 $('strong.product_total[data-id='+product_id+']').text(data['total']+' грн');
+//             }
+//
+//         }
+//     });
+// }
 
 function remove_from_cart()
 {

@@ -9,6 +9,10 @@ class Order extends Model
 {
     use HasFactory;
 
+    const STATUS_NEW = 1;
+    const STATUS_APPROVED = 2;
+    const STATUS_REJECTED = 3;
+
     protected $fillable = [
         'cart_id',
         'name',

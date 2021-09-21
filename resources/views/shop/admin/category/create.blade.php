@@ -8,6 +8,15 @@
                 <div class="card-header">
                     <h3 class="card-title">Добавление категории</h3>
                 </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form method="POST" action="{{ route('admin.category.store') }}" enctype="multipart/form-data">

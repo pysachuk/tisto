@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Shop\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
-use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -31,10 +30,11 @@ class CategoryController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
         $this -> categoryRepository -> store($request);
-        return redirect() -> route('admin.category.index') -> with('message', 'Категория успешно добавлена');
+        return redirect() -> route('admin.category.index')
+            -> with('message', ['type' => 'success', 'message' => __('messages.category_added')]);
     }
 
 
@@ -45,25 +45,18 @@ class CategoryController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
-        $category = $this -> categoryRepository -> getCategory($id);
-        $category -> title = $request -> title;
-        $category -> description = $request -> description;
-        if($request -> file('photo')) {
-            $photo_path = Storage::disk('public')
-                ->putFile('categories', $request->file('photo'), 'public');
-            $category -> image_url = $photo_path;
-        }
-        $category -> save();
-        return redirect() -> route('admin.category.index') -> with('success', 'Категорію оновлено');
+        if($this -> categoryRepository -> updateCategory($request, $id))
+            return redirect() -> route('admin.category.index')
+                -> with('message', ['type' => 'info', 'message' =>__('messages.category_updated')]);
     }
 
 
     public function destroy($id)
     {
-        $category = $this -> categoryRepository -> getCategory($id);
-        $category -> delete();
-        return redirect() -> route('admin.category.index') -> with('info', 'Категорію виделено');
+        if($this -> categoryRepository -> deleteCategory($id))
+            return redirect() -> route('admin.category.index')
+                -> with('message', ['type' => 'info', 'message' =>__('messages.category_deleted')]);
     }
 }

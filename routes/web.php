@@ -24,10 +24,8 @@ Route::middleware('web') ->group(function(){
         ->name('addToCart');
     Route::post('/cart/remove_item', [App\Http\Controllers\Shop\CartController::class, 'removeItem'])
         ->name('cart.remove_item');
-    Route::post('/cart/add_count', [App\Http\Controllers\Shop\CartController::class, 'addCount'])
-        ->name('cart.add_count');
-    Route::post('/cart/minus_count', [App\Http\Controllers\Shop\CartController::class, 'minusCount'])
-        ->name('cart.minus_count');
+    Route::post('/cart/edit_count', [App\Http\Controllers\Shop\CartController::class, 'editCount'])
+        ->name('cart.edit_count');
 });
 //ORDER
 Route::get('cart/checkout', [App\Http\Controllers\Shop\OrderController::class, 'checkout'])
@@ -55,12 +53,8 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
         -> name('admin.home');
 
     //ORDERS
-    Route::get('/order/new', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'newOrders'])
-        ->name('admin.order.new');
-    Route::get('/order/accepted', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'acceptedOrders'])
-        ->name('admin.order.accepted');
-    Route::get('/order/rejected', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'rejectedOrders'])
-        ->name('admin.order.rejected');
+    Route::get('/orders/{status}', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'getOrders'])
+        ->name('admin.orders');
     Route::get('/order/view/{order}', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'viewOrder'])
         ->name('admin.order.view');
     Route::post('/order/approve', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'approveOrder'])

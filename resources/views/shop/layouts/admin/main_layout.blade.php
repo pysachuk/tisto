@@ -193,7 +193,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.order.new') }}" class="nav-link @menuActive('admin.order.new', 'active')">
+                                <a href="{{ route('admin.orders', 'new') }}" class="nav-link @menuActive('admin.order.new', 'active')">
                                     <i class="fas fa-cart-plus nav-icon" style="color: #28a745!important"></i>
                                     <p>Нові замовлення</p>
                                     <span class="right badge badge-success">New</span>
@@ -202,7 +202,7 @@
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.order.accepted') }}" class="nav-link @menuActive('admin.order.accepted', 'active')">
+                                <a href="{{ route('admin.orders', 'approved') }}" class="nav-link @menuActive('admin.order.accepted', 'active')">
                                     <i class="fas fa-cart-plus nav-icon" style="color: #007bff!important"></i>
                                     <p>Прийняті замовлення</p>
                                 </a>
@@ -210,7 +210,7 @@
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.order.rejected') }}" class="nav-link @menuActive('admin.order.rejected', 'active')">
+                                <a href="{{ route('admin.orders', 'rejected') }}" class="nav-link @menuActive('admin.order.rejected', 'active')">
                                     <i class="fas fa-cart-plus nav-icon" style="color: #dc3545!important"></i>
                                     <p>Відхилені замовлення</p>
                                 </a>
@@ -257,42 +257,17 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="/shop/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-{{--<script src="/shop/admin/plugins/chart.js/Chart.min.js"></script>--}}
-<!-- Sparkline -->
-{{--<script src="/shop/admin/plugins/sparklines/sparkline.js"></script>--}}
-<!-- JQVMap -->
-{{--<script src="/shop/admin/plugins/jqvmap/jquery.vmap.min.js"></script>--}}
-{{--<script src="/shop/admin/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>--}}
-<!-- jQuery Knob Chart -->
-{{--<script src="/shop/admin/plugins/jquery-knob/jquery.knob.min.js"></script>--}}
-<!-- daterangepicker -->
-{{--<script src="/shop/admin/plugins/moment/moment.min.js"></script>--}}
-{{--<script src="/shop/admin/plugins/daterangepicker/daterangepicker.js"></script>--}}
-<!-- Tempusdominus Bootstrap 4 -->
-{{--<script src="/shop/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>--}}
-<!-- Summernote -->
-{{--<script src="/shop/admin/plugins/summernote/summernote-bs4.min.js"></script>--}}
-<!-- overlayScrollbars -->
+
 <script src="/shop/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/shop/admin/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-{{--<script src="/shop/admin/dist/js/demo.js"></script>--}}
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-{{--<script src="/shop/admin/dist/js/pages/dashboard.js"></script>--}}
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@if(session()->has('success'))
+@if(session()->has('message'))
     <script>
-        var success = '{{ session()->get('success') }}';
-    </script>
-@elseif(session()->has('error'))
-    <script>
-        var error = '{{ session()->get('error') }}';
-    </script>
-@elseif(session()->has('info'))
-    <script>
-        var info = '{{ session()->get('info') }}';
+        var message = [];
+        message['type'] = '{{ session() -> get('message.type') }}';
+        message['message'] = '{{ session() -> get('message.message') }}';
     </script>
 @endif
 <script>
@@ -300,29 +275,26 @@
         $(".clickable-row").click(function() {
             window.location = $(this).data("href");
         });
-        if(typeof success !== "undefined")
+        if(typeof message !== "undefined")
         {
+            var title = '';
+            switch (message['type'])
+            {
+                case 'success':
+                    title = 'Успіх'
+                    break
+                case 'info':
+                    title = 'Інфо'
+                    break
+                case 'error':
+                    title = 'Упс...'
+                    break
+            }
             Swal.fire(
-                'Успіх',
-                success,
-                'success'
+                title,
+                message['message'],
+                message['type']
             );
-        }
-        if(typeof info !== "undefined")
-        {
-            Swal.fire(
-                'Інфо',
-                info,
-                'info'
-            );
-        }
-        if(typeof error !== "undefined")
-        {
-            Swal.fire({
-                icon: 'error',
-                title: 'Упс...',
-                text: error,
-            })
         }
     });
 </script>

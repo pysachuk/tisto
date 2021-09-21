@@ -18,27 +18,12 @@ class OrderController extends Controller
         $this->orderReporitory = $orderReporitory;
     }
 
-    public function newOrders()
+    public function getOrders($status)
     {
-        $title = 'Нові замовлення:';
-        $orders = $this -> orderReporitory -> getOrdersByStatus(1, 15);
+        $title = __('titles.orders');
+        $orders = $this -> orderReporitory -> getOrdersByStatus($status, 15);
         return view('shop.admin.order.orders_list',compact('orders', 'title'));
     }
-
-    public function acceptedOrders()
-    {
-        $title = 'Прийняті замовлення:';
-        $orders = $this -> orderReporitory -> getOrdersByStatus(2, 15);
-        return view('shop.admin.order.orders_list',compact('orders', 'title'));
-    }
-
-    public function rejectedOrders()
-    {
-        $title = 'Відхилені замовлення:';
-        $orders = $this -> orderReporitory -> getOrdersByStatus(3, 15);
-        return view('shop.admin.order.orders_list',compact('orders', 'title'));
-    }
-
     public function viewOrder(Order $order)
     {
         return view('shop.admin.order.view',compact('order'));
