@@ -31,11 +31,11 @@ class OrderController extends Controller
     public function approveOrder(Request $request)
     {
         $this -> orderReporitory -> approveOrder($request -> order_id);
-        return redirect() -> route('admin.order.new') -> with('success', 'Замовлення прийняте.');
+        return redirect() -> route('admin.orders', 'new') -> with('success', 'Замовлення прийняте.');
     }
     public function rejectOrder(Request $request)
     {
         $this -> orderReporitory -> rejectOrder($request -> order_id);
-        return redirect() -> route('admin.order.new') -> with('info', 'Замовлення Відхилено.');
+        return redirect() -> route('admin.orders', 'new') -> with('info', 'Замовлення Відхилено.');
     }
 }

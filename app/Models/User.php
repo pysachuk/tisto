@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class User extends Authenticatable
@@ -44,6 +46,20 @@ class User extends Authenticatable
     public function role()
     {
         return $this->hasOne(UserRole::class);
+    }
+
+    public static function create($data)
+    {
+        $user = new self;
+        $user -> fill($data);
+        $user -> save();
+        return $user;
+    }
+
+    public static function setRole($id, $role)
+    {
+        $user = self::findOrFail($id);
+        return $user -> role() -> create(['role' => $role]);
     }
 
 }

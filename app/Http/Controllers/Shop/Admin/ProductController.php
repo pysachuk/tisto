@@ -36,7 +36,6 @@ class ProductController extends Controller
     public function create()
     {
         $categories = $this -> categoryRepository -> all();
-
         return view('shop.admin.product.create', compact('categories'));
     }
 
@@ -44,7 +43,8 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         if($this -> productRepository -> store($request))
-            return redirect() -> route('admin.product.index') -> with('success', 'Продукт додано');
+            return redirect() -> route('admin.product.index')
+                -> with('message',['type' => 'success', 'message' => __('messages.product_added')]);
     }
 
 
@@ -59,7 +59,8 @@ class ProductController extends Controller
     public function update(StoreProductRequest $request, $id)
     {
         $this -> productRepository -> update($request, $id);
-        return redirect() -> route('admin.product.index') -> with('success', 'Продукт оновлено');
+        return redirect() -> route('admin.product.index')
+            -> with('message',['type' => 'success', 'message' => __('messages.product_updated')]);
     }
 
 
@@ -67,7 +68,7 @@ class ProductController extends Controller
     {
         $product = $this -> productRepository -> getProduct($id);
         if($product -> delete())
-            return redirect() -> route('admin.product.index') -> with('info', 'Продукт видалено');
-
+            return redirect() -> route('admin.product.index')
+                -> with('message',['type' => 'info', 'message' => __('messages.product_deleted')]);
     }
 }

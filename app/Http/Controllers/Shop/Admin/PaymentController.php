@@ -18,9 +18,8 @@ class PaymentController extends Controller
             $data['payment_details'] = json_decode($payment -> json);
         }
         else
-        {
             $data['status'] = null;
-        }
+
         return view('shop.admin.order.pay_status', compact('data'));
     }
 }

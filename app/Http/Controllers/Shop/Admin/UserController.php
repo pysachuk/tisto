@@ -6,28 +6,31 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
+use App\Services\User\UserService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    protected $userService;
+    public function __construct(UserService $userService)
+    {
+        $this -> userService = $userService;
+    }
+
     public function user()
     {
-        $user = User::where('id', Auth::id()) -> first();
+        $user = User::findOrFail(Auth::id());
         return view('shop.admin.user.index', compact('user'));
     }
     public function userUpdate(UserUpdateRequest $request)
     {
-
-        $user = User::findOrFail(Auth::id());
-        if(!Hash::check($request -> old_password, $user->password))
-            return redirect() -> back() -> with('error', 'Не вірний поточний пароль!');
-        $user -> name = $request -> name;
-        $user -> email = $request -> email;
-        $user -> password = Hash::make($request -> new_password);
-        $user -> save();
-        return redirect() -> back() -> with('success', 'Дані успішно змінено!');
-
+        $user = Auth::user();
+        if(!$this -> userService -> checkUserPassword($user, $request -> old_password))
+            return redirect() -> back()
+                -> with('message', ['type' => 'error', 'message' => __('messages.invalid_old_password')]);
+        if($this -> userService -> updateUser($user, $request))
+            return redirect() -> back()
+                -> with('message', ['type' => 'success', 'message' => __('messages.data_change_success')]);
     }
 
     public function users()
@@ -43,20 +46,18 @@ class UserController extends Controller
 
     public function storeUser(StoreUserRequest $request)
     {
-        $user = new User;
-        $data = $request->only($user->getFillable());
-        $user->fill($data);
-        $user -> password = Hash::make($request -> password);
-        $user -> save();
-        $user -> role() -> create(['role' => $request -> role]);
-        return redirect() -> route('admin.users') -> with('success', 'Користувач успішно створено');
+        $user = $this -> userService -> createUser($request);
+        $this -> userService -> setUserRole($user -> id, $request -> role);
+        return redirect() -> route('admin.users')
+            -> with('message', ['type' => 'success', 'message' => __('messages.user_created')]);
 
     }
 
     public function deleteUser(User $user)
     {
         if($user -> delete())
-            return redirect() -> back() -> with('success', 'Користувача видалено');
+            return redirect() -> back()
+                -> with('message', ['type' => 'info', 'message' => __('messages.user_deleted')]);
     }
 
 }

@@ -43,4 +43,5 @@ class LiqPayService
         $json = base64_decode($data);
         return json_decode($json);
     }
+
 }
