@@ -15,10 +15,12 @@ class OrderProduct extends Model
         'count',
         'price'
     ];
+
     public function product()
     {
-        return $this -> belongsTo(Product::class);
+        return $this->belongsTo(Product::class);
     }
+
     public function order()
     {
         return $this->belongsTo(Order::class);

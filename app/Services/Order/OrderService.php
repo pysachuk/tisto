@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Order;
 
 use App\Models\Order;
@@ -7,8 +8,7 @@ class OrderService
 {
     public function getOrderStatusByUrl($status)
     {
-        switch ($status)
-        {
+        switch ($status) {
             case 'new':
             {
                 $status = Order::STATUS_NEW;
@@ -25,6 +25,7 @@ class OrderService
                 break;
             }
         }
+
         return $status;
     }
 }

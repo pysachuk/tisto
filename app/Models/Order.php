@@ -26,12 +26,12 @@ class Order extends Model
 
     public function orderProducts()
     {
-        return $this -> hasMany(OrderProduct::class);
+        return $this->hasMany(OrderProduct::class);
     }
 
     public function payment()
     {
-        return $this -> hasOne(Payment::class);
+        return $this->hasOne(Payment::class);
     }
 
 

@@ -9,10 +9,13 @@ class Payment extends Model
 {
     use HasFactory;
 
+    const PAYMENT_METHOD_MONEY = 1;
+    const PAYMENT_METHOD_CC = 2;
+
     protected $fillable = ['order_id', 'status', 'json'];
 
-    public static function checkPay($order_id)
+    public static function getPayment($order_id)
     {
-        return Payment::where('order_id', $order_id) -> first();
+        return Payment::where('order_id', $order_id)->first();
     }
 }

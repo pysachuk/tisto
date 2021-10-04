@@ -61,7 +61,7 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
         ->name('admin.order.approve');
     Route::post('/order/reject', [\App\Http\Controllers\Shop\Admin\OrderController::class, 'rejectOrder'])
         ->name('admin.order.reject');
-    Route::post('/order/pay_status', [\App\Http\Controllers\Shop\Admin\PaymentController::class, 'checkPay'])
+    Route::post('/order/pay_status', [\App\Http\Controllers\Shop\Admin\PaymentController::class, 'ajaxGetPayment'])
         ->name('admin.order.payStatus');
 
     //USER
@@ -93,8 +93,8 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
 
 
         //PAGES
-        Route::post('/pages/info/getPage', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'getPage'])
-            -> name('admin.pages.info.getPage');
+        Route::post('/pages/get', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'getPage'])
+            -> name('admin.pages.getPage');
         Route::get('/pages/main/edit', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainEdit'])
             ->name('admin.pages.main.edit');
         Route::post('/pages/main/update', [\App\Http\Controllers\Shop\Admin\PagesController::class, 'mainUpdate'])

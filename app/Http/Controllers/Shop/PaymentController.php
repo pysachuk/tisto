@@ -13,18 +13,21 @@ class PaymentController extends Controller
     public function payPage(Order $order)
     {
         $button = LiqPayService::getPaymentButton($order);
+
         return view('shop.order.payment', ['order' => $order, 'button' => $button]);
     }
 
     public function payStatus($order_id)
     {
         $order = Order::findOrFail($order_id);
+
         return view('shop.order.order_status', compact('order'));
     }
+
     public function checkPay(Request $request)
     {
-        $payment = Payment::checkPay($request -> order_id);
-        if($payment)
-            return response() -> json($payment);
+        $payment = Payment::checkPay($request->order_id);
+        if ($payment)
+            return response()->json($payment);
     }
 }

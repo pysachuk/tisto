@@ -9,6 +9,7 @@ return [
     'user_deleted' => 'Користувача видалено.',
     'product_added' => 'Продукт додано',
     'product_updated' => 'Продукт оновлено',
-    'product_deleted' => 'Продукт видалено!'
+    'product_deleted' => 'Продукт видалено!',
+    'saved' => 'Збережено'
 
 ];

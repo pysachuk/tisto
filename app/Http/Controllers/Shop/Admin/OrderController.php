@@ -21,21 +21,27 @@ class OrderController extends Controller
     public function getOrders($status)
     {
         $title = __('titles.orders');
-        $orders = $this -> orderReporitory -> getOrdersByStatus($status, 15);
-        return view('shop.admin.order.orders_list',compact('orders', 'title'));
+        $orders = $this->orderReporitory->getOrdersByStatus($status, 15);
+
+        return view('shop.admin.order.orders_list', compact('orders', 'title'));
     }
+
     public function viewOrder(Order $order)
     {
-        return view('shop.admin.order.view',compact('order'));
+        return view('shop.admin.order.view', compact('order'));
     }
+
     public function approveOrder(Request $request)
     {
-        $this -> orderReporitory -> approveOrder($request -> order_id);
-        return redirect() -> route('admin.orders', 'new') -> with('success', 'Замовлення прийняте.');
+        $this->orderReporitory->approveOrder($request->order_id);
+
+        return redirect()->route('admin.orders', 'new')->with('success', 'Замовлення прийняте.');
     }
+
     public function rejectOrder(Request $request)
     {
-        $this -> orderReporitory -> rejectOrder($request -> order_id);
-        return redirect() -> route('admin.orders', 'new') -> with('info', 'Замовлення Відхилено.');
+        $this->orderReporitory->rejectOrder($request->order_id);
+
+        return redirect()->route('admin.orders', 'new')->with('info', 'Замовлення Відхилено.');
     }
 }

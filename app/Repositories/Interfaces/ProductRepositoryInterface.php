@@ -10,8 +10,12 @@ use Illuminate\Support\Facades\Storage;
 interface ProductRepositoryInterface
 {
     public function all();
+
     public function store(StoreProductRequest $request);
+
     public function getCategoryProducts($category_id);
+
     public function getProduct($id);
+
     public function update(StoreProductRequest $request, $id);
 }

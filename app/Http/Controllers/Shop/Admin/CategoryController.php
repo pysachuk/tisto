@@ -19,7 +19,8 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = $this -> categoryRepository -> all();
+        $categories = $this->categoryRepository->all();
+
         return view('shop.admin.category.index', compact('categories'));
     }
 
@@ -32,31 +33,33 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
-        $this -> categoryRepository -> store($request);
-        return redirect() -> route('admin.category.index')
-            -> with('message', ['type' => 'success', 'message' => __('messages.category_added')]);
+        $this->categoryRepository->store($request);
+
+        return redirect()->route('admin.category.index')
+            ->with('message', ['type' => 'success', 'message' => __('messages.category_added')]);
     }
 
 
     public function edit($id)
     {
-        $category = $this -> categoryRepository -> getCategory($id);
+        $category = $this->categoryRepository->getCategory($id);
+
         return view('shop.admin.category.edit', compact('category'));
     }
 
 
     public function update(UpdateCategoryRequest $request, $id)
     {
-        if($this -> categoryRepository -> updateCategory($request, $id))
-            return redirect() -> route('admin.category.index')
-                -> with('message', ['type' => 'info', 'message' =>__('messages.category_updated')]);
+        if ($this->categoryRepository->updateCategory($request, $id))
+            return redirect()->route('admin.category.index')
+                ->with('message', ['type' => 'info', 'message' => __('messages.category_updated')]);
     }
 
 
     public function destroy($id)
     {
-        if($this -> categoryRepository -> deleteCategory($id))
-            return redirect() -> route('admin.category.index')
-                -> with('message', ['type' => 'info', 'message' =>__('messages.category_deleted')]);
+        if ($this->categoryRepository->deleteCategory($id))
+            return redirect()->route('admin.category.index')
+                ->with('message', ['type' => 'info', 'message' => __('messages.category_deleted')]);
     }
 }

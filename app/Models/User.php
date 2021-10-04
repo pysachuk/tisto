@@ -51,15 +51,17 @@ class User extends Authenticatable
     public static function create($data)
     {
         $user = new self;
-        $user -> fill($data);
-        $user -> save();
+        $user->fill($data);
+        $user->save();
+
         return $user;
     }
 
     public static function setRole($id, $role)
     {
         $user = self::findOrFail($id);
-        return $user -> role() -> create(['role' => $role]);
+
+        return $user->role()->create(['role' => $role]);
     }
 
 }

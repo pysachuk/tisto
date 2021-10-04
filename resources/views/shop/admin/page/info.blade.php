@@ -43,7 +43,7 @@
             let page = $('.select_page').val();
 
             $.ajax({
-                url: "{{ route('admin.pages.info.getPage') }}",
+                url: "{{ route('admin.pages.getPage') }}",
                 type: "POST",
                 data: {
                     page: page
