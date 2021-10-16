@@ -11,6 +11,7 @@ class MainController extends Controller
 
     public function index()
     {
+//        dd(session()->all());
         $header_image = Page::getHeaderImage('main');
         $categories = Category::all();
 

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/shop/main/assets/fonts/flaticon/flaticon.css">
     <link rel="stylesheet" href="/shop/main/assets/fonts/font-awesome/css/all.min.css">
     @yield('css')
+    @livewireStyles
 
     <!-- Slices Style sheet -->
     <link rel="stylesheet" href="/shop/main/assets/css/style.css">
@@ -91,14 +92,15 @@
 
             <div class="header-controls">
                 <ul class="header-controls-inner">
-                    <a href="{{ route('cart.index') }}">
-                        <li class="cart-dropdown-wrapper cart-trigger">
-                            <span class="cart-item-count">
-                                {{ Session::has('cart_id') ? \Cart::session(session('cart_id'))->getTotalQuantity() : 0}}
-                            </span>
-                            <i class="flaticon-shopping-bag"></i>
-                        </li>
-                    </a>
+                    @livewire('cart-sidebar')
+{{--                    <a href="{{ route('cart.index') }}">--}}
+{{--                        <li class="cart-dropdown-wrapper cart-trigger">--}}
+{{--                            <span class="cart-item-count">--}}
+{{--                                {{ Session::has('cart_id') ? \Cart::session(session('cart_id'))->getTotalQuantity() : 0}}--}}
+{{--                            </span>--}}
+{{--                            <i class="flaticon-shopping-bag"></i>--}}
+{{--                        </li>--}}
+{{--                    </a>--}}
                 </ul>
                 <!-- Toggler -->
                 <div class="aside-toggler aside-trigger">
@@ -169,6 +171,7 @@
         );
     }
 </script>
+@livewireScripts
 @yield('js')
 
 </body>

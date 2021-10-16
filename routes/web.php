@@ -13,19 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 //MAIN
-Route::get('/', [\App\Http\Controllers\Shop\MainController::class, 'index']) -> name('shop.main');
+Route::get('/', \App\Http\Livewire\Menu::class) -> name('shop.main');
 Route::get('/info', [\App\Http\Controllers\Shop\MainController::class, 'info']) -> name('shop.info');
 
 //CART
 Route::middleware('web') ->group(function(){
-    Route::get('/cart', [App\Http\Controllers\Shop\CartController::class, 'index'])->name('cart.index');
-    Route::post('/add-to-cart', [App\Http\Controllers\Shop\CartController::class, 'addToCart'])
-        ->name('addToCart');
-    Route::post('/cart/remove_item', [App\Http\Controllers\Shop\CartController::class, 'removeItem'])
-        ->name('cart.remove_item');
-    Route::post('/cart/edit_count', [App\Http\Controllers\Shop\CartController::class, 'editCount'])
-        ->name('cart.edit_count');
+    Route::get('/cart', \App\Http\Livewire\Cart::class)->name('cart.index');
+//    Route::post('/add-to-cart', [App\Http\Controllers\Shop\CartController::class, 'addToCart'])
+//        ->name('addToCart');
+//    Route::post('/cart/remove_item', [App\Http\Controllers\Shop\CartController::class, 'removeItem'])
+//        ->name('cart.remove_item');
+//    Route::post('/cart/edit_count', [App\Http\Controllers\Shop\CartController::class, 'editCount'])
+//        ->name('cart.edit_count');
 });
 //ORDER
 Route::get('cart/checkout', [App\Http\Controllers\Shop\OrderController::class, 'checkout'])
