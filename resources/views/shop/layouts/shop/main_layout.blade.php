@@ -176,6 +176,11 @@
 <script>
         $(".phone").mask("+38(099) 999-9999");
 </script>
+<script>
+    Livewire.on('addedToCart', function (){
+        $("body").toggleClass('cart-open');
+    });
+</script>
 @yield('js')
 
 </body>

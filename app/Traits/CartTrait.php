@@ -36,6 +36,7 @@ trait CartTrait
         $this->cartService->addProduct($product);
         $this->refresh();
         $this->emit('update');
+        $this->emit('addedToCart');
     }
 
     public function minus(Product $product)
