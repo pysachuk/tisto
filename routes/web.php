@@ -29,6 +29,7 @@ Route::middleware('web') ->group(function(){
 //        ->name('cart.edit_count');
 });
 //ORDER
+Route::get('/order/checkout', \App\Http\Livewire\Order::class)->name('order.checkout');
 Route::get('cart/checkout', [App\Http\Controllers\Shop\OrderController::class, 'checkout'])
     -> name('cart.checkout');
 Route::post('cart/checkout/accepted', [App\Http\Controllers\Shop\OrderController::class, 'addOrder'])

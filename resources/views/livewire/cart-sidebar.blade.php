@@ -40,14 +40,17 @@
                         </div>
                     </div>
                     @empty
-                    Кошик путий
+                        <h5>У кошику немає товарів! </h5>
                     @endforelse
                 </div>
             </div>
-            <div class="cart-sidebar-footer">
-                <h4>Сума: <span>{{ $cartTotal }} грн</span> </h4>
-                <a href="#" class="btn-custom">Замовити</a>
-            </div>
+                <div class="cart-sidebar-footer">
+                    @if(! $cartItems->isEmpty())
+                        <h4>Сума: <span>{{ $cartTotal }} грн</span> </h4>
+                        <a href="{{ route('cart.index') }}" class="btn-custom">Редагувати</a>
+                        <a href="{{ route('order.checkout') }}" class="btn-custom">Оформити замовлення</a>
+                    @endif
+                </div>
         </aside>
         <div class="cart-sidebar-overlay cart-trigger">
         </div>

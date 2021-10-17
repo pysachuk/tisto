@@ -100,4 +100,9 @@ class DbCartService
             return $this->cartTotal;
     }
 
+    public function clearCart()
+    {
+        $this->cart->products()->delete();
+    }
+
 }
