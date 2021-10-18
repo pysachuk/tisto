@@ -67,7 +67,7 @@
                 </tbody>
             </table>
             <!-- Cart Table End -->
-        @if(!\Cart::session(session('cart_id')) -> isEmpty())
+        @if(! $cartItems -> isEmpty())
             <!-- Cart form Start -->
                 <div class="row ct-cart-form">
                     <div class="offset-lg-6 col-lg-6">
