@@ -21,19 +21,16 @@ Route::get('/info', [\App\Http\Controllers\Shop\MainController::class, 'info']) 
 //CART
 Route::middleware('web') ->group(function(){
     Route::get('/cart', \App\Http\Livewire\Cart::class)->name('cart.index');
-//    Route::post('/add-to-cart', [App\Http\Controllers\Shop\CartController::class, 'addToCart'])
-//        ->name('addToCart');
-//    Route::post('/cart/remove_item', [App\Http\Controllers\Shop\CartController::class, 'removeItem'])
-//        ->name('cart.remove_item');
-//    Route::post('/cart/edit_count', [App\Http\Controllers\Shop\CartController::class, 'editCount'])
-//        ->name('cart.edit_count');
 });
+
 //ORDER
-Route::get('/order/checkout', \App\Http\Livewire\Order::class)->name('order.checkout');
-Route::get('cart/checkout', [App\Http\Controllers\Shop\OrderController::class, 'checkout'])
-    -> name('cart.checkout');
-Route::post('cart/checkout/accepted', [App\Http\Controllers\Shop\OrderController::class, 'addOrder'])
-    -> name('cart.add_order');
+Route::get('/order/checkout', \App\Http\Livewire\Order::class)
+    ->middleware('isWorkTime', 'isCart')
+    ->name('order.checkout');
+Route::get('/order/accepted/{order}', [\App\Http\Controllers\Shop\OrderController::class, 'orderAccepted'])
+    ->name('order.accepted');
+
+//PAYMENT
 Route::get('/cart/pay/{order}', [App\Http\Controllers\Shop\PaymentController::class, 'payPage'])
 -> name('cart.pay_page');
 Route::get('/cart/pay/status/{order_id}', [App\Http\Controllers\Shop\PaymentController::class, 'payStatus'])

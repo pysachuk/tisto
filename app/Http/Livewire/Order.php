@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Payment;
 use App\Services\DbCartService;
 use App\Services\Order\OrderService;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class Order extends Component
@@ -39,8 +40,7 @@ class Order extends Component
         if($order->payment_method == Payment::PAYMENT_METHOD_CC) {
             return redirect()->route('cart.pay_page', $order);
         } else {
-            //TODO redirect to order
-            return redirect()->route('shop.main');
+            return redirect()->route('order.accepted', $order);
         }
 
     }

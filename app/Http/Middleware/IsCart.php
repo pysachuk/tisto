@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\DbCartService;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class IsCart
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!\Cart::session(session('cart_id'))->isEmpty())
+        $cartService = new DbCartService();
+        if (! $cartService->isEmpty())
             return $next($request);
 
         return redirect()->route('shop.main');

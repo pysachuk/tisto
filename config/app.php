@@ -121,6 +121,9 @@ return [
 
     'key' => env('APP_KEY'),
 
+    'WORK_TIME_START' => env('WORK_TIME_START', '18:00:00'),
+    'WORK_TIME_END' => env('WORK_TIME_END', '02:00:00'),
+
     'cipher' => 'AES-256-CBC',
 
     /*

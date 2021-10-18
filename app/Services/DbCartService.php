@@ -105,4 +105,9 @@ class DbCartService
         $this->cart->products()->delete();
     }
 
+    public function isEmpty()
+    {
+        return ! $this->cart->products()->count() ? true : false;
+    }
+
 }
