@@ -25,7 +25,7 @@ namespace App\Services\Payment\Liqpay;
 /**
  * Payment method liqpay process
  *
- * @author      Liqpay <support@liqpay.ua>
+ * @author      Liqpay <support@liqpay.uk>
  */
 class LiqPay
 {
@@ -35,8 +35,8 @@ class LiqPay
     const CURRENCY_RUB = 'RUB';
     const CURRENCY_RUR = 'RUR';
 
-    private $_api_url = 'https://www.liqpay.ua/api/';
-    private $_checkout_url = 'https://www.liqpay.ua/api/3/checkout';
+    private $_api_url = 'https://www.liqpay.uk/api/';
+    private $_checkout_url = 'https://www.liqpay.uk/api/3/checkout';
     protected $_supportedCurrencies = array(
         self::CURRENCY_EUR,
         self::CURRENCY_USD,
@@ -148,7 +148,7 @@ class LiqPay
             <form method="POST" action="%s" accept-charset="utf-8">
                 %s
                 %s
-                <input type="image" src="//static.liqpay.ua/buttons/p1%s.radius.png" name="btn_text" />
+                <input type="image" src="//static.liqpay.uk/buttons/p1%s.radius.png" name="btn_text" />
             </form>
             ',
             $this->_checkout_url,

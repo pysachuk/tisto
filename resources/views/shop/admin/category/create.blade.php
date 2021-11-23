@@ -8,15 +8,15 @@
                 <div class="card-header">
                     <h3 class="card-title">Добавление категории</h3>
                 </div>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+{{--                @if ($errors->any())--}}
+{{--                    <div class="alert alert-danger">--}}
+{{--                        <ul>--}}
+{{--                            @foreach ($errors->all() as $error)--}}
+{{--                                <li>{{ $error }}</li>--}}
+{{--                            @endforeach--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form method="POST" action="{{ route('admin.category.store') }}" enctype="multipart/form-data">
@@ -24,21 +24,24 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="title">Название:</label>
-                            <input type="text"  name="title" class="form-control" id="title" placeholder="Введите название">
+                            <input type="text"  name="title" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Введите название">
+                            @error('title') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
                             <label>Описание</label>
-                            <textarea name="description" class="form-control" rows="3" placeholder="Описание..."></textarea>
+                            <textarea name="description" class="form-control @error('description') is-invalid @enderror" rows="3" placeholder="Описание..."></textarea>
+                            @error('description') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input name="photo" value="" type="file" class="custom-file-input" id="photo_input">
+                                <input name="photo" value="" type="file" class="custom-file-input @error('photo') is-invalid @enderror" id="photo_input">
                                 <label class="custom-file-label" for="photo_input">Выберите фото...</label>
                             </div>
                             <div class="input-group-append">
                                 <span class="input-group-text">Загрузить</span>
                             </div>
                         </div>
+                        @error('photo') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">

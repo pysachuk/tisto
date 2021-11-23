@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Livewire\Admin\Product\Products;
+use App\Http\Livewire\Admin\Product\Create;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,9 +20,7 @@ Route::get('/', \App\Http\Livewire\Menu::class) -> name('shop.main');
 Route::get('/info', [\App\Http\Controllers\Shop\MainController::class, 'info']) -> name('shop.info');
 
 //CART
-Route::middleware('web') ->group(function(){
-    Route::get('/cart', \App\Http\Livewire\Cart::class)->name('cart.index');
-});
+Route::get('/cart', \App\Http\Livewire\Cart::class)->name('cart.index');
 
 //ORDER
 Route::get('/order/checkout', \App\Http\Livewire\Order::class)
@@ -75,8 +74,10 @@ Route::middleware('admin')->prefix('panel') ->group(function(){
             ->names('admin.category');
 
         //PRODUCTS
-        Route::resource('/product', \App\Http\Controllers\Shop\Admin\ProductController::class)
-            ->names('admin.product');
+        Route::get('/products', Products::class)->name('admin.products');
+        Route::get('/products/create', Create::class)->name('admin.products.create');
+
+//
         Route::post('/category_products', [\App\Http\Controllers\Shop\Admin\ProductController::class, 'getCategoryProducts'])
             ->name('admin.category_products');
 

@@ -3,11 +3,11 @@
 namespace App\Traits;
 
 use App\Models\Product;
-use App\Services\DbCartService;
+use App\Services\Cart\CartService;
 
 trait CartTrait
 {
-    protected DbCartService $cartService;
+    protected CartService $cartService;
 
     public $cartItems;
     public $cartCount;
@@ -17,7 +17,7 @@ trait CartTrait
     public function __construct($id = null)
     {
         parent::__construct($id);
-        $this->cartService = new DbCartService();
+        $this->cartService = new CartService();
         $this->cartItems = $this->cartService->getProducts();
         $this->cartTotal = $this->cartService->getTotal();
         $this->cartCount = $this->cartService->getCount();
@@ -33,10 +33,12 @@ trait CartTrait
 
     public function add(Product $product)
     {
-        $this->cartService->addProduct($product);
-        $this->refresh();
-        $this->emit('update');
-        $this->emit('addedToCart');
+        if( $product->available ) {
+            $this->cartService->addProduct($product);
+            $this->refresh();
+            $this->emit('update');
+            $this->emit('addedToCart');
+        }
     }
 
     public function minus(Product $product)

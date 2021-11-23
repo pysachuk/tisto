@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="/shop/admin/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="/shop/admin/plugins/summernote/summernote-bs4.min.css">
+    @livewireStyles
     @yield('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -134,7 +135,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview @menuActive('admin.product.index', 'menu-open') @menuActive('admin.product.create', 'menu-open')">
+                    <li class="nav-item has-treeview @menuActive('admin.products', 'menu-open') @menuActive('admin.product.create', 'menu-open')">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -144,15 +145,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.product.index') }}" class="nav-link @menuActive('admin.product.index', 'active')">
+                                <a href="{{ route('admin.products') }}" class="nav-link @menuActive('admin.products', 'active')">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Всі продукти</p>
+                                    <p>Всі товари</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.product.create') }}" class="nav-link @menuActive('admin.product.create', 'active')">
+                                <a href="{{ route('admin.products.create') }}" class="nav-link @menuActive('admin.product.create', 'active')">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Додати продукт</p>
+                                    <p>Додати товар</p>
                                 </a>
                             </li>
                         </ul>
@@ -298,6 +299,7 @@
         }
     });
 </script>
+@livewireScripts
 @yield('js')
 </body>
 </html>

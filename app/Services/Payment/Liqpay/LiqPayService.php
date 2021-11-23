@@ -20,8 +20,8 @@ class LiqPayService
             'order_id' => $order->id,
             'version' => '3',
             'language' => Config::get('liqpay.language'),
-            'server_url' => 'https://tisto.pp.ua/api/payment_status',
-            'result_url' => 'https://tisto.pp.ua/cart/pay/status/' . $order->id
+            'server_url' => 'https://tisto.pp.uk/api/payment_status',
+            'result_url' => 'https://tisto.pp.uk/cart/pay/status/' . $order->id
 
         ));
     }

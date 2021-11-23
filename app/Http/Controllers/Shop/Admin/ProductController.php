@@ -27,7 +27,7 @@ class ProductController extends Controller
     {
         $categories = $this->categoryRepository->all();
 
-        return view('shop.admin.product.index', compact('categories'));
+        return view('shop.admin.products', compact('categories'));
     }
 
     public function getCategoryProducts(Request $request)
@@ -49,7 +49,7 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         if ($this->productRepository->store($request))
-            return redirect()->route('admin.product.index')
+            return redirect()->route('admin.products')
                 ->with('message', ['type' => 'success', 'message' => __('messages.product_added')]);
     }
 
@@ -67,7 +67,7 @@ class ProductController extends Controller
     {
         $this->productRepository->update($request, $id);
 
-        return redirect()->route('admin.product.index')
+        return redirect()->route('admin.products')
             ->with('message', ['type' => 'success', 'message' => __('messages.product_updated')]);
     }
 
@@ -76,7 +76,7 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->getProduct($id);
         if ($product->delete())
-            return redirect()->route('admin.product.index')
+            return redirect()->route('admin.products')
                 ->with('message', ['type' => 'info', 'message' => __('messages.product_deleted')]);
     }
 }

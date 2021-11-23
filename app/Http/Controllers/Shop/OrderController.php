@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddOrderRequest;
 use App\Models\Order;
-use App\Models\Payment;
-use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Services\Payment\Liqpay\LiqPayService;
 
 

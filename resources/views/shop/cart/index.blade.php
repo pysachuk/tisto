@@ -87,7 +87,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <a href="{{ route('cart.checkout') }}" class="btn-custom primary btn-block">Оформити замовлення</a>
+                    <a href="{{ route('order.checkout') }}" class="btn-custom primary btn-block">Оформити замовлення</a>
                 </div>
             </div>
             <!-- Cart form End -->

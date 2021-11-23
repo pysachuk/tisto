@@ -3,9 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Payment;
-use App\Services\DbCartService;
+use App\Services\Cart\CartService;
 use App\Services\Order\OrderService;
-use Carbon\Carbon;
 use Livewire\Component;
 
 class Order extends Component
@@ -26,13 +25,13 @@ class Order extends Component
     ];
     protected $orderService;
 
-    public function mount(DbCartService $cartService)
+    public function mount(CartService $cartService)
     {
         $this->cartItems = $cartService->getProducts();
         $this->cartTotal = $cartService->getTotal();
     }
 
-    public function createOrder(OrderService $orderService, DbCartService $cartService)
+    public function createOrder(OrderService $orderService, CartService $cartService)
     {
         $data = $this->validate();
         $order = $orderService->create($data, $this->cartItems, $this->cartTotal);

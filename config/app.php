@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://tisto.pp.ua'),
+    'url' => env('APP_URL', 'https://tisto.pp.uk'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'ua',
+    'locale' => 'uk',
 
     /*
     |--------------------------------------------------------------------------

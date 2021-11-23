@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\DbCartService;
+use App\Services\Cart\CartService;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class IsCart
      */
     public function handle(Request $request, Closure $next)
     {
-        $cartService = new DbCartService();
+        $cartService = new CartService();
         if (! $cartService->isEmpty())
             return $next($request);
 

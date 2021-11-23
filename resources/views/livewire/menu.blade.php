@@ -35,7 +35,15 @@
                                         </div>
                                         <div class="product-controls">
                                             <p class="product-price">{{ $product -> price }} грн</p>
-                                            <span wire:click="add({{ $product }})" href="#" class="order-item btn-custom btn-sm shadow-none add_to_cart" data-id="{{ $product -> id }}">Додати <i class="fas fa-shopping-cart"></i> </span>
+                                            @if( $product->available )
+                                                <span wire:click="add({{ $product }})" href="#" class="order-item btn-custom btn-sm shadow-none add_to_cart" data-id="{{ $product -> id }}">
+                                                    Додати <i class="fas fa-shopping-cart"></i>
+                                                </span>
+                                            @else
+                                                <span class="">
+                                                    <i class="text-danger">Немає</i>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

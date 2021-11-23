@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Services\StorageService;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreCategoryRequest;
 
@@ -45,8 +46,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         $category->title = $request->title;
         $category->description = $request->description;
         if ($request->file('photo')) {
-            $photo_path = Storage::disk('public')
-                ->putFile('categories', $request->file('photo'), 'public');
+            $photo_path = (new StorageService())->updateImage($request->file('photo'), $category->image_url, 'categories');
             $category->image_url = $photo_path;
         }
 
