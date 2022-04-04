@@ -115,6 +115,24 @@
 
 </header>
 <!-- Header End -->
+<!-- Subheader Start -->
+<div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/shop/main/assets/img/subheader.jpg')">
+    <div class="container">
+        <div class="subheader-inner">
+            <h1>Меню</h1>
+            <nav aria-label="breadcrumb">
+{{--                <ol class="breadcrumb">--}}
+{{--                    <li class="breadcrumb-item"><a href="#">Home</a></li>--}}
+{{--                    <li class="breadcrumb-item"><a href="#">Menu</a></li>--}}
+{{--                    <li class="breadcrumb-item active" aria-current="page">Menu v1</li>--}}
+{{--                </ol>--}}
+            </nav>
+        </div>
+
+    </div>
+</div>
+<!-- Subheader End -->
+
 @if(session()->has('message'))
     <script>
         var message = '{{ session()->get('message') }}';

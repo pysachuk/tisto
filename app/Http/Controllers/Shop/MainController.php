@@ -5,17 +5,18 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Page;
+use App\Models\Product;
 
 class MainController extends Controller
 {
 
     public function index()
     {
-//        dd(session()->all());
         $header_image = Page::getHeaderImage('main');
-        $categories = Category::all();
+        $categories = Category::get();
+        $products = Product::get();
 
-        return view('shop.main.menu', compact('categories', 'header_image'));
+        return view('shop.main.menu', compact('categories', 'header_image', 'products'));
     }
 
     public function info()

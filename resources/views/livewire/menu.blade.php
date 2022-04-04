@@ -1,14 +1,4 @@
 <div>
-    <!-- Subheader Start -->
-        <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/shop/main/assets/img/subheader.jpg')">
-            <div class="container">
-                <div class="subheader-inner">
-                    <h1>Меню</h1>
-                </div>
-
-            </div>
-        </div>
-        <!-- Subheader End -->
         <!-- Menu Wrapper Start -->
         <div class="section section-padding menu-v2">
             <div class="container">
@@ -26,7 +16,7 @@
                                     <div class="favorite">
                                         <i class="far fa-heart"></i>
                                     </div>
-                                    <div class="product-thumb" href="menu-item-v1.html"> <img style="max-width: 220px" src="/storage/{{ $product -> image -> image }}" alt="menu item" /> </div>
+                                    <div class="product-thumb" href="menu-item-v1.html"> <img style="max-width: 220px" src="/storage/{{ $product -> image -> image ?? null }}" alt="menu item" /> </div>
                                     <div class="product-body">
                                         <div class="product-desc">
                                             <h4 class="product_title" data-id="{{ $product -> id }}">{{ $product -> title }}</h4>

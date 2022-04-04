@@ -7,15 +7,15 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('admin.category.create') }}" class="btn btn-success">Добавить</a>
+                            <a href="{{ route('admin.category.create') }}" class="btn btn-success">Додати</a>
                         </div>
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Название</th>
-                                    <th class="text-right">Правка</th>
+                                    <th>Назва</th>
+                                    <th class="text-right">Редагувати</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -36,7 +36,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td><h2>НЕТ КАТЕГОРИЙ</h2></td>
+                                        <td><h2>Немає категорій</h2></td>
                                     </tr>
                                     @endforelse
                                 </tbody>

@@ -17,7 +17,7 @@ trait CartTrait
     public function __construct($id = null)
     {
         parent::__construct($id);
-        $this->cartService = new CartService();
+        $this->cartService = resolve(CartService::class);
         $this->cartItems = $this->cartService->getProducts();
         $this->cartTotal = $this->cartService->getTotal();
         $this->cartCount = $this->cartService->getCount();

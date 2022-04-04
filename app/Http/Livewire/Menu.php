@@ -15,7 +15,7 @@ class Menu extends Component
 
     public function mount()
     {
-        $this->categories = Category::all();
+        $this->categories = Category::get();
     }
 
     public function render()
