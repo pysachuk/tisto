@@ -30,12 +30,12 @@ class ProductController extends Controller
         return view('shop.admin.products', compact('categories'));
     }
 
-    public function getCategoryProducts(Request $request)
-    {
-        $products = $this->productRepository->getCategoryProducts($request->category_id);
-
-        return view('shop.admin.product.products', compact('products'));
-    }
+//    public function getCategoryProducts(Request $request)
+//    {
+//        $products = $this->productRepository->getCategoryProducts($request->category_id);
+//
+//        return view('shop.admin.product.products', compact('products'));
+//    }
 
 
     public function create()

@@ -20,6 +20,21 @@ class ProductService
         $product = Product::create($data);
         $product->image()->create(['image' => $data['image'], 'is_main' => true]);
 
-        return true;
+        return $product;
+    }
+
+    public function update(Product $product, $data)
+    {
+        if(isset($data['newImage'])) {
+            $data['image'] = $this->storageService->updateImage($data['newImage'], $product->image->image, 'products');
+            $product->image()->delete();
+            $product->image()->create(['image' => $data['image'], 'is_main' => true]);
+            unset($data['newImage'], $data['image']);
+        }
+
+        $product->update($data);
+
+        return $product;
+
     }
 }

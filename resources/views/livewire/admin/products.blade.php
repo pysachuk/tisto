@@ -1,3 +1,4 @@
+@section('title', 'TISTO - Товари')
 <div>
     <div class="container-fluid">
         <div class="row">
@@ -51,8 +52,8 @@
                                     <td><img src="/storage/{{ $product -> image -> image ?? '' }}" style="width: 100px"></td>
                                     <td class="text-right py-0 align-middle">
                                         <div class="btn-group btn-group-sm">
-                                            <a href="" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                                <button wire:click="removeProduct({{ $product }})" class="btn btn-danger delete" type="button"><i class="fas fa-trash"></i></button>
+                                            <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                                <button wire:click="deleteConfirm({{$product}})" class="btn btn-danger delete" type="button"><i class="fas fa-trash"></i></button>
                                         </div>
                                     </td>
                                     @empty

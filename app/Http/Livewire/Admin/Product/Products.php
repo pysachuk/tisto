@@ -12,33 +12,50 @@ class Products extends Component
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
+    protected $queryString = ['selectedCategoryId'];
 
     public $categories;
     public $products;
     public $selectedCategoryId;
 
-    protected $listeners = ['categorySelected'];
+    protected $listeners = ['categorySelected', 'delete'];
 
     public function mount()
     {
         $this->categories = Category::all();
-        $this->products = $this->categories->first()->products ?? [];
+        $this->selectedCategoryId = $this->selectedCategoryId ?? $this->categories->first()->id;
+        $this->loadCategoryProducts();
+    }
+
+    public function loadCategoryProducts()
+    {
+        $this->products = Category::find($this->selectedCategoryId)->products;
     }
 
     public function categorySelected(int $id)
     {
         $this->selectedCategoryId = $id;
-        $this->products = Category::find($this->selectedCategoryId)->products;
+        $this->loadCategoryProducts();
     }
 
-    public function removeProduct(Product $product)
+    public function deleteConfirm(Product $product)
     {
-        $product->delete();
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'type' => 'warning',
+            'title' => 'Ви впевнені?',
+            'text' => '',
+            'id' => $product->id,
+        ]);
+    }
+
+    public function delete($id)
+    {
+        Product::where('id', $id)->delete();
+        $this->loadCategoryProducts();
     }
 
     public function render()
     {
-
         return view('livewire.admin.products')
             ->extends('shop.layouts.admin.main_layout')
             ->section('content');

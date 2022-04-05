@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Services;
+
+use App\Http\Livewire\Admin\Product\Edit;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Product\Products;
 use App\Http\Livewire\Admin\Product\Create;
@@ -50,10 +53,11 @@ Route::middleware('admin')->prefix('panel') ->group(function() {
         //PRODUCTS
         Route::get('/products', Products::class)->name('admin.products');
         Route::get('/products/create', Create::class)->name('admin.products.create');
+        Route::get('products/{product}/edit', Edit::class)->name('admin.products.edit');
 
 //
-        Route::post('/category_products', [ProductController::class, 'getCategoryProducts'])
-            ->name('admin.category_products');
+//        Route::post('/category_products', [ProductController::class, 'getCategoryProducts'])
+//            ->name('admin.category_products');
 
         //USERS
         Route::get('/users', [UserController::class, 'users'])

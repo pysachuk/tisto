@@ -233,11 +233,11 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2021 <a href="https://adminlte.io">TISTO</a>.</strong>
-        All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.1.0
-        </div>
+        <strong>Copyright &copy; 2022 <a href="{{ route('shop.main') }}">TISTO</a>.</strong>
+        Усі права захищено.
+{{--        <div class="float-right d-none d-sm-inline-block">--}}
+{{--            <b>Version</b> 3.1.0--}}
+{{--        </div>--}}
     </footer>
 
     <!-- Control Sidebar -->
@@ -263,7 +263,7 @@
 <!-- AdminLTE App -->
 <script src="/shop/admin/dist/js/adminlte.js"></script>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @if(session()->has('message'))
     <script>
         var message = [];
@@ -291,14 +291,44 @@
                     title = 'Упс...'
                     break
             }
-            Swal.fire(
-                title,
-                message['message'],
-                message['type']
-            );
+            swal({
+                title: title,
+                text: message['message'],
+                icon: message['type']
+            });
+            // Swal.fire(
+            //     title,
+            //     message['message'],
+            //     message['type']
+            // );
         }
     });
 </script>
+<script>
+    window.addEventListener('swal:modal', event => {
+        swal({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+        });
+    });
+
+    window.addEventListener('swal:confirm', event => {
+        swal({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.livewire.emit('delete', event.detail.id);
+                }
+            });
+    });
+</script>
+
 @livewireScripts
 @yield('js')
 </body>
