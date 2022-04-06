@@ -38,13 +38,23 @@
                                 <label for="new_password_input_confirm">Підтвердіть пароль</label>
                                 <input type="password" name="password_confirmation" class="form-control" id="new_password_input_confirm" placeholder="Підтвердження">
                             </div>
-                                <div class="form-group">
-                                    <label>Роль</label>
-                                    <select name="role" class="form-control select_page">
-                                        <option value="manager" selected>Менеджер</option>
-                                        <option value="admin">Адміністратор</option>
-                                    </select>
-                                </div>
+                            <div class="form-group">
+                                <label>Роль</label>
+                                <select name="role" class="form-control select_page">
+                                    <option value="manager" selected>Менеджер</option>
+                                    <option value="admin">Адміністратор</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Локація</label>
+                                <select name="location" class="form-control select_page">
+                                    <option value='null' selected>Не вибрано</option>
+                                    @foreach($locations as $location)
+                                        <option value="{{ $location->key }}">{{ $location->city }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

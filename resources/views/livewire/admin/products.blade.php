@@ -9,17 +9,28 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <div class="form-group">
-                            <label>Категорія</label>
-                            <input type="hidden" wire:model="selectedCategoryId" value="" class="selectedCategoryId">
-                            <select wire:model="selectedCategoryId" name="category" class="form-control select_category">
-                                @forelse($categories as $category)
-                                    <option value="{{ $category -> id }}">{{ $category -> title }}</option>
-                                @empty
-                                    <option>Створіть категорію</option>
-                                @endforelse
-                            </select>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Категорія</label>
+                                    <input type="hidden" wire:model="selectedCategoryId" value="" class="selectedCategoryId">
+                                    <select wire:model="selectedCategoryId" name="category" class="form-control select_category">
+                                        @forelse($categories as $category)
+                                            <option value="{{ $category -> id }}">{{ $category -> title }}</option>
+                                        @empty
+                                            <option>Створіть категорію</option>
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Пошук</label>
+                                    <input wire:model="search" type="text" placeholder="Пошук..." class="form-control">
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -38,6 +49,7 @@
                                 <th>Ціна</th>
                                 <th>Вага</th>
                                 <th>Фото</th>
+{{--                                <th>Наявність</th>--}}
                                 <th class="text-right">Правка</th>
                             </tr>
                             </thead>
@@ -50,6 +62,9 @@
                                     <td>{{ $product -> price }}</td>
                                     <td>{{ $product -> weight }}</td>
                                     <td><img src="/storage/{{ $product -> image -> image ?? '' }}" style="width: 100px"></td>
+{{--                                    <td>--}}
+{{--                                        <input wire:model="available.{{$product->id}}" type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="В наявності" data-off="Немає">--}}
+{{--                                    </td>--}}
                                     <td class="text-right py-0 align-middle">
                                         <div class="btn-group btn-group-sm">
                                             <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>

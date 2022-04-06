@@ -1,14 +1,7 @@
 <div>
-    <!-- Subheader Start -->
-        <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/shop/main/assets/img/subheader.jpg')">
-            <div class="container">
-                <div class="subheader-inner">
-                    <h1>Замовлення</h1>
-                </div>
-
-            </div>
-        </div>
-        <!-- Subheader End -->
+@section('subheader_title')
+    Замовлення
+@endsection
 
         <!-- Checkout Start -->
         <section class="section">
@@ -32,6 +25,15 @@
                             <!-- Buyer Info -->
                             <h4>Ваші дані</h4>
                             <div class="row">
+                                <div class="form-group col-xl-12">
+                                    <label>Локація <span class="text-danger">*</span></label>
+                                    <select wire:model="location_key"  class="form-control">
+                                        @foreach($locations as $location)
+                                            <option value="{{ $location->key }}">{{ $location->city }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('location_key') <span class="error">{{ $message }}</span> @enderror
+                                </div>
                                 <div class="form-group col-xl-6">
                                     <label>Ім'я<span class="text-danger">*</span></label>
                                     <input wire:model="name" type="text" placeholder="Як до вас звертатись?" name="name" class="form-control" value="" required="">

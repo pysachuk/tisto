@@ -17,6 +17,8 @@ class Products extends Component
     public $categories;
     public $products;
     public $selectedCategoryId;
+    public $search;
+//    public array $available;
 
     protected $listeners = ['categorySelected', 'delete'];
 
@@ -29,7 +31,24 @@ class Products extends Component
 
     public function loadCategoryProducts()
     {
-        $this->products = Category::find($this->selectedCategoryId)->products;
+        $category = Category::findOrFail($this->selectedCategoryId);
+        if($this->search) {
+            $this->products = $category
+                ->products()
+                ->where('title', "LIKE", "%$this->search%")
+//                ->orWhere('description', "LIKE", "%$this->search%")
+                ->get();
+//            dd($category->products);
+        } else {
+            $this->products = Category::find($this->selectedCategoryId)
+                ->products;
+        }
+
+    }
+
+    public function updatedSearch()
+    {
+        $this->loadCategoryProducts();
     }
 
     public function categorySelected(int $id)
@@ -44,6 +63,7 @@ class Products extends Component
             'type' => 'warning',
             'title' => 'Ви впевнені?',
             'text' => '',
+            'emit' => 'delete',
             'id' => $product->id,
         ]);
     }

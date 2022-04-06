@@ -26,6 +26,33 @@ class OrderService
             return $order;
         }
     }
+
+    public function getOrders($status, $paginate = null, $location = null)
+    {
+        $user = auth()->user();
+        $status = $this->getOrderStatusByUrl($status);
+        $orders = Order::query()
+            ->where('status', $status)
+            ->orderBy('updated_at', 'DESC');
+
+        if( config('settings.orders_by_location') ) {
+            if( $user->role->role === 'admin' ) {
+                if($location) {
+                    $orders = $orders->where('location_key', $location);
+                }
+            } else {
+                $orders = $orders->where('location_key', $user->role->location->key);
+            }
+        }
+        if ($paginate) {
+            $orders = $orders->paginate($paginate);
+        } else {
+            $orders = $orders->get();
+        }
+
+        return $orders;
+    }
+
     public function getOrderStatusByUrl($status)
     {
         switch ($status) {

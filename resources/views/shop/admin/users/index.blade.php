@@ -16,15 +16,17 @@
                                     <th>Імя</th>
                                     <th>E-Mail</th>
                                     <th>Роль</th>
+                                    <th>Локація</th>
                                     <th class="text-right">Правка</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($users as $user)
                                     <tr>
-                                        <td>{{ $user -> name }}</td>
-                                        <td>{{ $user -> email }}</td>
-                                        <td>{{ $user -> role -> role }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->role->roleName }}</td>
+                                        <td>{{ $user->role->location->city ?? '' }}</td>
                                         <td class="text-right py-0 align-middle">
                                             @if(\Auth::id() == $user -> id)
                                                 <div class="btn-group btn-group-sm">

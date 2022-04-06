@@ -1,21 +1,5 @@
 @extends('shop.layouts.shop.main_layout')
 @section('content')
-<!-- Subheader Start -->
-<div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/shop/main/assets/img/subheader.jpg')">
-    <div class="container">
-        <div class="subheader-inner">
-            <h1>Замовлення</h1>
-{{--            <nav aria-label="breadcrumb">--}}
-{{--                <ol class="breadcrumb">--}}
-{{--                    <li class="breadcrumb-item"><a href="#">Home</a></li>--}}
-{{--                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>--}}
-{{--                </ol>--}}
-{{--            </nav>--}}
-        </div>
-
-    </div>
-</div>
-<!-- Subheader End -->
 
 <!-- Checkout Start -->
 <section class="section">

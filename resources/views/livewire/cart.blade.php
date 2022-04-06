@@ -1,14 +1,7 @@
 <div>
-    <!-- Subheader Start -->
-    <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/storage')">
-        <div class="container">
-            <div class="subheader-inner">
-                <h1>Кошик</h1>
-            </div>
-
-        </div>
-    </div>
-    <!-- Subheader End -->
+    @section('subheader_title')
+        Кошик
+    @endsection
     <!--Cart Start -->
     <section class="section">
         <div class="container">
@@ -17,7 +10,7 @@
             <table class="ct-responsive-table">
                 <thead>
                 <tr>
-                    <th>Продукт</th>
+                    <th>Товар</th>
                     <th>Ціна</th>
                     <th>Кількість</th>
                     <th>Сумма</th>

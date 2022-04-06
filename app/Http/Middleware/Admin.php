@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\UserRole;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,9 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (\Auth::user() && \Auth::user()->role->role == 'admin' || \Auth::user() && \Auth::user()->role->role == 'manager') {
-            return $next($request);
+        $roles = UserRole::getRoles();
+        if(auth()->check() && in_array(auth()->user()->role->role, $roles) ) {
+            return  $next($request);
         }
 
         return redirect()->route('admin.login');

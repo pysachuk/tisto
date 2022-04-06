@@ -6,27 +6,43 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>{{ $title ?? 'Замовлення' }}</h4>
+                    <div class="row">
+                        <div class="col-md-8 pt-4">
+                            <h4>{{ $title ?? 'Замовлення' }}</h4>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="form-group">
+                                <label>Локація</label>
+                                <input type="hidden" value="24" class="selectedCategoryId">
+                                <select name="category" class="form-control select_category">
+                                    <option value="24">Світязь</option>
+                                    <option value="25">Любомль</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table class="table table-bordered table-hover table-sm">
                         <thead>
-                        <tr>
-                            <th>№ заказа</th>
-                            <th>Имя</th>
+                        <tr class="text-center">
+                            <th>№ замовлення</th>
+                            <th>Локація</th>
+                            <th>Імя</th>
                             <th>Телефон</th>
-                            <th>Адрес</th>
-                            <th>Сумма</th>
-                            <th>Метод оплаты</th>
+                            <th>Адреса</th>
+                            <th>Сума</th>
+                            <th>Спосіб оплати</th>
                             <th>Статус</th>
-                            <th>Дата заказа</th>
+                            <th>Дата замовлення</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($orders as $order)
                             <tr  data-id="{{ $order -> id }}" class='clickable-row' data-href='{{ route('admin.order.view', $order -> id) }}'>
-                                <td>{{ $order -> id }}</td>
+                                <td class="text-center text-bold">{{ $order -> id }}</td>
+                                <td>{{ $order->location->city }}</td>
                                 <td>{{ $order -> name }}</td>
                                 <td>{{ $order -> phone }}</td>
                                 <td>{{ $order -> address }}</td>

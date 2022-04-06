@@ -25,10 +25,20 @@ class OrderRepository implements OrderRepositoryInterface
     public function getOrdersByStatus($status, $paginate = null)
     {
         $status = $this->orderService->getOrderStatusByUrl($status);
-        if ($paginate)
-            return Order::where('status', $status)->orderBy('updated_at', 'DESC')->paginate($paginate);
+        $user = auth()->user();
+        $orders = Order::query()
+            ->where('status', $status)
+            ->orderBy('updated_at', 'DESC');
+        if( config('settings.orders_by_location') && $user->role->role !== 'admin' ) {
+            $orders = $orders->where('location_key', $user->role->location->key);
+        }
+        if ($paginate) {
+            $orders = $orders->paginate($paginate);
+        } else {
+            $orders = $orders->get();
+        }
 
-        return Order::where('status', $status)->orderBy('updated_at', 'DESC')->get();
+        return $orders;
     }
 
     public function approveOrder($id)
@@ -75,22 +85,4 @@ class OrderRepository implements OrderRepositoryInterface
         return Order::where('status', Order::STATUS_APPROVED)->sum('summ');
     }
 
-    public function addOrder(AddOrderRequest $request, $products)
-    {
-        $order = new Order;
-        $data = $request->only($order->getFillable());
-        $order->fill($data);
-        $order->status = Order::STATUS_NEW;
-        $order->cart_id = session('cart_id');
-        $order->save();
-        foreach ($products as $product) {
-            $order->orderProducts()->create([
-                'product_id' => $product->id,
-                'count' => $product->quantity,
-                'price' => $product->price
-            ]);
-        }
-
-        return $order;
-    }
 }

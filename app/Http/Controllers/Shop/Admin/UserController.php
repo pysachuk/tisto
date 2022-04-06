@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\Location;
 use App\Models\User;
 use App\Services\User\UserService;
 use Illuminate\Support\Facades\Auth;
@@ -45,13 +46,16 @@ class UserController extends Controller
 
     public function createUser()
     {
-        return view('shop.admin.users.create');
+        $locations = Location::get();
+
+        return view('shop.admin.users.create', compact('locations'));
     }
 
     public function storeUser(StoreUserRequest $request)
     {
+//        dd($request->validated());
         $user = $this->userService->createUser($request);
-        $this->userService->setUserRole($user->id, $request->role);
+        $this->userService->setUserRole($user, $request->role, $request->location);
 
         return redirect()->route('admin.users')
             ->with('message', ['type' => 'success', 'message' => __('messages.user_created')]);

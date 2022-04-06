@@ -47,7 +47,7 @@
                 <div class="cart-sidebar-footer">
                     @if(! $cartItems->isEmpty())
                         <h4>Сума: <span>{{ $cartTotal }} грн</span> </h4>
-                        <a href="{{ route('cart.index') }}" class="btn-custom">Редагувати</a>
+                        <a href="{{ route('cart.index') }}" class="btn-custom">Змінити</a>
                         <a href="{{ route('order.checkout') }}" class="btn-custom">Оформити замовлення</a>
                     @endif
                 </div>

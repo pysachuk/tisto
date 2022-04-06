@@ -48,20 +48,4 @@ class User extends Authenticatable
         return $this->hasOne(UserRole::class);
     }
 
-    public static function create($data)
-    {
-        $user = new self;
-        $user->fill($data);
-        $user->save();
-
-        return $user;
-    }
-
-    public static function setRole($id, $role)
-    {
-        $user = self::findOrFail($id);
-
-        return $user->role()->create(['role' => $role]);
-    }
-
 }

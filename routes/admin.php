@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Http\Livewire\Admin\Orders;
 use App\Http\Livewire\Admin\Product\Edit;
+use App\Http\Livewire\Admin\ViewOrder;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Product\Products;
 use App\Http\Livewire\Admin\Product\Create;
@@ -28,9 +30,9 @@ Route::middleware('admin')->prefix('panel') ->group(function() {
         ->name('admin.home');
 
     //ORDERS
-    Route::get('/orders/{status}', [OrderController::class, 'getOrders'])
+    Route::get('/orders/{status}', Orders::class)
         ->name('admin.orders');
-    Route::get('/order/view/{order}', [OrderController::class, 'viewOrder'])
+    Route::get('/order/view/{order}', ViewOrder::class)
         ->name('admin.order.view');
     Route::post('/order/approve', [OrderController::class, 'approveOrder'])
         ->name('admin.order.approve');

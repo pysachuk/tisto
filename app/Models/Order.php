@@ -21,12 +21,23 @@ class Order extends Model
         'description',
         'summ',
         'status',
-        'payment_method'
+        'payment_method',
+        'location_key'
     ];
 
     public function orderProducts()
     {
         return $this->hasMany(OrderProduct::class);
+    }
+
+    public function location()
+    {
+        return $this->hasOne(Location::class, 'key', 'location_key');
+    }
+
+    public function getCityAttribute()
+    {
+        return $this->location->city ?? null;
     }
 
     public function payment()

@@ -23,6 +23,5 @@ interface OrderRepositoryInterface
 
     public function getTotalAmount();
 
-    public function addOrder(AddOrderRequest $request, $products);
 
 }

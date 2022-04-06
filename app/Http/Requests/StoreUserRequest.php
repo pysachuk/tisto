@@ -23,11 +23,20 @@ class StoreUserRequest extends FormRequest
      */
     public function rules()
     {
+        $checkLocation = $this->role == 'manager' ? true : false;
+
+        if($this->location == 'null') {
+            $this->location = null;
+        }
+        $locationRules = $checkLocation ? ['exists:locations,key'] : ['nullable'];
+
+
         return [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|confirmed',
-            'role'     => 'required'
+            'role'     => 'required|string',
+            'location' => $locationRules
         ];
     }
 
@@ -36,6 +45,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name.required' => 'Введіть імя!',
             'email.required' => 'Введіть Email!',
+            'location.required' => 'Виберіть локацію!',
+            'location.exists' => 'Виберіть локацію!',
             'password.required' => 'Введіть пароль!',
             'password.confirmed' => 'Паролі не співпадають!',
         ];

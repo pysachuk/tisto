@@ -12,6 +12,10 @@
                         <table class="table table-bordered">
                             <tbody>
                                 <tr>
+                                    <td>Локація:</td>
+                                    <td><b>{{ $order->location->city }}</b></td>
+                                </tr>
+                                <tr>
                                     <td>Імя:</td>
                                     <td><b>{{ $order -> name }}</b></td>
                                 </tr>

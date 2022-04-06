@@ -28,12 +28,14 @@ class UserService
 
     public function createUser(StoreUserRequest $request)
     {
-        $data = $request -> only((new User)->getFillable());
+        $data = $request->only((new User)->getFillable());
         $data['password'] = Hash::make($data['password']);
         return User::create($data);
     }
-    public function setUserRole($id, $role)
+    public function setUserRole(User $user, $role, $location = null)
     {
-        return User::setRole($id, $role);
+        $user->role()->create(['role' => $role, 'location_key' => $location]);
+
+        return $user;
     }
 }

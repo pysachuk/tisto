@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="/shop/admin/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="/shop/admin/plugins/summernote/summernote-bs4.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     @livewireStyles
     @yield('css')
 </head>
@@ -264,6 +265,7 @@
 <script src="/shop/admin/dist/js/adminlte.js"></script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 @if(session()->has('message'))
     <script>
         var message = [];
@@ -323,7 +325,7 @@
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    window.livewire.emit('delete', event.detail.id);
+                    window.livewire.emit(event.detail.emit, event.detail.id);
                 }
             });
     });

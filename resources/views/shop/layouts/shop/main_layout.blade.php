@@ -67,11 +67,14 @@
                         <li> <a class="p-0" href="tel:+380980008050"><i class="fas fa-phone mr-2"></i> +380 98 000 8050</a> </li>
                     </ul>
                 </div>
-
+                @if( auth()->check() )
+                    <ul class="top-header-nav header-cta">
+                        <li> <a href="{{ route('admin.home') }}" target="_blank"><i class="fa fa-user" aria-hidden="true">Адмінка</i></a> </li>
+                    </ul>
+                @endif
                 <ul class="top-header-nav header-cta">
                     <li> <a href="https://instagram.com/tisto.svityaz" target="_blank"><i class="fab fa-instagram fa-1x"> Instagram</i></a> </li>
                 </ul>
-
             </div>
         </div>
     </div>
@@ -119,7 +122,7 @@
 <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('/shop/main/assets/img/subheader.jpg')">
     <div class="container">
         <div class="subheader-inner">
-            <h1>Меню</h1>
+            <h1>@yield('subheader_title', 'Меню')</h1>
             <nav aria-label="breadcrumb">
 {{--                <ol class="breadcrumb">--}}
 {{--                    <li class="breadcrumb-item"><a href="#">Home</a></li>--}}
