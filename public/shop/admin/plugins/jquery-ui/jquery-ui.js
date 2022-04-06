@@ -1082,11 +1082,11 @@ $.ui.position = {
 					}
 				}
 
-			// Too far left -> align with left edge
+			// Too far left->align with left edge
 			} else if ( overLeft > 0 ) {
 				position.left += overLeft;
 
-			// Too far right -> align with right edge
+			// Too far right->align with right edge
 			} else if ( overRight > 0 ) {
 				position.left -= overRight;
 
@@ -1126,11 +1126,11 @@ $.ui.position = {
 					}
 				}
 
-			// Too far up -> align with top
+			// Too far up->align with top
 			} else if ( overTop > 0 ) {
 				position.top += overTop;
 
-			// Too far down -> align with bottom edge
+			// Too far down->align with bottom edge
 			} else if ( overBottom > 0 ) {
 				position.top -= overBottom;
 
@@ -1498,7 +1498,7 @@ function clamp( value, prop, allowEmpty ) {
 	if ( type.mod ) {
 
 		// We add mod before modding to make sure that negatives values
-		// get converted properly: -10 -> 350
+		// get converted properly: -10->350
 		return ( value + type.mod ) % type.mod;
 	}
 

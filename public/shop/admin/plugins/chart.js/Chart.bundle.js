@@ -723,7 +723,7 @@ convert.rgb.ansi16 = function (args) {
 	var r = args[0];
 	var g = args[1];
 	var b = args[2];
-	var value = 1 in arguments ? arguments[1] : convert.rgb.hsv(args)[2]; // hsv -> ansi16 optimization
+	var value = 1 in arguments ? arguments[1] : convert.rgb.hsv(args)[2]; // hsv->ansi16 optimization
 
 	value = Math.round(value / 50);
 
@@ -1092,7 +1092,7 @@ function buildGraph() {
 // https://en.wikipedia.org/wiki/Breadth-first_search
 function deriveBFS(fromModel) {
 	var graph = buildGraph();
-	var queue = [fromModel]; // unshift -> queue -> pop
+	var queue = [fromModel]; // unshift->queue->pop
 
 	graph[fromModel].distance = 0;
 
@@ -1532,7 +1532,7 @@ function getAlpha(string) {
 // generators
 function hexString(rgba, a) {
    var a = (a !== undefined && rgba.length === 3) ? a : rgba[3];
-   return "#" + hexDouble(rgba[0]) 
+   return "#" + hexDouble(rgba[0])
               + hexDouble(rgba[1])
               + hexDouble(rgba[2])
               + (
@@ -3364,7 +3364,7 @@ helpers$1.extend(Element.prototype, {
 		var start = me._start;
 		var view = me._view;
 
-		// No animation -> No Transition
+		// No animation->No Transition
 		if (!model || ease === 1) {
 			me._view = helpers$1.extend({}, model);
 			me._start = null;
@@ -7154,7 +7154,7 @@ function fitBoxes(boxes, chartArea, params) {
 			changed = true;
 			if (refitBoxes.length) {
 				// Dimensions changed and there were non full width boxes before this
-				// -> we have to refit those
+				//->we have to refit those
 				refit = true;
 			}
 		}
@@ -7424,7 +7424,7 @@ var CSS_RENDER_ANIMATION = CSS_PREFIX + 'render-animation';
 var ANIMATION_START_EVENTS = ['animationstart', 'webkitAnimationStart'];
 
 /**
- * DOM event types -> Chart.js event types.
+ * DOM event types->Chart.js event types.
  * Note: only events with different types are mapped.
  * @see https://developer.mozilla.org/en-US/docs/Web/Events
  */
@@ -14962,7 +14962,7 @@ var moment = createCommonjsModule(function (module, exports) {
 
     function absFloor (number) {
         if (number < 0) {
-            // -0 -> 0
+            // -0->0
             return Math.ceil(number) || 0;
         } else {
             return Math.floor(number);
@@ -18941,7 +18941,7 @@ var moment = createCommonjsModule(function (module, exports) {
         months += monthsFromDays;
         days -= absCeil(monthsToDays(monthsFromDays));
 
-        // 12 months -> 1 year
+        // 12 months->1 year
         years = absFloor(months / 12);
         months %= 12;
 
@@ -19160,13 +19160,13 @@ var moment = createCommonjsModule(function (module, exports) {
         var months       = abs$1(this._months);
         var minutes, hours, years;
 
-        // 3600 seconds -> 60 minutes -> 1 hour
+        // 3600 seconds->60 minutes->1 hour
         minutes           = absFloor(seconds / 60);
         hours             = absFloor(minutes / 60);
         seconds %= 60;
         minutes %= 60;
 
-        // 12 months -> 1 year
+        // 12 months->1 year
         years  = absFloor(months / 12);
         months %= 12;
 

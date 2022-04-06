@@ -6,7 +6,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Деталі замовлення № {{ $order -> id }}</h4>
+                        <h4>Деталі замовлення № {{ $order->id }}</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
@@ -17,29 +17,29 @@
                                 </tr>
                                 <tr>
                                     <td>Імя:</td>
-                                    <td><b>{{ $order -> name }}</b></td>
+                                    <td><b>{{ $order->name }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Телефон:</td>
-                                    <td><b>{{ $order -> phone }}</b></td>
+                                    <td><b>{{ $order->phone }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Адреса:</td>
-                                    <td><b>{{ $order -> address }}</b></td>
+                                    <td><b>{{ $order->address }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Метод оплати:</td>
                                     <td>
                                         <b>
-                                            {!! ($order -> payment_method == 1) ? 'Готівка <i class="bi bi-currency-dollar"></i>' : '' !!}
-                                            {!! ($order -> payment_method == 2) ? 'Картка <i class="bi bi-credit-card"></i>' : '' !!}
+                                            {!! ($order->payment_method == 1) ? 'Готівка <i class="bi bi-currency-dollar"></i>' : '' !!}
+                                            {!! ($order->payment_method == 2) ? 'Картка <i class="bi bi-credit-card"></i>' : '' !!}
                                         </b>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Статус:</td>
                                     <td>
-                                        @switch($order -> status)
+                                        @switch($order->status)
                                             @case(1)
                                             <b style="color: green">Нове</b>
                                             @break
@@ -54,9 +54,9 @@
                                 </tr>
                                 <tr>
                                     <td>Дата замовлення:</td>
-                                    <td><b>{{ \Carbon\Carbon::parse($order -> created_at)->format('d/m/Y H:m')}}</b></td>
+                                    <td><b>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:m')}}</b></td>
                                 </tr>
-                                @if(isset($order -> payment -> status) && $order -> payment -> status == 'success')
+                                @if(isset($order->payment->status) && $order->payment->status == 'success')
                                     <tr>
                                         <td>Оплата:</td>
                                         <td class="bg-success"><b>Оплачено карткою</b></td>
@@ -65,10 +65,10 @@
                             </tbody>
                         </table>
                     </div>
-                        @if($order -> description)
+                        @if($order->description)
                         <div class="card-footer">
                             <h5>Коментар:</h5>
-                            <p class="card-text">{{ $order -> description }}</p>
+                            <p class="card-text">{{ $order->description }}</p>
                         </div>
                         @endif
                 </div>
@@ -76,16 +76,16 @@
                         <div class="card-footer text-center">
                             <form class="form_approve" method="POST" action="{{ route('admin.order.approve') }}" style="display: inline-block">
                                 @csrf
-                                <input type="hidden" name="order_id" value="{{ $order -> id }}">
+                                <input type="hidden" name="order_id" value="{{ $order->id }}">
                                 <button type="submit"   class="btn btn-success accept_order">Прийняти</button>
                             </form>
                             <form class="form_reject" method="POST" action="{{ route('admin.order.reject') }}" style="display: inline-block">
                                 @csrf
-                                <input type="hidden" name="order_id" value="{{ $order -> id }}">
+                                <input type="hidden" name="order_id" value="{{ $order->id }}">
                                 <button type="submit"   class="btn btn-danger reject_order">Відхилити</button>
                             </form>
-                            @if((isset($order -> payment -> status) &&  $order -> payment -> status == 'success') || $order -> payment_method == 2)
-                                <a href="#" class="btn btn-outline-info check_pay" data-id="{{ $order -> id }}">Деталі оплати</a>
+                            @if((isset($order->payment->status) &&  $order->payment->status == 'success') || $order->payment_method == 2)
+                                <a href="#" class="btn btn-outline-info check_pay" data-id="{{ $order->id }}">Деталі оплати</a>
                             @endif
                         </div>
                     </div>
@@ -106,17 +106,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($order -> orderProducts as $product)
+                            @foreach($order->orderProducts as $product)
                                 <tr>
-                                    <td>{{ $product -> product -> title }}</td>
-                                    <td>{{ $product -> product -> price }} грн</td>
-                                    <td>{{ $product -> count }}</td>
-                                    <td><img src="/storage/{{ $product -> product -> image -> image }}" style="width: 100px"></td>
+                                    <td>{{ $product->product->title }}</td>
+                                    <td>{{ $product->product->price }} грн</td>
+                                    <td>{{ $product->count }}</td>
+                                    <td><img src="/storage/{{ $product->product->image->image }}" style="width: 100px"></td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <td colspan="4">
-                                    <h4>Сумма: <b>{{ $order -> summ  }}</b> грн</h4>
+                                    <h4>Сумма: <b>{{ $order->summ  }}</b> грн</h4>
                                 </td>
                             </tr>
                             </tbody>

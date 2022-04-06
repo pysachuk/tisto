@@ -173,7 +173,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
           state.listStack.pop();
           if (state.listStack.length) {
             state.indentation = state.listStack[state.listStack.length - 1];
-          // less than the first list's indent -> the line is no longer a list
+          // less than the first list's indent->the line is no longer a list
           } else {
             state.list = false;
           }

@@ -80,7 +80,7 @@
                     <img src="/shop/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="{{ route('admin.user') }}" class="d-block">{{Auth::user() -> name}}</a>
+                    <a href="{{ route('admin.user') }}" class="d-block">{{Auth::user()->name}}</a>
                 </div>
                 <form action="{{route('admin.logout')}}" method="post">
                     @csrf
@@ -269,8 +269,8 @@
 @if(session()->has('message'))
     <script>
         var message = [];
-        message['type'] = '{{ session() -> get('message.type') }}';
-        message['message'] = '{{ session() -> get('message.message') }}';
+        message['type'] = '{{ session()->get('message.type') }}';
+        message['message'] = '{{ session()->get('message.message') }}';
     </script>
 @endif
 <script>

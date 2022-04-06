@@ -14,7 +14,7 @@ class AddCartIdToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table -> string('cart_id') -> after('id');
+            $table->string('cart_id')->after('id');
         });
     }
 

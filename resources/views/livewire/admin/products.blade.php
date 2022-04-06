@@ -16,7 +16,7 @@
                                     <input type="hidden" wire:model="selectedCategoryId" value="" class="selectedCategoryId">
                                     <select wire:model="selectedCategoryId" name="category" class="form-control select_category">
                                         @forelse($categories as $category)
-                                            <option value="{{ $category -> id }}">{{ $category -> title }}</option>
+                                            <option value="{{ $category->id }}">{{ $category->title }}</option>
                                         @empty
                                             <option>Створіть категорію</option>
                                         @endforelse
@@ -56,12 +56,12 @@
                             <tbody>
                             @forelse($products as $product)
                                 <tr>
-                                    <td>{{ $product -> id }}</td>
-                                    <td>{{ $product -> title }}</td>
-                                    <td>{{ $product -> description }}</td>
-                                    <td>{{ $product -> price }}</td>
-                                    <td>{{ $product -> weight }}</td>
-                                    <td><img src="/storage/{{ $product -> image -> image ?? '' }}" style="width: 100px"></td>
+                                    <td>{{ $product->id }}</td>
+                                    <td>{{ $product->title }}</td>
+                                    <td>{{ $product->description }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->weight }}</td>
+                                    <td><img src="/storage/{{ $product->image->image ?? '' }}" style="width: 100px"></td>
 {{--                                    <td>--}}
 {{--                                        <input wire:model="available.{{$product->id}}" type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="В наявності" data-off="Немає">--}}
 {{--                                    </td>--}}

@@ -21,8 +21,8 @@
                                 <tbody>
                                 @forelse($categories as $category)
                                     <tr>
-                                        <td>{{ $category -> id }}</td>
-                                        <td>{{ $category -> title }}</td>
+                                        <td>{{ $category->id }}</td>
+                                        <td>{{ $category->title }}</td>
                                         <td class="text-right py-0 align-middle">
                                             <div class="btn-group btn-group-sm">
                                                 <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>

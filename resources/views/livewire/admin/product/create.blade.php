@@ -23,7 +23,7 @@
                                 <label>Категорія</label>
                                 <select wire:model="category_id" name="category_id" class="form-control">
                                     @forelse($categories as $category)
-                                        <option value="{{ $category -> id }}">{{ $category -> title }}</option>
+                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
                                     @empty
                                         <option value="0" active >Немає категорій</option>
                                     @endforelse

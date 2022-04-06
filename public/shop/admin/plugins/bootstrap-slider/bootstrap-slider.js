@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  11.0.2              
+                      VERSION  11.0.2
 ========================================================= */
 "use strict";
 
@@ -106,7 +106,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			// -------------------------- addOptionMethod -------------------------- //
 
 			/**
-    * adds option method -> $().plugin('option', {...})
+    * adds option method->$().plugin('option', {...})
     * @param {Function} PluginClass - constructor class
     */
 			function addOptionMethod(PluginClass) {
@@ -406,8 +406,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			/*
    	Validate `tooltip_position` against 'orientation`
    	- if `tooltip_position` is incompatible with orientation, switch it to a default compatible with specified `orientation`
-   		-- default for "vertical" -> "right", "left" if rtl
-   		-- default for "horizontal" -> "top"
+   		-- default for "vertical"->"right", "left" if rtl
+   		-- default for "horizontal"->"top"
    */
 			if (this.options.orientation === "vertical" && (this.options.tooltip_position === "top" || this.options.tooltip_position === "bottom")) {
 				if (this.options.rtl) {

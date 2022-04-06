@@ -22,13 +22,13 @@
                     <tr class="cart_item" data-id="{{ $item->product->id }}">
                         <td data-title="Продукт">
                             <div class="cart-product-wrapper">
-                                <img src="/storage/{{ $item -> product -> image->image }}" alt="prod1">
+                                <img src="/storage/{{ $item->product->image->image }}" alt="prod1">
                                 <div class="cart-product-body">
-                                    <h6> <a href="#">{{ $item -> product->title }}</a> </h6>
+                                    <h6> <a href="#">{{ $item->product->title }}</a> </h6>
                                 </div>
                             </div>
                         </td>
-                        <td data-title="Ціна"> <strong>{{ $item -> product->price }} грн</strong> </td>
+                        <td data-title="Ціна"> <strong>{{ $item->product->price }} грн</strong> </td>
                         <td class="quantity" data-title="Кількість">
                             <div class="input-group">
                             <span class="input-group-prepend">
@@ -36,7 +36,7 @@
                                     <span class="fa fa-minus"></span>
                                 </button>
                             </span>
-                                <input type="text" data-id="{{ $item->product->id }}" name="quant[1]" class="form-control input-number qty" value="{{ $item -> quantity }}" min="1" max="10" readonly>
+                                <input type="text" data-id="{{ $item->product->id }}" name="quant[1]" class="form-control input-number qty" value="{{ $item->quantity }}" min="1" max="10" readonly>
                                 <span class="input-group-append">
                                 <button type="button" wire:click="add({{ $item->product }})" data-id="{{ $item->product->id }}" class="btn btn-outline-secondary btn-number cart_add_count" data-type="plus" data-field="quant[1]">
                                     <span class="fa fa-plus"></span>
@@ -44,7 +44,7 @@
                             </span>
                             </div>
                         </td>
-                        <td data-title="Сума"> <strong class="product_total" data-id="{{ $item->product->id }}">{{ ($item->product->price * $item -> quantity) }} грн</strong> </td>
+                        <td data-title="Сума"> <strong class="product_total" data-id="{{ $item->product->id }}">{{ ($item->product->price * $item->quantity) }} грн</strong> </td>
                         <td class="remove">
                             <button type="button" wire:click="removeProduct({{ $item->product }})" data-id="{{ $item->product->id }}" class="close-btn close-danger remove-from-cart">
                                 <span></span>
@@ -60,7 +60,7 @@
                 </tbody>
             </table>
             <!-- Cart Table End -->
-        @if(! $cartItems -> isEmpty())
+        @if(! $cartItems->isEmpty())
             <!-- Cart form Start -->
                 <div class="row ct-cart-form">
                     <div class="offset-lg-6 col-lg-6">

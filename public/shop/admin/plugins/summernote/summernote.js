@@ -1,14 +1,14 @@
 /*!
- * 
+ *
  * Super simple wysiwyg editor v0.8.18
  * https://summernote.org
- * 
- * 
+ *
+ *
  * Copyright 2013- Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license.
- * 
+ *
  * Date: 2020-05-20T16:47Z
- * 
+ *
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -9529,10 +9529,10 @@ var HintPopover_HintPopover = /*#__PURE__*/function () {
       var $item = this.$content.find('.note-hint-item.active');
 
       if ($item.length) {
-        var node = this.nodeFromItem($item); // If matchingWord length = 0 -> capture OK / open hint / but as mention capture "" (\w*)
+        var node = this.nodeFromItem($item); // If matchingWord length = 0->capture OK / open hint / but as mention capture "" (\w*)
 
         if (this.matchingWord !== null && this.matchingWord.length === 0) {
-          this.lastWordRange.so = this.lastWordRange.eo; // Else si > 0 and normal case -> adjust range "before" for correct position of insertion
+          this.lastWordRange.so = this.lastWordRange.eo; // Else si > 0 and normal case->adjust range "before" for correct position of insertion
         } else if (this.matchingWord !== null && this.matchingWord.length > 0 && !this.lastWordRange.isCollapsed()) {
           var rangeCompute = this.lastWordRange.eo - this.lastWordRange.so - this.matchingWord.length;
 

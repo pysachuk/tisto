@@ -49,7 +49,7 @@ var Lightbox = (function ($) {
 
 			/**
        Class properties:
-   	 _$element: null -> the <a> element currently being displayed
+   	 _$element: null->the <a> element currently being displayed
     _$modal: The bootstrap modal generated
        _$modalDialog: The .modal-dialog
        _$modalContent: The .modal-content

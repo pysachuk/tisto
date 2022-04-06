@@ -15,9 +15,9 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('order_id') -> unsigned();
-            $table -> string('status');
-            $table -> text('json');
+            $table->bigInteger('order_id')->unsigned();
+            $table->string('status');
+            $table->text('json');
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders')

@@ -41,18 +41,18 @@
                             </thead>
                             <tbody>
                             @forelse($orders as $order)
-                                <tr class='clickable-row' data-href='{{ route('admin.order.view', $order -> id) }}'>
-                                    <td class="text-center text-bold">{{ $order -> id }}</td>
+                                <tr class='clickable-row' data-href='{{ route('admin.order.view', $order->id) }}'>
+                                    <td class="text-center text-bold">{{ $order->id }}</td>
                                     <td>{{ $order->location->city }}</td>
-                                    <td>{{ $order -> name }}</td>
-                                    <td>{{ $order -> phone }}</td>
-                                    <td>{{ $order -> address }}</td>
-                                    <td>{{ $order -> summ }} грн</td>
+                                    <td>{{ $order->name }}</td>
+                                    <td>{{ $order->phone }}</td>
+                                    <td>{{ $order->address }}</td>
+                                    <td>{{ $order->summ }} грн</td>
                                     <td>
-                                        {!! ($order -> payment_method == 1) ? 'Готівка <i class="bi bi-currency-dollar"></i>': ''!!}
-                                        {!!   ($order -> payment_method == 2) ? 'Картка <i class="bi bi-credit-card"></i>': ''!!}
+                                        {!! ($order->payment_method == 1) ? 'Готівка <i class="bi bi-currency-dollar"></i>': ''!!}
+                                        {!!   ($order->payment_method == 2) ? 'Картка <i class="bi bi-credit-card"></i>': ''!!}
                                     </td>
-                                    @switch($order -> status)
+                                    @switch($order->status)
                                         @case(1)
                                         <td class="bg-success text-center">Нове</td>
                                         @break
@@ -63,7 +63,7 @@
                                         <td class="bg-danger text-center">Відхилене</td>
                                         @break
                                     @endswitch
-                                    <td>{{ \Carbon\Carbon::parse($order -> created_at)->format('d/m/Y H:m')}}</td>
+                                    <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:m')}}</td>
                                 </tr>
                             @empty
                                 <tr>

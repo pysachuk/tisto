@@ -19,10 +19,10 @@ use App\Http\Controllers\Shop\Admin\ProductController;
 
 //ADMIN AUTH
 Route::get('/panel/login',[LoginController::class, 'showLoginForm'])
-    -> name('admin.login');
+   ->name('admin.login');
 Route::post('/panel/login',[LoginController::class, 'login']);
 Route::post('/panel/logout', [LoginController::class, 'logout'])
-    -> name('admin.logout');
+   ->name('admin.logout');
 //ADMIN
 Route::middleware('admin')->prefix('panel') ->group(function() {
     //HOME

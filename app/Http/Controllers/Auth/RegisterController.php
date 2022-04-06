@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        UserRole::create(['user_id' => $user -> id]);
+        UserRole::create(['user_id' => $user->id]);
         return $user;
     }
 }

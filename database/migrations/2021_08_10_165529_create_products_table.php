@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->float('price');
             $table->float('weight');
-            $table->bigInteger('category_id') -> unsigned();
+            $table->bigInteger('category_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('category_id')

@@ -674,7 +674,7 @@
 
     function absFloor(number) {
         if (number < 0) {
-            // -0 -> 0
+            // -0->0
             return Math.ceil(number) || 0;
         } else {
             return Math.floor(number);
@@ -5252,7 +5252,7 @@
         months += monthsFromDays;
         days -= absCeil(monthsToDays(monthsFromDays));
 
-        // 12 months -> 1 year
+        // 12 months->1 year
         years = absFloor(months / 12);
         months %= 12;
 
@@ -5524,13 +5524,13 @@
             return 'P0D';
         }
 
-        // 3600 seconds -> 60 minutes -> 1 hour
+        // 3600 seconds->60 minutes->1 hour
         minutes = absFloor(seconds / 60);
         hours = absFloor(minutes / 60);
         seconds %= 60;
         minutes %= 60;
 
-        // 12 months -> 1 year
+        // 12 months->1 year
         years = absFloor(months / 12);
         months %= 12;
 

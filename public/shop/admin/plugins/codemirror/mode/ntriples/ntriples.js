@@ -14,18 +14,18 @@
     pre_subject ->
         {
         ( writing_subject_uri | writing_bnode_uri )
-            -> pre_predicate
-                -> writing_predicate_uri
-                    -> pre_object
-                        -> writing_object_uri | writing_object_bnode |
+           ->pre_predicate
+               ->writing_predicate_uri
+                   ->pre_object
+                       ->writing_object_uri | writing_object_bnode |
                           (
                             writing_object_literal
-                                -> writing_literal_lang | writing_literal_type
+                               ->writing_literal_lang | writing_literal_type
                           )
-                            -> post_object
-                                -> BEGIN
+                           ->post_object
+                               ->BEGIN
          } otherwise {
-             -> ERROR
+            ->ERROR
          }
 */
 

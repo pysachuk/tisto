@@ -28,14 +28,14 @@
                                         <td>{{ $user->role->roleName }}</td>
                                         <td>{{ $user->role->location->city ?? '' }}</td>
                                         <td class="text-right py-0 align-middle">
-                                            @if(\Auth::id() == $user -> id)
+                                            @if(\Auth::id() == $user->id)
                                                 <div class="btn-group btn-group-sm">
                                                     <a href="{{ route('admin.user') }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                                 </div>
                                             @else
                                                 <div class="btn-group btn-group-sm">
-{{--                                                    <a href="{{ route('admin.users.edit_user', $user -> id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>--}}
-                                                    <form class="del_form" method="POST" action="{{ route('admin.users.delete', $user -> id) }}">
+{{--                                                    <a href="{{ route('admin.users.edit_user', $user->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>--}}
+                                                    <form class="del_form" method="POST" action="{{ route('admin.users.delete', $user->id) }}">
                                                         @method('DELETE')
                                                         @csrf
                                                         <button class="btn btn-danger delete" type="submit"><i class="fas fa-trash"></i></button>

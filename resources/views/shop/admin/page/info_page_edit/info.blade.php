@@ -6,7 +6,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <img src="/storage/{{ isset($data -> image) ? $data -> image : '' }}" style="max-width: 100%">
+                        <img src="/storage/{{ isset($data->image) ? $data->image : '' }}" style="max-width: 100%">
                         <div class="custom-file" style="margin-top: 20px">
                             <input name="image" value="" type="file" class="custom-file-input" id="photo_input">
                             <label class="custom-file-label" for="photo_input">Нове зображення...</label>
@@ -22,7 +22,7 @@
                         <div class="card-body">
                                 <div class="form-group">
                                     <textarea name="text" id="summernote" class="form-control" rows="3" placeholder="Enter ...">
-                                        {{ isset($data -> text) ? $data -> text : '' }}
+                                        {{ isset($data->text) ? $data->text : '' }}
                                     </textarea>
                                 </div>
                         </div>

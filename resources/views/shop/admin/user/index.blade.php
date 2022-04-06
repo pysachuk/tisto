@@ -24,11 +24,11 @@
                             @endif
                             <div class="form-group">
                                 <label for="name_input">Ім'я</label>
-                                <input type="text" name="name" value="{{ old('name')? old('name') : $user -> name }}" class="form-control" id="name_input" >
+                                <input type="text" name="name" value="{{ old('name')? old('name') : $user->name }}" class="form-control" id="name_input" >
                             </div>
                             <div class="form-group">
                                 <label for="email_input">E-mail</label>
-                                <input type="email" name="email" value="{{ old('email') ? old('email') : $user -> email }}" class="form-control" id="email_input">
+                                <input type="email" name="email" value="{{ old('email') ? old('email') : $user->email }}" class="form-control" id="email_input">
                             </div>
                             <div class="form-group">
                                 <label for="old_password_input">Пароль<span class="text-danger">*</span></label>

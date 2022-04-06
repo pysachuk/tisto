@@ -14,7 +14,7 @@ class AddPaymentMethodToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table -> integer('payment_method'); //1 - готівка, 2 - карта
+            $table->integer('payment_method'); //1 - готівка, 2 - карта
         });
     }
 

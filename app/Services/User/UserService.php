@@ -11,12 +11,12 @@ class UserService
     public function updateUser(User $user, UserUpdateRequest $request)
     {
         $data = [
-            'name' => $request -> name,
-            'email' => $request -> email
+            'name' => $request->name,
+            'email' => $request->email
         ];
-        if($request -> new_password)
-            $data['password'] = Hash::make($request -> new_password);
-        return $user -> update($data);
+        if($request->new_password)
+            $data['password'] = Hash::make($request->new_password);
+        return $user->update($data);
     }
 
     public function checkUserPassword(User $user, $password)

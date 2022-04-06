@@ -15,16 +15,16 @@
             <tbody>
             @forelse($products as $product)
                 <tr>
-                    <td>{{ $product -> id }}</td>
-                    <td>{{ $product -> title }}</td>
-                    <td>{{ $product -> description }}</td>
-                    <td>{{ $product -> price }}</td>
-                    <td>{{ $product -> weight }}</td>
-                    <td><img src="/storage/{{ $product -> image -> image ?? '' }}" style="width: 100px"></td>
+                    <td>{{ $product->id }}</td>
+                    <td>{{ $product->title }}</td>
+                    <td>{{ $product->description }}</td>
+                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->weight }}</td>
+                    <td><img src="/storage/{{ $product->image->image ?? '' }}" style="width: 100px"></td>
                     <td class="text-right py-0 align-middle">
                         <div class="btn-group btn-group-sm">
-                            <a href="{{ route('admin.product.edit', $product -> id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                            <form class="del_form" method="POST" action="{{ route('admin.product.destroy', $product -> id) }}">
+                            <a href="{{ route('admin.product.edit', $product->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                            <form class="del_form" method="POST" action="{{ route('admin.product.destroy', $product->id) }}">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-danger delete" type="submit"><i class="fas fa-trash"></i></button>

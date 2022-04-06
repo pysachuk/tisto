@@ -10,7 +10,7 @@
 {{--            <div class="row align-items-center">--}}
 
 {{--                <div class="col-lg-6 mb-lg-30 ct-single-img-wrapper">--}}
-{{--                    <img src="/storage/{{ $data['info'] -> image ?? '' }}" alt="img">--}}
+{{--                    <img src="/storage/{{ $data['info']->image ?? '' }}" alt="img">--}}
 {{--                    <div class="ct-dots"></div>--}}
 {{--                </div>--}}
 {{--                <div class="col-lg-6">--}}
@@ -26,7 +26,7 @@
 {{--                        <div class="signature">--}}
 {{--                            <img src="shop/main/assets/img/signature.png" alt="signature">--}}
 {{--                        </div>--}}
-{{--                        {!!  $data['info'] -> text ?? '' !!}--}}
+{{--                        {!!  $data['info']->text ?? '' !!}--}}
 {{--                        <a href="menu-v1.html" class="btn-custom">Наше меню</a>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
@@ -208,13 +208,13 @@
 {{--                <div class="row">--}}
 {{--                    <div class="col-md-6">--}}
 {{--                        <div class="location-item-inner">--}}
-{{--                            <img src="/storage/{{ $data['contacts'] -> image ?? '' }}" alt="location">--}}
+{{--                            <img src="/storage/{{ $data['contacts']->image ?? '' }}" alt="location">--}}
 {{--                            <div class="location-desc">--}}
 {{--                                <h3>TISTO</h3>--}}
 {{--                            </div>--}}
 {{--                            <div class="location-info">--}}
 {{--                                <div class="row">--}}
-{{--                                    {!!  $data['contacts'] -> text ?? '' !!}--}}
+{{--                                    {!!  $data['contacts']->text ?? '' !!}--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
 {{--                        </div>--}}

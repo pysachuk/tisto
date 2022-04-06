@@ -10,8 +10,8 @@ use App\Http\Controllers\Shop\PaymentController;
 
 //MAIN
 //Route::get('/', [\App\Http\Controllers\Shop\MainController::class, 'index'])->name('shop.main');
-Route::get('/', Menu::class) -> name('shop.main');
-Route::get('/info', [MainController::class, 'info']) -> name('shop.info');
+Route::get('/', Menu::class)->name('shop.main');
+Route::get('/info', [MainController::class, 'info'])->name('shop.info');
 
 //CART
 Route::get('/cart', Cart::class)->name('cart.index');
@@ -27,4 +27,4 @@ Route::get('/order/accepted/{order}', [OrderController::class, 'orderAccepted'])
 Route::get('/cart/pay/{order}', [PaymentController::class, 'payPage'])
 -> name('cart.pay_page');
 Route::get('/cart/pay/status/{order_id}', [PaymentController::class, 'payStatus'])
-    -> name('cart.pay_status');
+   ->name('cart.pay_status');

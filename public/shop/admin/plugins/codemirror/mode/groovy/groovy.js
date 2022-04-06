@@ -188,7 +188,7 @@ CodeMirror.defineMode("groovy", function(config) {
       if (ctx.align == null) ctx.align = true;
 
       if ((curPunc == ";" || curPunc == ":") && ctx.type == "statement") popContext(state);
-      // Handle indentation for {x -> \n ... }
+      // Handle indentation for {x->\n ... }
       else if (curPunc == "->" && ctx.type == "statement" && ctx.prev.type == "}") {
         popContext(state);
         state.context.align = false;

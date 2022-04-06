@@ -2293,7 +2293,7 @@ convert.rgb.ansi16 = function (args) {
 	var r = args[0];
 	var g = args[1];
 	var b = args[2];
-	var value = 1 in arguments ? arguments[1] : convert.rgb.hsv(args)[2]; // hsv -> ansi16 optimization
+	var value = 1 in arguments ? arguments[1] : convert.rgb.hsv(args)[2]; // hsv->ansi16 optimization
 
 	value = Math.round(value / 50);
 
@@ -5644,7 +5644,7 @@ function buildGraph() {
 // https://en.wikipedia.org/wiki/Breadth-first_search
 function deriveBFS(fromModel) {
 	var graph = buildGraph();
-	var queue = [fromModel]; // unshift -> queue -> pop
+	var queue = [fromModel]; // unshift->queue->pop
 
 	graph[fromModel].distance = 0;
 

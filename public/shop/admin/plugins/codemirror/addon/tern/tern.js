@@ -367,7 +367,7 @@
       pos += 2;
     }
 
-    var rettype = text.slice(pos).match(/^\) -> (.*)$/);
+    var rettype = text.slice(pos).match(/^\)->(.*)$/);
 
     return {args: args, rettype: rettype && rettype[1]};
   }

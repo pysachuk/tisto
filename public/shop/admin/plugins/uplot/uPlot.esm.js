@@ -778,7 +778,7 @@ function genTimeStuffs(ms) {
 	// [0]:   minimum num secs in the tick incr
 	// [1]:   default tick format
 	// [2-7]: rollover tick formats
-	// [8]:   mode: 0: replace [1] -> [2-7], 1: concat [1] + [2-7]
+	// [8]:   mode: 0: replace [1]->[2-7], 1: concat [1] + [2-7]
 	const _timeAxisStamps = [
 	//   tick incr    default          year                    month   day                   hour    min       sec   mode
 		[y,           yyyy,            _,                      _,      _,                    _,      _,        _,       1],
@@ -1420,7 +1420,7 @@ function orient(u, seriesIdx, cb) {
 	);
 }
 
-// creates inverted band clip path (towards from stroke path -> yMax)
+// creates inverted band clip path (towards from stroke path->yMax)
 function clipBandLine(self, seriesIdx, idx0, idx1, strokePath) {
 	return orient(self, seriesIdx, (series, dataX, dataY, scaleX, scaleY, valToPosX, valToPosY, xOff, yOff, xDim, yDim) => {
 		const dir = scaleX.dir * (scaleX.ori == 0 ? 1 : -1);

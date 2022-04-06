@@ -25,34 +25,34 @@
                             </thead>
                             <tbody>
                             @foreach($orders as $order)
-                            <tr data-id="{{ $order -> id }}" data-widget="expandable-table" aria-expanded="false">
-                                <td>{{ $order -> id }}</td>
-                                <td>{{ $order -> name }}</td>
-                                <td>{{ $order -> phone }}</td>
-                                <td>{{ $order -> address }}</td>
-                                <td>{{ $order -> summ }} грн</td>
+                            <tr data-id="{{ $order->id }}" data-widget="expandable-table" aria-expanded="false">
+                                <td>{{ $order->id }}</td>
+                                <td>{{ $order->name }}</td>
+                                <td>{{ $order->phone }}</td>
+                                <td>{{ $order->address }}</td>
+                                <td>{{ $order->summ }} грн</td>
                                 <td>
-                                    {!! ($order -> payment_method == 1) ? 'Готівка <i class="bi bi-currency-dollar"></i>': ''!!}
-                                    {!!   ($order -> payment_method == 2) ? 'Картка <i class="bi bi-credit-card"></i>': ''!!}
+                                    {!! ($order->payment_method == 1) ? 'Готівка <i class="bi bi-currency-dollar"></i>': ''!!}
+                                    {!!   ($order->payment_method == 2) ? 'Картка <i class="bi bi-credit-card"></i>': ''!!}
                                 </td>
                                 <td class="bg-success">
-                                    @if($order -> status == 1)
+                                    @if($order->status == 1)
                                         <span>Нове</span>
-                                    @elseif($order -> status == 2)
+                                    @elseif($order->status == 2)
                                         <p class="bg-danger">Старий</p>
                                     @endif
                                 </td>
-                                <td>{{ \Carbon\Carbon::parse($order -> created_at)->format('d/m/Y H:m')}}</td>
+                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:m')}}</td>
                             </tr>
-                            <tr class="expandable-body d-none" data-id="{{ $order -> id }}">
+                            <tr class="expandable-body d-none" data-id="{{ $order->id }}">
                                 <td colspan="8">
                                     <div class="container-fluid">
                                         <div class="card" >
                                             <!-- /.card-header -->
-                                            @if($order -> description)
+                                            @if($order->description)
                                                 <div class="card-header">
                                                     <b>Примітка: </b>
-                                                    {{ $order -> description }}
+                                                    {{ $order->description }}
                                                 </div>
                                             @endif
                                             <div class="card-body">
@@ -66,17 +66,17 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach($order -> orderProducts as $product)
+                                                    @foreach($order->orderProducts as $product)
                                                     <tr>
-                                                        <td>{{ $product -> product -> title }}</td>
-                                                        <td>{{ $product -> product -> price }} грн</td>
-                                                        <td>{{ $product -> count }}</td>
-                                                        <td><img src="/storage/{{ $product -> product -> image -> image }}" style="width: 100px"></td>
+                                                        <td>{{ $product->product->title }}</td>
+                                                        <td>{{ $product->product->price }} грн</td>
+                                                        <td>{{ $product->count }}</td>
+                                                        <td><img src="/storage/{{ $product->product->image->image }}" style="width: 100px"></td>
                                                     </tr>
                                                     @endforeach
                                                     <tr>
                                                         <td colspan="4">
-                                                            <h4>Сумма: {{ $order -> summ  }} грн</h4>
+                                                            <h4>Сумма: {{ $order->summ  }} грн</h4>
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -84,9 +84,9 @@
                                             </div>
                                             <!-- /.card-body -->
                                             <div class="card-footer clearfix">
-                                                <button data-id="{{ $order -> id }}" type="submit" href="#" class="btn btn-success approve_order">Одобрить</button>
-                                                @if($order -> payment_method == 2)
-                                                    <button type="button" class="btn btn-outline-info check_pay" data-id="{{ $order -> id }}">
+                                                <button data-id="{{ $order->id }}" type="submit" href="#" class="btn btn-success approve_order">Одобрить</button>
+                                                @if($order->payment_method == 2)
+                                                    <button type="button" class="btn btn-outline-info check_pay" data-id="{{ $order->id }}">
                                                         Перевірити платіж
                                                     </button>
                                                 @endif

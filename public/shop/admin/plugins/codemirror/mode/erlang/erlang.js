@@ -6,7 +6,7 @@
 /*global CodeMirror:true */
 
 // erlang mode.
-// tokenizer -> token types -> CodeMirror styles
+// tokenizer->token types->CodeMirror styles
 // tokenizer maintains a parse stack
 // indenter uses the parse stack
 
@@ -353,7 +353,7 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
     pushToken(state,realToken(type,stream));
 
     // map erlang token type to CodeMirror style class
-    //     erlang             -> CodeMirror tag
+    //     erlang            ->CodeMirror tag
     switch (type) {
       case "atom":        return "atom";
       case "attribute":   return "attribute";

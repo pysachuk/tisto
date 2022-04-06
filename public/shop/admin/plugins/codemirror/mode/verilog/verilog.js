@@ -61,7 +61,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
      binary_operator ::=
        + | - | * | / | % | == | != | === | !== | ==? | !=? | && | || | **
        | < | <= | > | >= | & | | | ^ | ^~ | ~^ | >> | << | >>> | <<<
-       | -> | <->
+       |->| <->
      inc_or_dec_operator ::= ++ | --
      unary_module_path_operator ::=
        ! | ~ | & | ~& | | | ~| | ^ | ~^ | ^~

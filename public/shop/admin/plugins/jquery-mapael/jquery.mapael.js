@@ -838,7 +838,7 @@
                 zoomOptions.x = areaBBox.cx;
                 zoomOptions.y = areaBBox.cy;
 
-                // Compute a new absolute zoomLevel value (inverse of relative -> absolute)
+                // Compute a new absolute zoomLevel value (inverse of relative->absolute)
                 // Take the min between zoomLevel on width vs. height to be able to see the whole area
                 zoomLevel = Math.min(Math.floor((self.mapConf.width / areaFullWidth - 1) / self.options.map.zoom.step),
                                      Math.floor((self.mapConf.height / areaFullHeight - 1) / self.options.map.zoom.step));
