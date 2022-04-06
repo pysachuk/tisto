@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Shop\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\TelegramChat;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\OrderCreated;
 use App\Models\Location;
 use App\Models\Payment;
 use App\Services\Cart\CartService;
@@ -40,6 +41,7 @@ class Order extends Component
     {
         $data = $this->validate();
         $order = $orderService->create($data, $this->cartItems, $this->cartTotal);
+        event(new OrderCreated($order));
         $cartService->clearCart();
         if($order->payment_method == Payment::PAYMENT_METHOD_CC) {
             return redirect()->route('cart.pay_page', $order);

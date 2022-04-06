@@ -113,29 +113,6 @@
                             <p>На сайт</p>
                         </a>
                     </li>
-                    <li class="nav-item  has-treeview @menuActive('admin.category.index', 'menu-open') @menuActive('admin.category.create', 'menu-open')">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Категорії
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.category.index') }}" class="nav-link @menuActive('admin.category.index', 'active')">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Всі категорії</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.category.create') }}" class="nav-link  @menuActive('admin.category.create', 'active')">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Додати категорію</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                     <li class="nav-item has-treeview @menuActive('admin.products', 'menu-open') @menuActive('admin.product.create', 'menu-open')">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -215,6 +192,24 @@
                                 <a href="{{ route('admin.orders', 'rejected') }}" class="nav-link @menuActive('admin.order.rejected', 'active')">
                                     <i class="fas fa-cart-plus nav-icon" style="color: #dc3545!important"></i>
                                     <p>Відхилені замовлення</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview {{ request()->is('*/telegram/*') ? 'menu-open' : '' }} ">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                            <p>
+                                Налаштування
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.telegram.chats') }}" class="nav-link {{ Route::is('admin.telegram.chats') ? 'active' : '' }}">
+                                    <p>&nbsp;</p>
+                                    <i class="fab fa-telegram"></i>
+                                    <p>Telegram сповіщення</p>
                                 </a>
                             </li>
                         </ul>

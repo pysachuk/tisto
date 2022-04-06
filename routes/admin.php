@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Livewire\Admin\Orders;
 use App\Http\Livewire\Admin\Product\Edit;
+use App\Http\Livewire\Admin\Telegram\Chats;
 use App\Http\Livewire\Admin\ViewOrder;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Product\Products;
@@ -83,5 +84,7 @@ Route::middleware('admin')->prefix('panel') ->group(function() {
             ->name('admin.pages.info.edit');
         Route::post('/pages/info/update', [PagesController::class, 'infoUpdate'])
             ->name('admin.pages.info.update');
+
+        Route::get('/telegram/chats', Chats::class)->name('admin.telegram.chats');
     });
 });
