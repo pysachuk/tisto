@@ -17,8 +17,8 @@ class Orders extends Component
 
     public function mount($status)
     {
-        $fondy = resolve(FondyService::class);
-        dd($fondy->getPaymentUrl(Order::find(11)));
+//        $fondy = resolve(FondyService::class);
+//        dd($fondy->getPaymentUrl(Order::find(11)));
         $this->locations = Location::get();
         $this->isAdmin = auth()->user()->role->role === 'admin';
         $this->status = $status;
