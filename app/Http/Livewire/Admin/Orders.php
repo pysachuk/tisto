@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Location;
+use App\Models\Order;
 use App\Services\Order\OrderService;
+use App\Services\Payment\Fondy\FondyService;
 use Livewire\Component;
 
 class Orders extends Component
@@ -15,6 +17,8 @@ class Orders extends Component
 
     public function mount($status)
     {
+        $fondy = resolve(FondyService::class);
+        dd($fondy->getPaymentUrl(Order::find(11)));
         $this->locations = Location::get();
         $this->isAdmin = auth()->user()->role->role === 'admin';
         $this->status = $status;

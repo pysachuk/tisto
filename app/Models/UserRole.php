@@ -43,7 +43,13 @@ class UserRole extends Model
 
     public function getRoleNameAttribute()
     {
-        return $this->role == 'manager' ? 'Менеджер' : 'Адмін';
+        if($this->role === 'manager') {
+            return 'Менеджер';
+        }
+
+        if($this->role === 'admin') {
+            return 'Адмін';
+        }
     }
 
     public static function getLocations()
