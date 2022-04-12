@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\CanViewOrder;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -67,6 +66,5 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Admin::class,
         'isCart' => \App\Http\Middleware\IsCart::class,
         'isWorkTime' => \App\Http\Middleware\IsWorkTime::class,
-        'canViewOrder' => CanViewOrder::class
     ];
 }

@@ -196,24 +196,26 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview {{ request()->is('*/telegram/*') ? 'menu-open' : '' }} ">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-cog" aria-hidden="true"></i>
-                            <p>
-                                Налаштування
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.telegram.chats') }}" class="nav-link {{ Route::is('admin.telegram.chats') ? 'active' : '' }}">
-                                    <p>&nbsp;</p>
-                                    <i class="fab fa-telegram"></i>
-                                    <p>Telegram сповіщення</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    @can('view-admin-part')
+                        <li class="nav-item has-treeview {{ request()->is('*/telegram/*') ? 'menu-open' : '' }} ">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                                <p>
+                                    Налаштування
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.telegram.chats') }}" class="nav-link {{ Route::is('admin.telegram.chats') ? 'active' : '' }}">
+                                        <p>&nbsp;</p>
+                                        <i class="fab fa-telegram"></i>
+                                        <p>Telegram сповіщення</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endcan
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

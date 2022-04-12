@@ -34,7 +34,7 @@ Route::middleware('admin')->prefix('panel') ->group(function() {
     Route::get('/orders/{status}', Orders::class)
         ->name('admin.orders');
     Route::get('/order/view/{order}', ViewOrder::class)
-        ->middleware('canViewOrder')
+        ->middleware('can:view-order')
         ->name('admin.order.view');
 //    Route::post('/order/approve', [OrderController::class, 'approveOrder'])
 //        ->name('admin.order.approve');
