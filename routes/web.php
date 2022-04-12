@@ -20,11 +20,13 @@ Route::get('/cart', Cart::class)->name('cart.index');
 Route::get('/order/checkout', Order::class)
     ->middleware('isWorkTime', 'isCart')
     ->name('order.checkout');
-Route::get('/order/accepted/{order}', [OrderController::class, 'orderAccepted'])
-    ->name('order.accepted');
+//Route::get('/order/accepted/{order}', [OrderController::class, 'orderAccepted'])
+//    ->name('order.accepted');
 
 //PAYMENT
-Route::get('/cart/pay/{order}', [PaymentController::class, 'payPage'])
--> name('cart.pay_page');
-Route::get('/cart/pay/status/{order_id}', [PaymentController::class, 'payStatus'])
-   ->name('cart.pay_status');
+Route::post('/order/{order}/payed', [OrderController::class, 'orderPayed'])
+    ->name('order.payed');
+//Route::get('/cart/pay/{order}', [PaymentController::class, 'payPage'])
+//-> name('cart.pay_page');
+//Route::get('/cart/pay/status/{order_id}', [PaymentController::class, 'payStatus'])
+//   ->name('cart.pay_status');

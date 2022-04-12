@@ -34,13 +34,14 @@ Route::middleware('admin')->prefix('panel') ->group(function() {
     Route::get('/orders/{status}', Orders::class)
         ->name('admin.orders');
     Route::get('/order/view/{order}', ViewOrder::class)
+        ->middleware('canViewOrder')
         ->name('admin.order.view');
-    Route::post('/order/approve', [OrderController::class, 'approveOrder'])
-        ->name('admin.order.approve');
-    Route::post('/order/reject', [OrderController::class, 'rejectOrder'])
-        ->name('admin.order.reject');
-    Route::post('/order/pay_status', [PaymentController::class, 'ajaxGetPayment'])
-        ->name('admin.order.payStatus');
+//    Route::post('/order/approve', [OrderController::class, 'approveOrder'])
+//        ->name('admin.order.approve');
+//    Route::post('/order/reject', [OrderController::class, 'rejectOrder'])
+//        ->name('admin.order.reject');
+//    Route::post('/order/pay_status', [PaymentController::class, 'ajaxGetPayment'])
+//        ->name('admin.order.payStatus');
 
     //USER
     Route::get('/user', [UserController::class, 'user'])

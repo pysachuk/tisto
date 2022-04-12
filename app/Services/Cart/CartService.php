@@ -24,6 +24,11 @@ class CartService
         $this->cartTotal = $this->getTotal();
     }
 
+    public function getCartId()
+    {
+        return $this->cartUuid;
+    }
+
     public function setCart()
     {
         $cart = Cart::where('uuid', $this->cartUuid)->first();
@@ -107,7 +112,7 @@ class CartService
 
     public function isEmpty()
     {
-        return ! $this->cart->products()->count() ? true : false;
+        return ! (bool) $this->cart->products()->count();
     }
 
 }

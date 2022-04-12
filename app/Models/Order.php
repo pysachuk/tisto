@@ -25,6 +25,11 @@ class Order extends Model
         'location_key'
     ];
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function orderProducts()
     {
         return $this->hasMany(OrderProduct::class);

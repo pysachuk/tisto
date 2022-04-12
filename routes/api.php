@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Shop\Api\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +14,6 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::post('/payment_status', [\App\Http\Controllers\Shop\Api\PaymentController::class, 'savePayment']);
+//Route::post('/payment_status', [\App\Http\Controllers\Shop\Api\PaymentController::class, 'savePayment']);
+Route::post('/payment/result', [PaymentController::class, 'resultPayment'])
+    ->name('payment.result');

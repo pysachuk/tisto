@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+    public function payed()
+    {
+
+    }
+
     public function payPage(Order $order)
     {
         $button = LiqPayService::getPaymentButton($order);

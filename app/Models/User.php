@@ -48,4 +48,9 @@ class User extends Authenticatable
         return $this->hasOne(UserRole::class);
     }
 
+    public function getLocationKeyAttribute()
+    {
+        return $this->role->location_key ?? null;
+    }
+
 }

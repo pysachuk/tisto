@@ -95,7 +95,12 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <button type="submit" class="btn-custom primary btn-block">Замовити</button>
+                            @if($payment_method == 2)
+                                <button type="submit" class="btn-custom primary btn-block">Перейти до оплати</button>
+                            @else
+                                <button type="submit" class="btn-custom primary btn-block">Оформити замовлення</button>
+                            @endif
+
 
                             <!-- Order Details End -->
 

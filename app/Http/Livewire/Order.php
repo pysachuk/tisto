@@ -5,9 +5,16 @@ namespace App\Http\Livewire;
 use App\Events\OrderCreated;
 use App\Models\Location;
 use App\Models\Payment;
+use App\Models\Transaction;
 use App\Services\Cart\CartService;
+use App\Services\LocationService;
 use App\Services\Order\OrderService;
+use App\Services\Payment\Fondy\FondyService;
+use App\Services\Payment\PaymentService;
+use Cloudipsp\Configuration;
+use Cloudipsp\Result\Result;
 use Livewire\Component;
+use App\Models\Order as OrderModel;
 
 class Order extends Component
 {
@@ -34,21 +41,23 @@ class Order extends Component
     {
         $this->locations = Location::get();
         $this->cartItems = $cartService->getProducts();
-        $this->cartTotal = $cartService->getTotal();
     }
 
-    public function createOrder(OrderService $orderService, CartService $cartService)
+    public function createOrder(OrderService $orderService)
     {
         $data = $this->validate();
-        $order = $orderService->create($data, $this->cartItems, $this->cartTotal);
-        event(new OrderCreated($order));
-        $cartService->clearCart();
+        $order = $orderService->saveOrder($data);
+        $this->redirectAfterOrder($order);
+    }
+
+    public function redirectAfterOrder(OrderModel $order)
+    {
         if($order->payment_method == Payment::PAYMENT_METHOD_CC) {
-            return redirect()->route('cart.pay_page', $order);
+            $paymentService = resolve(PaymentService::class);
+            return $paymentService->orderPayment($order);
         } else {
             return redirect()->route('order.accepted', $order);
         }
-
     }
 
     public function render()

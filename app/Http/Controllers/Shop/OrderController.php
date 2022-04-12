@@ -10,6 +10,11 @@ use App\Services\Payment\Liqpay\LiqPayService;
 class OrderController extends Controller
 {
 
+    public function orderPayed(Order $order)
+    {
+        return view('shop.order.order-payed', compact('order'));
+    }
+
     public function orderAccepted(Order $order)
     {
         if($order->cart_id != session('cart_uuid')) {

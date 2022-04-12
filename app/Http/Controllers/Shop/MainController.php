@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Product;
+use Cloudipsp\Result\Result;
+use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
@@ -26,5 +28,12 @@ class MainController extends Controller
         $data['contacts'] = Page::getPage('contacts');
 
         return view('shop.main.info', compact('data'));
+    }
+
+    public function test(Request $request)
+    {
+
+        dd($request->all());
+        return 'OK';
     }
 }
